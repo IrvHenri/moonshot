@@ -1,6 +1,7 @@
+import Button from '../Button'
 const Landing = () => {
   return <div>
-    Landing Page
+    <Button text={"What's up"}/>
   </div>
 }
 

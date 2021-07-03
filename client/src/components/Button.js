@@ -1,6 +1,7 @@
-const Button = () => {
+import "./Button.css"
+const Button = ({text}) => {
   return <button>
-    CLick
+    {text} 
   </button>
 }
 

@@ -1,0 +1,20 @@
+button {
+  text-decoration: none;
+  background-color: var(--primary-btn-color);
+  color: var(--primary-font-color);
+  padding: 0.2em 0.6em;
+  font-family: var(--primary-font-family);
+  border-radius: 4px;
+  font-size: 1em;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0.1em 0.1em #6767c9;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: translateX(0.5rem);
+  transform: translateY(0.1rem);
+  box-shadow: none;
+}
