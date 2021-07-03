@@ -1,8 +1,11 @@
-import Button from '../Button'
-const Landing = () => {
-  return <div>
-    <Button text={"What's up"}/>
-  </div>
-}
+import Button from "../Button";
 
-export default Landing
+const Landing = () => {
+  return (
+    <div>
+      <Button text={"what's up"} />
+    </div>
+  );
+};
+
+export default Landing;
