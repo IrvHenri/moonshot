@@ -2,17 +2,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  --primary-color: #4141AA;
-  --secondary-color: #42429A;
+  --primary-bg-color: #040C13;
+  --secondary-bg-color: #DCF6FF;
   --market-up-color: #00FF00;
   --market-down-color: #FF0000;
   --primary-font-color: #FFFFFF;
   --secondary-font-color: #000000;
-  /* --primary-font-family: 
-  --secondary-font-family: */
-}
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+  --primary-btn-color: #132455;
+  --primary-font-family: 'Poppins', sans-serif;
+  --secondary-font-family: 'Roboto', sans-serif;
 }
