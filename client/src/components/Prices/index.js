@@ -132,8 +132,12 @@ const TableData = () => {
                     style={{ minWidth: column.minWidth }}
                     onClick={() => requestSort(column.id)}
                   >
-                    {arrowHelper(column.id, active, direction)}
-                    <button className="table-header-btn">{column.label}</button>
+                    <button className="table-header-btn">
+                      <p>
+                        {arrowHelper(column.id, active, direction)}
+                        {column.label}
+                      </p>
+                    </button>
                   </TableCell>
                 ))}
               </TableRow>

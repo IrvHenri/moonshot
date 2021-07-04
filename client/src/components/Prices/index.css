@@ -49,3 +49,8 @@
   transform: translateX(0);
   transform: translateY(0);
 }
+
+.table-header-btn p {
+  display: flex;
+  align-items: center;
+}
