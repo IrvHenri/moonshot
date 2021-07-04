@@ -6,8 +6,8 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import { useSortableData } from "../../hooks/useSortableData";
+import arrowHelper from "../../helpers/arrowHelper";
 import Row from "./Row";
 import "./index.css";
 
@@ -132,6 +132,7 @@ const TableData = () => {
                     style={{ minWidth: column.minWidth }}
                     onClick={() => requestSort(column.id)}
                   >
+                    {arrowHelper(column.id, active, direction)}
                     <button className="table-header-btn">{column.label}</button>
                   </TableCell>
                 ))}

@@ -33,6 +33,5 @@ export const useSortableData = (items, config = null) => {
     setDirection(direction);
     setActive(key);
   };
-  console.log(sortConfig);
   return { items: sortedItems, requestSort, direction, active };
 };
