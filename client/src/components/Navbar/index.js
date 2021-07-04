@@ -5,12 +5,10 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false)
   return <nav className='navbar'>
     <div className='nav-left'>
-    <h1 className='nav-logo'>Moonshot</h1>
-      <NavLinks toggle={toggle} setToggle={setToggle} />
+      <h1 className='nav-logo'>Moonshot</h1>
     </div>
     <div className='nav-right'>
-      <input type='text' placeholder="bitcoin"/>
-      <button>Search</button>
+      <NavLinks toggle={toggle} setToggle={setToggle} />
     </div>
     <div onClick={() => setToggle(prev => !prev)} className='burger'>
       CLICK
