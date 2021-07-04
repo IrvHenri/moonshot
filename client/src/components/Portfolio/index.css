@@ -40,11 +40,18 @@
 }
 
 .portfolio-graph-article {
-  border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  background-color: 0;
 }
 
-.sample-graph-image {
-  min-width: 200px;
-  max-width: 350px;
+.portfolio-graph-article img {
+  display: block;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 280px;
   height: auto;
+  margin-bottom: 1em;
 }

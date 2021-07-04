@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Button from "../Button";
-import Container from "@material-ui/core/Container";
 import "./index.css";
-import sampleImage from "../../images/sample-graph.jpg";
+import sampleGraph from "../../images/sample-graph.jpg";
+
 export default function LoggedOut() {
   return (
     <div className="portfolio-jumbo">
@@ -21,13 +21,7 @@ export default function LoggedOut() {
         </div>
       </article>
       <article className="portfolio-graph-article">
-        <div>
-          <img
-            src={sampleImage}
-            alt="sample graph"
-            className="sample-graph-image"
-          />
-        </div>
+        <img src={sampleGraph} alt="sample graph" />
       </article>
     </div>
   );
