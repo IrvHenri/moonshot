@@ -15,10 +15,10 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <TableData />
 
       <Router>
         <Switch>
+          <TableData />
           <Route exact path="/" component={Landing} />
           <Route path="/prices" component={Prices} />
           <Route path="/prices/:id" component={CoinDetail} />

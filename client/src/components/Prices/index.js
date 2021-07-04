@@ -7,6 +7,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
+import { useSortableData } from "../../hooks/useSortableData";
 import Row from "./Row";
 import "./index.css";
 
@@ -44,7 +45,7 @@ const columns = [
   },
 ];
 
-const rows = [
+const data = [
   {
     id: "bitcoin",
     symbol: "btc",
@@ -74,6 +75,35 @@ const rows = [
     roi: null,
     last_updated: "2021-07-03T18:24:23.220Z",
   },
+  {
+    id: "tether",
+    symbol: "usdt",
+    name: "Tether",
+    image:
+      "https://assets.coingecko.com/coins/images/325/large/Tether-logo.png?1598003707",
+    current_price: 1,
+    market_cap: 62885581614,
+    market_cap_rank: 3,
+    fully_diluted_valuation: null,
+    total_volume: 45631564061,
+    high_24h: 1.01,
+    low_24h: 0.998311,
+    price_change_24h: -0.000500607251,
+    price_change_percentage_24h: -0.0498,
+    market_cap_change_24h: -45287522.61431885,
+    market_cap_change_percentage_24h: -0.07196,
+    circulating_supply: 62555876181.1193,
+    total_supply: 62555876181.1193,
+    max_supply: null,
+    ath: 1.32,
+    ath_change_percentage: -24.17589,
+    ath_date: "2018-07-24T00:00:00.000Z",
+    atl: 0.572521,
+    atl_change_percentage: 75.22942,
+    atl_date: "2015-03-02T00:00:00.000Z",
+    roi: null,
+    last_updated: "2021-07-04T00:05:23.649Z",
+  },
 ];
 
 const useStyles = makeStyles({
@@ -86,6 +116,7 @@ const useStyles = makeStyles({
 });
 const TableData = () => {
   const classes = useStyles();
+  const { items, requestSort } = useSortableData(data);
 
   return (
     <div className="prices-table">
@@ -99,6 +130,7 @@ const TableData = () => {
                     key={column.id}
                     align={column.align}
                     style={{ minWidth: column.minWidth }}
+                    onClick={() => requestSort(column.id)}
                   >
                     {column.label}
                   </TableCell>
@@ -106,7 +138,7 @@ const TableData = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => {
+              {items.map((row) => {
                 return <Row key={row.id} {...row} />;
               })}
             </TableBody>

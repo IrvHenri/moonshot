@@ -22,7 +22,7 @@ const Row = (props) => {
     price_change_percentage_24h > 0 ? "market-up" : "market-down";
   return (
     <TableRow hover role="checkbox" tabIndex={-1}>
-      <Link to={`/prices/${id}`}>
+      <Link to={`/prices/${id}`} style={{ textDecoration: "none" }}>
         <TableCell align={"left"}>
           <div className="first-cell">
             <Avatar alt="coin logo" src={image} />
