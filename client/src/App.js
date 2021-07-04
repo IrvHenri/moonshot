@@ -16,7 +16,7 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
-          {/* <Route exact path="/" component={Landing} /> */}
+          <Route exact path="/" component={Landing} />
           <Route path="/prices" component={TableData} />
           <Route path="/prices/:id" component={CoinDetail} />
           <Route path="/portfolio" component={Portfolio} />

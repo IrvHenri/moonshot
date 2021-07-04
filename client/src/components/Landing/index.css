@@ -1,4 +1,58 @@
-.container {
+.hero-header {
   background-color: var(--primary-bg-color);
-  height: 60vh;
+  height: 90vh;
+}
+
+.hero-header-grid {
+  height: 100%;
+}
+
+.hero-header-text {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10%;
+}
+
+.hero-header h1 {
+  color: white;
+  font-size: 120px;
+  font-family: var(--primary-font-family);
+}
+
+.hero-header h3 {
+  color: white;
+}
+
+.about {
+  background-color: var(--primary-bg-color);
+  height: 40vh;
+}
+
+.about-grid-container {
+  height: 100%;
+}
+
+.about-card {
+  margin: 10% 15% 15% 15%;
+}
+
+.about-card-icon {
+  color: white;
+  margin-bottom: 2%;
+}
+
+.card-content {
+  background-color: var(--primary-bg-color);
+}
+
+.card-content h2 {
+  color: white;
+  font-size: 25px;
+  font-family: var(--primary-font-family);
+}
+
+.card-content p {
+  color: white;
 }
