@@ -1,5 +1,56 @@
-nav ul{
+.navbar {
   display: flex;
   justify-content: space-between;
-  list-style: none;
+  align-items: center;
+  background-color: var(--primary-bg-color);
+  color: var(--primary-font-color);
+  font-family: var(--primary-font-family);
+  height: 8vh;
+  z-index: 2;
+}
+
+.nav-logo {
+  font-weight: 900;
+  font-size: 3rem;
+  margin-left: 0.25em;
+  margin-right: 1em;
+  z-index: 2;
+}
+.navbar div{
+  display: flex;
+  z-index: 2;
+}
+
+.nav-right{
+  margin-right: 2em;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.nav-right input{
+  height: 2em;
+  width: 25em;
+  border-radius: 8px;
+  text-indent: 5px;
+}
+
+.nav-right input:hover, .nav-right input:focus{
+  outline: none;
+}
+
+.navbar .burger{
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .navbar .nav-right {
+    display: none;
+  }
+
+  .navbar .burger {
+    display: flex;
+    cursor: pointer;
+    justify-content: flex-end;
+    margin-right: 1em;
+  }
 }

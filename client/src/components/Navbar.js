@@ -1,16 +1,21 @@
 import "./Navbar.css";
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import NavLinks from "./NavLinks";
 const Navbar = () => {
-  const [loggedIn, setLoggedIn] = useState(false); //We'll change this later, just a temp way to toggle for now
+  const [toggle, setToggle] = useState(false);
   return (
-    <nav>
-      <ul>
-        <li>Home</li>
-        <li>Cryptocurrencies</li>
-        <li>Portfolio</li>
-        {loggedIn ? <li>Log Out</li> : <li>Log in</li>}
-      </ul>
+    <nav className="navbar">
+      <div className="nav-left">
+        <h1 className="nav-logo">Moonshot</h1>
+        <NavLinks toggle={toggle} setToggle={setToggle} />
+      </div>
+      <div className="nav-right">
+        <input type="text" placeholder="bitcoin" />
+        <button>Search</button>
+      </div>
+      <div onClick={() => setToggle((prev) => !prev)} className="burger">
+        CLICK
+      </div>
     </nav>
   );
 };
