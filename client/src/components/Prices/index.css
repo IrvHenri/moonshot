@@ -39,3 +39,13 @@
 .last-cell small {
   margin-left: 0.4em;
 }
+.table-header-btn {
+  color: var(--secondary-font-color);
+  background: 0;
+  box-shadow: none !important;
+}
+
+.table-header-btn:hover {
+  transform: translateX(0);
+  transform: translateY(0);
+}

@@ -6,7 +6,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import TableSortLabel from "@material-ui/core/TableSortLabel";
+import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import { useSortableData } from "../../hooks/useSortableData";
 import Row from "./Row";
 import "./index.css";
@@ -116,7 +116,7 @@ const useStyles = makeStyles({
 });
 const TableData = () => {
   const classes = useStyles();
-  const { items, requestSort } = useSortableData(data);
+  const { items, requestSort, direction, active } = useSortableData(data);
 
   return (
     <div className="prices-table">
@@ -132,7 +132,7 @@ const TableData = () => {
                     style={{ minWidth: column.minWidth }}
                     onClick={() => requestSort(column.id)}
                   >
-                    {column.label}
+                    <button className="table-header-btn">{column.label}</button>
                   </TableCell>
                 ))}
               </TableRow>

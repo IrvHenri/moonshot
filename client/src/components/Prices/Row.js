@@ -22,15 +22,18 @@ const Row = (props) => {
     price_change_percentage_24h > 0 ? "market-up" : "market-down";
   return (
     <TableRow hover role="checkbox" tabIndex={-1}>
-      <Link to={`/prices/${id}`} style={{ textDecoration: "none" }}>
-        <TableCell align={"left"}>
+      <TableCell align={"left"}>
+        <Link
+          to={`/prices/${id}`}
+          style={{ textDecoration: "none", color: "#232b2b" }}
+        >
           <div className="first-cell">
             <Avatar alt="coin logo" src={image} />
             <p>{name}</p>
             <small>{symbol}</small>
           </div>
-        </TableCell>
-      </Link>
+        </Link>
+      </TableCell>
 
       <TableCell align={"right"}>
         <p>{currencyFormatter.format(current_price)}</p>

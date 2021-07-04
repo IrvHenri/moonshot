@@ -2,7 +2,8 @@ import { useMemo, useState } from "react";
 
 export const useSortableData = (items, config = null) => {
   const [sortConfig, setSortConfig] = useState(config);
-
+  const [direction, setDirection] = useState("null");
+  const [active, setActive] = useState("null");
   const sortedItems = useMemo(() => {
     let sortableItems = [...items];
     if (sortConfig !== null) {
@@ -29,7 +30,9 @@ export const useSortableData = (items, config = null) => {
       direction = "descending";
     }
     setSortConfig({ key, direction });
+    setDirection(direction);
+    setActive(key);
   };
-
-  return { items: sortedItems, requestSort };
+  console.log(sortConfig);
+  return { items: sortedItems, requestSort, direction, active };
 };
