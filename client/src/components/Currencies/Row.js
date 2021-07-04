@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import currencyFormatter from "../../helpers/currencyFormatter";
 import Avatar from "@material-ui/core/Avatar";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
+import currencyFormatter from "../../helpers/currencyFormatter";
+import ProgressBar from "./Progressbar";
 import "./index.css";
 
 const Row = (props) => {
@@ -17,6 +18,7 @@ const Row = (props) => {
     market_cap,
     market_cap_change_24h,
     circulating_supply,
+    max_supply,
   } = props;
   const priceStyling =
     price_change_percentage_24h > 0 ? "market-up" : "market-down";
@@ -59,6 +61,12 @@ const Row = (props) => {
           <p>{circulating_supply.toLocaleString()}</p>
           <small>{symbol.toUpperCase()}</small>
         </div>
+        {max_supply !== null && (
+          <ProgressBar
+            maxSupply={max_supply}
+            circulatingSupply={circulating_supply}
+          />
+        )}
       </TableCell>
     </TableRow>
   );

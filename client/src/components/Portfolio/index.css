@@ -1,4 +1,50 @@
 .portfolio-jumbo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   background-color: var(--secondary-bg-color);
+  border-radius: 10px;
+  width: 75%;
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-top: 5em;
+  min-height: 50vh;
+  padding: 1.5em;
+}
+
+.portfolio-signup-article {
+  color: var(--secondary-font-color);
+}
+
+.portfolio-signup-article p {
+  max-width: 500px;
+  word-wrap: break-word;
+}
+
+.portfolio-signup-article h1 {
+  font-size: 1.7rem;
+  margin-bottom: 0.5em;
+}
+.portfolio-signup-article h3 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5em;
+}
+.portfolio-signup-links {
+  margin-top: 1em;
+}
+
+.portfolio-signup-links a {
+  margin-left: 1em;
+  color: inherit;
+  text-decoration: none;
+}
+
+.portfolio-graph-article {
   border: 2px solid red;
+}
+
+.sample-graph-image {
+  min-width: 200px;
+  max-width: 350px;
+  height: auto;
 }

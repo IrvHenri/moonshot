@@ -1,15 +1,22 @@
 * {
   margin: 0;
   padding: 0;
-  font-size: 16px;
   box-sizing: border-box;
+}
+
+:root {
   --primary-bg-color: #040c13;
   --secondary-bg-color: #dcf6ff;
   --market-up-color: #27cb8d;
   --market-down-color: #ff0000;
-  --primary-font-color: #ffffff;
+  --primary-font-color: #f3f3f3;
   --secondary-font-color: #232b2b;
   --primary-btn-color: #132455;
   --primary-font-family: "Poppins", sans-serif;
   --secondary-font-family: "Roboto", sans-serif;
+}
+
+html,
+body {
+  font-size: 16px;
 }
