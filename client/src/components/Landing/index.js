@@ -1,10 +1,12 @@
-import Button from "../Button";
+import './index.css'
+import { Container, Grid } from '@material-ui/core'
 
 const Landing = () => {
   return (
-    <div>
-      <Button text={"what's up"} />
-    </div>
+    <Container maxWidth="sm" className="container">
+      <Grid item xs={12} sm={6}> </Grid>
+      <Grid item xs={12} sm={6}> </Grid>
+    </Container>
   );
 };
 

@@ -14,10 +14,10 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-
+      <Landing />
       <Router>
         <Switch>
-          <Route exact path="/" component={Landing} />
+          {/* <Route exact path="/" component={Landing} /> */}
           <Route path="/prices" component={TableData} />
           <Route path="/prices/:id" component={CoinDetail} />
           <Route path="/portfolio" component={Portfolio} />
