@@ -3,13 +3,13 @@
   padding: 0;
   font-size: 16px;
   box-sizing: border-box;
-  --primary-bg-color: #040C13;
-  --secondary-bg-color: #DCF6FF;
-  --market-up-color: #00FF00;
-  --market-down-color: #FF0000;
-  --primary-font-color: #FFFFFF;
+  --primary-bg-color: #040c13;
+  --secondary-bg-color: #dcf6ff;
+  --market-up-color: #27cb8d;
+  --market-down-color: #ff0000;
+  --primary-font-color: #ffffff;
   --secondary-font-color: #232b2b;
   --primary-btn-color: #132455;
-  --primary-font-family: 'Poppins', sans-serif;
-  --secondary-font-family: 'Roboto', sans-serif;
+  --primary-font-family: "Poppins", sans-serif;
+  --secondary-font-family: "Roboto", sans-serif;
 }

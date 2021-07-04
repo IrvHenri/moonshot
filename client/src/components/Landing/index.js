@@ -1,13 +1,11 @@
-import { Container } from "@material-ui/core"
+import Button from "../Button";
 
 const Landing = () => {
   return (
-    
-    <Container maxwidth="sm">
+    <div>
+      <Button text={"what's up"} />
+    </div>
+  );
+};
 
-    </Container>
-
-  )
-}
-
-export default Landing
+export default Landing;

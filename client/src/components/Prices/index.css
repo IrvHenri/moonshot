@@ -1,0 +1,56 @@
+.market-up {
+  color: var(--market-up-color);
+}
+
+.market-down {
+  color: var(--market-down-color);
+}
+
+.prices-table {
+  margin: 0 auto;
+  margin-top: 3em;
+  max-width: 85%;
+}
+
+.first-cell {
+  display: flex;
+  align-items: center;
+}
+
+.second-cell {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.first-cell p {
+  margin: 0 0.5em;
+}
+.first-cell small {
+  font-size: 0.8em;
+  color: #818b9e;
+}
+
+.last-cell {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.last-cell small {
+  margin-left: 0.4em;
+}
+.table-header-btn {
+  color: var(--secondary-font-color);
+  background: 0;
+  box-shadow: none !important;
+}
+
+.table-header-btn:hover {
+  transform: translateX(0);
+  transform: translateY(0);
+}
+
+.table-header-btn p {
+  display: flex;
+  align-items: center;
+}
