@@ -1,43 +1,47 @@
 import "./Login.css"
-import Grid from '@material-ui/core/Grid';
+import { useState } from "react";
+import { Link } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField';
 import { Button } from "@material-ui/core";
 const Login = () => {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   return <div className='login-section'>
     <img className="login-img" src="img/stock_login.jpg" />
     <div className='login-form'>
     <h1>Log In</h1>
     <form>
-        <Grid container spacing={4}>
-          <Grid item xs={12}>
-            <Grid container spacing={4}>
-              <Grid item xs={12}>
-                <TextField 
-                fullWidth
-                label="Email" 
-                name="email" 
-                size="small" 
-                variant="outlined" />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Password"
-                  name="password"
-                  size="small"
-                  type="password"
-                  variant="outlined"
-                />
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item xs={12}>
-          <Button fullWidth color="secondary" type="submit" variant="contained">
-              Log in
-            </Button>
-          </Grid>
-        </Grid>
+      <div>
+      <TextField 
+       fullWidth
+       label="Email" 
+       name="email" 
+       size="small" 
+       variant="outlined" />
+      </div>
+      <div>
+      <TextField
+        fullWidth
+        label="Password"
+        name="password"
+        size="small"
+        type="password"
+        variant="outlined" />
+      </div>
+      <div>
+      <Button fullWidth color="primary" type="submit" variant="contained">
+        Log in
+      </Button>
+      </div>
+
       </form>
+      <Link className='signup-link' to={"/signup"}>
+        <div className='signup-btn'>
+          <Button fullWidth color="primary">
+            Not A User Yet? Sign Up!
+          </Button>
+        </div>
+      </Link>
     </div>
   </div>
 }

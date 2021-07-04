@@ -1,6 +1,6 @@
 .login-section{
   display: flex;
-  background-color: rgb(44, 44, 44);
+  background-color: rgb(182, 60, 161);
 }
 
 .login-img{
@@ -24,4 +24,17 @@
 .login-form form {
   width: 80%;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form div {
+  margin-bottom: 0.5em;
+}
+.signup-link{
+  text-decoration: none;
+}
+.signup-btn{
+  width: 80%;
+  margin: 1em auto;
 }
