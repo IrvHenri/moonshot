@@ -1,0 +1,27 @@
+.login-section{
+  display: flex;
+  background-color: rgb(44, 44, 44);
+}
+
+.login-img{
+  height: 100vh;
+  flex: 1;
+  opacity: 0.5;
+}
+
+.login-form{
+  height: 100vh;
+  flex: 1;
+  background-color: rgb(255, 255, 255);
+}
+
+.login-form h1{
+  font-size: 5em;
+  text-align: center;
+  margin: 1em;
+}
+
+.login-form form {
+  width: 80%;
+  margin: auto;
+}
