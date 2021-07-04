@@ -1,0 +1,4 @@
+.portfolio-jumbo {
+  background-color: var(--secondary-bg-color);
+  border: 2px solid red;
+}

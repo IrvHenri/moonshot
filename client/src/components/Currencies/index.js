@@ -114,7 +114,7 @@ const useStyles = makeStyles({
     maxHeight: 440,
   },
 });
-const TableData = () => {
+const CurrencyTable = () => {
   const classes = useStyles();
   const { items, requestSort, direction, active } = useSortableData(data);
 
@@ -154,4 +154,4 @@ const TableData = () => {
   );
 };
 
-export default TableData;
+export default CurrencyTable;
