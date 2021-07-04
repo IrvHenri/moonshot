@@ -17,7 +17,9 @@ const Login = () => {
        label="Email" 
        name="email" 
        size="small" 
-       variant="outlined" />
+       variant="outlined"
+       value={email}
+       onChange={(e) => setEmail(e.target.value)} />
       </div>
       <div>
       <TextField
@@ -26,7 +28,9 @@ const Login = () => {
         name="password"
         size="small"
         type="password"
-        variant="outlined" />
+        variant="outlined"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)} />
       </div>
       <div>
       <Button fullWidth color="primary" type="submit" variant="contained">
