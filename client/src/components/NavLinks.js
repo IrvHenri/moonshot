@@ -1,5 +1,6 @@
 import "./NavLinks.css"
 import {Link} from 'react-router-dom'
+import { CSSTransition } from 'react-transition-group'
 import { useState } from 'react'
 
 const NavLinks = ({toggle, setToggle}) => {
@@ -7,9 +8,13 @@ const [loggedIn, setLoggedIn] = useState(true) //We'll change this later, just a
 const signOut = () => {
   setLoggedIn(false)
 }
-  return <div 
+  return <CSSTransition 
+  in={toggle} 
+  timeout={100} 
+  classNames="my-node">
+    <div 
   className="nav-links" 
-  onClick={() => setToggle(prev => !prev)} id={toggle ? "visible" : ""}>
+  onClick={() => setToggle(prev => !prev)} id={toggle && "visible"}>
     <Link to="/" className="link">Home</Link>
     <Link to="/prices" className="link">Prices</Link>
     <Link to="/portfolio" className="link">My Portfolio</Link>
@@ -21,6 +26,7 @@ const signOut = () => {
     <Link to="/signup" className="link">Sign Up</Link>
     </>}
   </div>
+  </CSSTransition>
 }
 
 export default NavLinks;
