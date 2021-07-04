@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { AiOutlineDown, AiOutlineTeam} from 'react-icons/ai'
 import { CSSTransition } from 'react-transition-group'
 import TeamMember from './TeamMember'
+import teamData from '../../teamData'
 const Footer = () => {
   const [toggle, setToggle] = useState(false)
   return   <CSSTransition   
@@ -18,9 +19,7 @@ const Footer = () => {
     <span onClick={() => setToggle(prev => !prev)}><AiOutlineDown /></span>
     <h1>Meet The Team</h1>
     <div className='team-container'>
-    <TeamMember />
-    <TeamMember />
-    <TeamMember />
+      {teamData.map(member => <TeamMember {...member}/>)}
     </div>
   </div>}
   </CSSTransition>

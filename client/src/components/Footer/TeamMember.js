@@ -3,14 +3,18 @@ import {AiFillGithub, AiFillLinkedin} from 'react-icons/ai'
 const TeamMember = ({name, img, bio, linkedInUrl, gitHubUrl}) => {
   return <div className='member-container'>
 
-    <div className='member-img'></div>
+    <img className='member-img' src={img}/>
     <div className='member-info'>
-    <h1>Frank</h1>
-    <p>This is my bio, what's good?</p>
+    <h1>{name}</h1>
+    <p>{bio}</p>
     </div>
     <div className='member-socials'>
-      <AiFillGithub size={"4em"} />
-      <AiFillLinkedin size={"4em"}/>
+      <a href="http://www.github.com/">
+      <AiFillGithub size={"3.3em"} />
+      </a>
+      <a href="http://www.linkedIn.com/">
+      <AiFillLinkedin size={"3.3em"}/>
+      </a>
     </div>
   </div>
 }

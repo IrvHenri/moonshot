@@ -13,7 +13,7 @@
 .footer:hover{
   bottom: -2em;
   right: -2em;
-  background-color: rgb(255, 166, 0);
+  background-color: #FEC87F;
 }
 
 .footer span{
@@ -52,6 +52,14 @@
   text-align: center;
   cursor: pointer;
   box-shadow: 0.1em 0.1em #555;
+  color: white;
+  transition: all 0.5s ease;
+}
+
+.footer-active span:hover{
+  transform: translateX(0.05em);
+  transform: translateY(0.05em);
+  box-shadow: 0.05em 0.05em #292929;
 }
 
 .team-container{
