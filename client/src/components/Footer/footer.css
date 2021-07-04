@@ -1,0 +1,102 @@
+.footer{
+  position: absolute;
+  bottom: -3em;
+  right: -3em;
+  background-color: var(--primary-bg-color);
+  height: 8em;
+  width: 8em;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.footer:hover{
+  bottom: -2em;
+  right: -2em;
+  background-color: var(--accent-btn-color);
+}
+
+.footer span{
+  color: white;
+  position: relative;
+  margin-left: 15%;
+}
+
+.footer-active{
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  /* background: linear-gradient(225deg, var(--primary-bg-color), #2e485f, #6a8297); */
+  background-color: var(--primary-bg-color);
+  border-radius: 8px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-active > h1{
+  font-size: 5em;
+  margin: 0.5em auto 1em;
+  color: white;
+  text-align: center;
+}
+
+.footer-active span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  padding: 0.5em;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0.1em 0.1em #555;
+  color: white;
+  transition: all 0.5s ease;
+}
+
+.footer-active span:hover{
+  transform: translateX(0.05em);
+  transform: translateY(0.05em);
+  box-shadow: 0.05em 0.05em #292929;
+}
+
+.team-container{
+  display: flex;
+  flex: 1;
+}
+
+.toggle-footer-enter {
+  opacity: 0;
+  transition: opacity 200;
+}
+
+.toggle-footer-enter-active {
+  opacity: 1;
+  transition: opacity 200;
+}
+
+.toggle-footer-exit {
+  opacity: 1;
+  transition: opacity 200;
+}
+
+.toggle-footer-exit-active {
+  opacity: 0;
+  transition: opacity 200;
+}
+
+@media screen and (max-width: 760px) {
+  .footer {
+    display: none;
+  }
+  .footer-active > h1{
+    font-size: 2.5em;
+    margin: 0.25em auto;
+  }
+
+  .team-container{
+    flex-direction: column;
+  }
+}

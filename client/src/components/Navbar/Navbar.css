@@ -26,27 +26,11 @@
   justify-content: flex-end;
 }
 
-.nav-right input {
-  height: 2em;
-  width: 25em;
-  border-radius: 8px;
-  text-indent: 5px;
-}
-
-.nav-right input:hover,
-.nav-right input:focus {
-  outline: none;
-}
-
 .navbar .burger {
   display: none;
 }
 
 @media screen and (max-width: 600px) {
-  .navbar .nav-right {
-    display: none;
-  }
-
   .navbar .burger {
     display: flex;
     cursor: pointer;
