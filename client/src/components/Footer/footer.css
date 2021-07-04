@@ -28,11 +28,19 @@
   position: absolute;
   height: 100vh;
   width: 100vw;
-  background-color: var(--secondary-bg-color);
+  /* background: linear-gradient(225deg, var(--primary-bg-color), #2e485f, #6a8297); */
+  background-color: var(--primary-bg-color);
   border-radius: 8px;
   z-index: 200;
   display: flex;
   flex-direction: column;
+}
+
+.footer-active > h1{
+  font-size: 5em;
+  margin: 0.5em auto 1em;
+  color: white;
+  text-align: center;
 }
 
 .footer-active span {
@@ -40,11 +48,15 @@
   top: 0;
   right: 0;
   background-color: red;
-  color: white;
   padding: 0.5em;
   text-align: center;
   cursor: pointer;
   box-shadow: 0.1em 0.1em #555;
+}
+
+.team-container{
+  display: flex;
+  flex: 1;
 }
 
 .toggle-footer-enter {
@@ -65,4 +77,15 @@
 .toggle-footer-exit-active {
   opacity: 0;
   transition: opacity 200;
+}
+
+@media screen and (max-width: 760px) {
+  .footer-active > h1{
+    font-size: 2.5em;
+    margin: 0.25em auto;
+  }
+
+  .team-container{
+    flex-direction: column;
+  }
 }

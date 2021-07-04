@@ -16,9 +16,12 @@ const Footer = () => {
   :
   <div className='footer-active'> 
     <span onClick={() => setToggle(prev => !prev)}><AiOutlineDown /></span>
+    <h1>Meet The Team</h1>
+    <div className='team-container'>
     <TeamMember />
     <TeamMember />
     <TeamMember />
+    </div>
   </div>}
   </CSSTransition>
 }
