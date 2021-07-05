@@ -62,3 +62,36 @@
   height: auto;
   margin-bottom: 1em;
 }
+
+.portfolio-dashboard{
+  display: flex;
+  flex-direction: column;
+  margin: 2em auto;
+  width: 90%;
+  height: 80vh;
+  border-radius: 10px;
+  color: black;
+}
+
+.portfolio-top-banner {
+  width: 100%;
+  height: 18vh;
+  margin-bottom: 2em;
+  background-color: var(--secondary-bg-color);
+}
+
+.portfolio-info-container{
+  display: flex;
+  flex: 1;
+}
+
+.portfolio-graph{
+  flex: 1;
+  margin-right: 2em;
+  background-color: var(--secondary-bg-color);
+}
+
+.portfolio-coin-data{
+  flex: 1;
+  background-color: var(--secondary-bg-color);
+}

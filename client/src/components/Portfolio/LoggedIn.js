@@ -1,4 +1,5 @@
 import { useState } from "react"
+import PortfolioDashboard from "./PortfolioDashboard";
 import sampleGraph from "../../images/sample-graph.jpg";
 
 const LoggedIn = () => {
@@ -6,7 +7,7 @@ const LoggedIn = () => {
   return userHasPortfolio 
   ? 
   //View My Portfolio
-  <div>Logged In!</div> 
+  <PortfolioDashboard />
   :
   //Create A New Portfolio
   <div className="portfolio-jumbo">
