@@ -1,4 +1,4 @@
-import { Modal } from '@material-ui/core'
+import { Modal, Avatar } from '@material-ui/core'
 import { useState } from 'react';
 import useCoinData from '../../hooks/useCoinData'
 const PortfolioDashboard = () => {
@@ -21,11 +21,12 @@ const PortfolioDashboard = () => {
       </form>
       {loading ? null : 
       <div>
-        {coins.map(coin => <p 
+        {coins.map(coin => <div
         className='coin' 
         onClick={() => {
           setSelectedCoin(coin)
-        }}>{coin.id}</p>)}
+          setOpen(false)
+        }}><Avatar alt="coin logo" src={coin.image} />{coin.id}</div>)}
       </div>}
       <p className='modal-close' onClick={() => setOpen(false)}>X</p>
     </div>

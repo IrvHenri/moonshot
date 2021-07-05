@@ -167,6 +167,14 @@
   margin: 0.5em;
 }
 
+.coin{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border: solid 1px white;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 600px) {
   .portfolio-info-container{
     flex-direction: column;
