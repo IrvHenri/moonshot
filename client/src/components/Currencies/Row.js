@@ -34,7 +34,7 @@ const Row = (props) => {
           <div className="first-cell">
             <Avatar alt="coin logo" src={image} />
             <p>{name}</p>
-            <small>{symbol}</small>
+            <small>{symbol.toUpperCase()}</small>
           </div>
         </Link>
       </TableCell>

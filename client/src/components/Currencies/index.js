@@ -10,7 +10,7 @@ export default function Cryptocurrencies() {
     <div className="currencies-page">
       {loading ? (
         <div className="table-loading">
-          <CircularProgress />
+          <CircularProgress size={100} />
         </div>
       ) : (
         <>

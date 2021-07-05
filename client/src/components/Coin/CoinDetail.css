@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   background-color: var(--secondary-bg-color);
   color: var(--secondary-font-color);
   border-radius: 10px;
@@ -16,12 +16,84 @@
   padding: 1.5em;
 }
 
+/* ------------- */
+/* Header */
+/* ------------- */
 .coin-detail-header {
   display: flex;
   justify-content: space-between;
-  width: 80%;
-  border: 2px solid red;
+  width: 100%;
 }
 .coin-detail-header h1 {
   font-size: 2rem;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.header-left div {
+  display: flex;
+  align-items: center;
+}
+
+.header-left div h1 {
+  margin-left: 0.2em;
+}
+
+.header-left div small {
+  font-size: 0.8em;
+  margin-left: 0.5em;
+  color: #818b9e;
+  font-weight: 600;
+}
+
+.header-left p {
+  background: var(--accent-btn-color);
+  border-radius: 5px;
+  padding: 0.2em 0.6em;
+  font-size: 0.8em;
+  margin-top: 0.8em;
+  font-weight: 600;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.header-right p {
+  color: #818b9e;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+.header-right div:first-of-type {
+  display: flex;
+  align-items: center;
+}
+
+.header-right div:first-of-type small {
+  display: flex;
+  align-items: center;
+  color: var(--primary-font-color);
+  background: var(--primary-btn-color);
+  border-radius: 5px;
+  padding: 0.1em 0.3em;
+  margin-left: 0.7em;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.high-low-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.high-low-price p small {
+  padding: 0;
+  color: var(--secondary-font-color);
 }
