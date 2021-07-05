@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar/index";
 import Landing from "./components/Landing";
-import CurrencyTable from "./components/Currencies/index";
-import CoinDetail from "./components/CoinDetail";
+import Cryptocurrencies from "./components/Currencies/index";
+import CoinDetail from "./components/Currencies/CoinDetail";
 import Portfolio from "./components/Portfolio";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -17,7 +17,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Landing} />
-          <Route path="/currencies" component={CurrencyTable} />
+          <Route exact path="/currencies" component={Cryptocurrencies} />
           <Route path="/currencies/:id" component={CoinDetail} />
           <Route path="/portfolio" component={Portfolio} />
           <Route path="/login" component={Login} />
