@@ -1,7 +1,6 @@
+import LoggedOut from "./LoggedOut";
 const Portfolio = () => {
-  return <div>
-    Portfolio
-  </div>
-}
+  return <LoggedOut />;
+};
 
-export default Portfolio
+export default Portfolio;

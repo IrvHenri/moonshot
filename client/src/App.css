@@ -4,14 +4,17 @@
   font-size: 16px;
   overflow: hidden;
   box-sizing: border-box;
+}
+
+:root {
   --primary-bg-color: #040c13;
   --secondary-bg-color: #dcf6ff;
   --market-up-color: #27cb8d;
   --market-down-color: #ff0000;
-  --primary-font-color: #ffffff;
+  --primary-font-color: #f3f3f3;
   --secondary-font-color: #232b2b;
   --primary-btn-color: #132455;
-  --accent-btn-color: #FEC87F;
+  --accent-btn-color: #fec87f;
   --primary-font-family: "Poppins", sans-serif;
   --secondary-font-family: "Roboto", sans-serif;
 }

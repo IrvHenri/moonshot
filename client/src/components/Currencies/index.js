@@ -76,33 +76,37 @@ const data = [
     last_updated: "2021-07-03T18:24:23.220Z",
   },
   {
-    id: "tether",
-    symbol: "usdt",
-    name: "Tether",
+    id: "ethereum",
+    symbol: "eth",
+    name: "Ethereum",
     image:
-      "https://assets.coingecko.com/coins/images/325/large/Tether-logo.png?1598003707",
-    current_price: 1,
-    market_cap: 62885581614,
-    market_cap_rank: 3,
+      "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880",
+    current_price: 2357.81,
+    market_cap: 274666618359,
+    market_cap_rank: 2,
     fully_diluted_valuation: null,
-    total_volume: 45631564061,
-    high_24h: 1.01,
-    low_24h: 0.998311,
-    price_change_24h: -0.000500607251,
-    price_change_percentage_24h: -0.0498,
-    market_cap_change_24h: -45287522.61431885,
-    market_cap_change_percentage_24h: -0.07196,
-    circulating_supply: 62555876181.1193,
-    total_supply: 62555876181.1193,
+    total_volume: 20880000308,
+    high_24h: 2370.62,
+    low_24h: 2195.5,
+    price_change_24h: 133.64,
+    price_change_percentage_24h: 6.00872,
+    market_cap_change_24h: 14785729661,
+    market_cap_change_percentage_24h: 5.68943,
+    circulating_supply: 116558742.999,
+    total_supply: null,
     max_supply: null,
-    ath: 1.32,
-    ath_change_percentage: -24.17589,
-    ath_date: "2018-07-24T00:00:00.000Z",
-    atl: 0.572521,
-    atl_change_percentage: 75.22942,
-    atl_date: "2015-03-02T00:00:00.000Z",
-    roi: null,
-    last_updated: "2021-07-04T00:05:23.649Z",
+    ath: 4356.99,
+    ath_change_percentage: -45.91527,
+    ath_date: "2021-05-12T14:41:48.623Z",
+    atl: 0.432979,
+    atl_change_percentage: 544145.18375,
+    atl_date: "2015-10-20T00:00:00.000Z",
+    roi: {
+      times: 87.65135689672238,
+      currency: "btc",
+      percentage: 8765.135689672237,
+    },
+    last_updated: "2021-07-04T19:04:41.990Z",
   },
 ];
 
@@ -110,16 +114,21 @@ const useStyles = makeStyles({
   root: {
     width: "100%",
   },
+  cell: {
+    background: "#dcf6ff",
+  },
   container: {
     maxHeight: 440,
+    background: "#dcf6ff",
+    borderRadius: "10px",
   },
 });
-const TableData = () => {
+const CurrencyTable = () => {
   const classes = useStyles();
   const { items, requestSort, direction, active } = useSortableData(data);
 
   return (
-    <div className="prices-table">
+    <div className="currency-table">
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
           <Table stickyHeader aria-label="sticky table">
@@ -129,6 +138,7 @@ const TableData = () => {
                   <TableCell
                     key={column.id}
                     align={column.align}
+                    className={classes.cell}
                     style={{ minWidth: column.minWidth }}
                     onClick={() => requestSort(column.id)}
                   >
@@ -154,4 +164,4 @@ const TableData = () => {
   );
 };
 
-export default TableData;
+export default CurrencyTable;
