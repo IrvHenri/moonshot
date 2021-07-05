@@ -4,7 +4,7 @@ function useSingleCoinData(id) {
   const [coin, setCoin] = useState({});
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    axios.get(`https://api.coingecko.com/api/v3/coins/${id}`).then((result) => {
+    axios.get(`http://localhost:3001/api/coins/${id}`).then((result) => {
       setCoin(result.data);
       setLoading(false);
     });
