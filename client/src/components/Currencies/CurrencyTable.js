@@ -27,13 +27,13 @@ const columns = [
   },
   {
     id: "market_cap",
-    label: "Market Cap",
+    label: "Market Cap(MC)",
     minWidth: 170,
     align: "right",
   },
   {
     id: "market_cap_change_24h",
-    label: "Market Cap Change(24h)",
+    label: "MC Change(24h)",
     minWidth: 170,
     align: "right",
   },

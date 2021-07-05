@@ -2,12 +2,10 @@ import "./CoinDetail.css";
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import currencyFormatterHelpers from "../../helpers/currencyFormatterHelpers";
-import ProgressBar from "../Currencies/Progressbar";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 const { currencyFormatter } = currencyFormatterHelpers();
 export default function DetailHeader({ coin }) {
   const {
-    price,
     name,
     image: { thumb },
     symbol,

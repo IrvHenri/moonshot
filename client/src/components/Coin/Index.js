@@ -15,7 +15,9 @@ export default function CoinDetail() {
   return (
     <div className="coin-detail-page">
       {loading ? (
-        <CircularProgress size={100} />
+        <div className="table-loading">
+          <CircularProgress size={100} />
+        </div>
       ) : (
         <>
           <DetailHeader coin={coin} />
