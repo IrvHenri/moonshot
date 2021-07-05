@@ -22,8 +22,8 @@ const Footer = () => {
           </span>
           <h1>Meet The Team</h1>
           <div className="team-container">
-            {teamData.map((member) => (
-              <TeamMember {...member} />
+            {teamData.map((member, index) => (
+              <TeamMember key={index} {...member} />
             ))}
           </div>
         </div>

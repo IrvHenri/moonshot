@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
@@ -22,6 +23,7 @@ const Row = (props) => {
   } = props;
   const priceStyling =
     price_change_percentage_24h > 0 ? "market-up" : "market-down";
+
   return (
     <TableRow hover role="checkbox" tabIndex={-1}>
       <TableCell align={"left"}>

@@ -4,9 +4,9 @@ const { formatMoneyShort } = currencyFormatterHelpers();
 export default function TableTitle(props) {
   const { data } = props;
 
-  const totalMarketCap = data.reduce((acc, val) => acc + val.market_cap, 0);
+  const totalMarketCap = data.reduce((acc, c) => acc + c.market_cap, 0);
   const totalVolumeTwentyFour = data.reduce(
-    (acc, val) => acc + val.market_cap_change_24h,
+    (acc, c) => acc + c.market_cap_change_24h,
     0
   );
   const topCoin = data.reduce((acc, c) =>
@@ -16,12 +16,14 @@ export default function TableTitle(props) {
 
   return (
     <div className="currencies-page-header">
-      <h1>Todays Top 100 Cryptocurrency Prices </h1>
+      <h1>Today's Top 100 Cryptocurrency Prices </h1>
       <div>
         <p>
           ${formatMoneyShort(totalMarketCap)} <small>market cap</small>
         </p>
-        <p>${formatMoneyShort(totalVolumeTwentyFour)} 24h volume</p>
+        <p>
+          ${formatMoneyShort(totalVolumeTwentyFour)} <small>24h volume</small>
+        </p>
         <p>
           {Math.floor(dominance)}%<small>{topCoin.symbol}</small>
         </p>

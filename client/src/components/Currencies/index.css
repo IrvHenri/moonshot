@@ -6,9 +6,24 @@
   max-width: 1400px;
 }
 .currencies-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: var(--secondary-font-color);
   background: var(--secondary-bg-color);
   padding: 1em;
+}
+.currencies-page-header h1 {
+  font-size: 1.5em;
+}
+.currencies-page-header div {
+  display: flex;
+}
+.currencies-page-header div small {
+  font-size: 0.8em;
+  color: #818b9e;
+  margin-left: 0.1em;
+  margin-right: 0.8em;
 }
 
 .currency-table {

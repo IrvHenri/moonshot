@@ -12,9 +12,10 @@
   font-weight: 800;
   align-self: center;
 }
-
-.nav-links .link:hover,
-.nav-links .link:focus {
+.link:hover {
+  color: var(--accent-btn-color);
+}
+.link:focus {
   border-bottom: 2px solid var(--accent-btn-color);
 }
 
