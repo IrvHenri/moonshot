@@ -15,10 +15,9 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
-
         <Switch>
           <Route exact path="/" component={Landing} />
-          <Route path="/currencies" component={Cryptocurrencies} />
+          <Route exact path="/currencies" component={Cryptocurrencies} />
           <Route path="/currencies/:id" component={CoinDetail} />
           <Route path="/portfolio" component={Portfolio} />
           <Route path="/login" component={Login} />
