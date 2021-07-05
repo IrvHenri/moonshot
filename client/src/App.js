@@ -8,7 +8,6 @@ import Portfolio from "./components/Portfolio";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Footer from "./components/Footer";
-
 function App() {
   return (
     <div className="App">

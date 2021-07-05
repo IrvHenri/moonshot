@@ -1,9 +1,13 @@
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
 .currencies-page {
-  max-width: 85%;
   margin: 0 auto;
   margin-top: 5em;
-  width: 80%;
-  max-width: 1400px;
+  width: 75%;
+  max-width: 1350px;
 }
 .currencies-page-header {
   display: flex;

@@ -53,8 +53,9 @@ const useStyles = makeStyles({
     background: "#dcf6ff",
   },
   container: {
-    maxHeight: 440,
+    maxHeight: 560,
     background: "#dcf6ff",
+    overflowY: "auto",
   },
 });
 const CurrencyTable = ({ data }) => {
@@ -65,7 +66,11 @@ const CurrencyTable = ({ data }) => {
     <div className="currency-table">
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
-          <Table stickyHeader aria-label="sticky table">
+          <Table
+            stickyHeader
+            aria-label="sticky table"
+            className={classes.table}
+          >
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
