@@ -1,4 +1,19 @@
+import { Modal } from '@material-ui/core'
+import { useState } from 'react';
+
 const PortfolioDashboard = () => {
+  const [open, setOpen] = useState(false);
+
+  const body = (
+    <div className="modal">
+      <h1 className="modal-title" id="simple-modal-title">Select Coin</h1>
+      <form className='modal-form'>
+      <input type='text'/>
+      <button>Search</button>
+      </form>
+      <p className='modal-close' onClick={() => setOpen(false)}>X</p>
+    </div>
+  );
   return <div className='portfolio-dashboard'>
     <div className='portfolio-banner'>
       <div className='portfolio-banner-left'>
@@ -12,7 +27,7 @@ const PortfolioDashboard = () => {
       </div>
       </div>
       <div className='portfolio-banner-right'>
-        <button>
+        <button onClick={() => setOpen(true)}>
           Add Coin:
         </button>
       </div>
@@ -25,6 +40,13 @@ const PortfolioDashboard = () => {
         <h1>Your Assets:</h1>
       </div>
     </div>
+    <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="simple-modal-title"
+      >
+        {body}
+      </Modal>
   </div>
 }
 
