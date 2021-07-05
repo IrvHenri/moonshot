@@ -3,12 +3,17 @@ import { useState } from 'react';
 
 const PortfolioDashboard = () => {
   const [open, setOpen] = useState(false);
-
+  const [searchTerm, setSearchTerm] = useState("")
   const body = (
     <div className="modal">
       <h1 className="modal-title" id="simple-modal-title">Select Coin</h1>
       <form className='modal-form'>
-      <input type='text'/>
+      <input 
+        type='text'
+        placeholder="Find a coin"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
       <button>Search</button>
       </form>
       <p className='modal-close' onClick={() => setOpen(false)}>X</p>
