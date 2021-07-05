@@ -9,7 +9,9 @@ export default function Cryptocurrencies() {
   return (
     <div className="currencies-page">
       {loading ? (
-        <CircularProgress />
+        <div className="table-loading">
+          <CircularProgress />
+        </div>
       ) : (
         <>
           <TableTitle data={coins} />

@@ -1,9 +1,11 @@
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 0;
   background: transparent;
-}
+} */
 
 .currencies-page {
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
   margin-top: 5em;
   width: 75%;
@@ -11,6 +13,11 @@
   min-height: 60vh;
   background-color: var(--secondary-bg-color);
   border-radius: 10px;
+}
+.table-loading {
+  display: block;
+  align-self: center;
+  margin: auto 0;
 }
 
 .currencies-page-header {
