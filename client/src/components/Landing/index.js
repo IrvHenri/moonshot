@@ -15,7 +15,7 @@ const Landing = () => {
               <h3> Learn how to invest in crypto, build and track your portfolio and stay on top of current market trends. </h3>
             </div>
           </Grid>
-          <Grid item xs={12} sm={4}> <img alt=""/> </Grid>
+
         </Grid>
 
       </Box>
