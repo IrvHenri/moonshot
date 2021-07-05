@@ -3,12 +3,21 @@ import React from 'react'
 import { Box, Grid, Card, CardContent } from '@material-ui/core'
 import { BsFillEyeFill, BsFillCalendarFill } from 'react-icons/bs'
 import { FaBrain } from 'react-icons/fa'
+import Background from '../../images/moonshot-background.jpeg'
+
+const styles = {
+  boxContainer: {
+    backgroundImage: `url(${Background})`,
+    backgroundSize: "cover",
+    position: "absolute"
+  }
+}
 
 const Landing = () => {
   return (
     <React.Fragment>
       <Box className="hero-header">
-        <Grid container className="hero-header-grid">
+        <Grid container className="hero-header-grid" style={styles.boxContainer}>
           <Grid item xs={12} sm={8}> 
             <div className="hero-header-text">
               <h1> Moonshot </h1>
