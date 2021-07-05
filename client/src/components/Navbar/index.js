@@ -1,5 +1,6 @@
 import "./Navbar.css";
 import { useState } from "react";
+import { GiHamburgerMenu } from 'react-icons/gi'
 import NavLinks from "./NavLinks";
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
@@ -12,7 +13,7 @@ const Navbar = () => {
         <NavLinks toggle={toggle} setToggle={setToggle} />
       </div>
       <div onClick={() => setToggle((prev) => !prev)} className="burger">
-        CLICK
+        <GiHamburgerMenu />
       </div>
     </nav>
   );

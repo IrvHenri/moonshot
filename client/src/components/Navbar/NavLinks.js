@@ -13,7 +13,7 @@ const NavLinks = ({ toggle, setToggle }) => {
       <div
         className="nav-links"
         onClick={() => setToggle((prev) => !prev)}
-        id={toggle && "visible"}
+        id={toggle ? "visible" : undefined}
       >
         <Link to="/" className="link">
           Home
@@ -21,13 +21,15 @@ const NavLinks = ({ toggle, setToggle }) => {
         <Link to="/currencies" className="link">
           Cryptocurrencies
         </Link>
-        <Link to="/portfolio" className="link">
-          My Portfolio
-        </Link>
         {loggedIn ? (
+          <>
+          <Link to="/portfolio" className="link">
+            My Portfolio
+          </Link>
           <Link to="/" className="link" onClick={signOut}>
             Sign Out
           </Link>
+          </>
         ) : (
           <>
             <Link to="/login" className="link">

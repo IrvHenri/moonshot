@@ -1,0 +1,42 @@
+.login-section{
+  display: flex;
+  background-color: rgb(182, 60, 161);
+}
+
+.login-img{
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  flex: 1;
+  opacity: 0.5;
+}
+
+.login-form{
+  height: 100vh;
+  flex: 1;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+}
+
+.login-form h1{
+  font-size: 5em;
+  margin: 1em;
+}
+
+.login-form form {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form div {
+  margin-bottom: 0.5em;
+}
+.signup-link{
+  text-decoration: none;
+}
+.signup-btn{
+  width: 80%;
+  margin: 1em auto;
+}
