@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/index";
 import Landing from "./components/Landing";
 import CurrencyTable from "./components/Currencies/index";
 import CoinDetail from "./components/CoinDetail";
