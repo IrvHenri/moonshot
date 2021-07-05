@@ -1,15 +1,26 @@
+.currencies-page {
+  max-width: 85%;
+  margin: 0 auto;
+  margin-top: 5em;
+  width: 80%;
+  max-width: 1400px;
+}
+.currencies-page-header {
+  color: var(--secondary-font-color);
+  background: var(--secondary-bg-color);
+  padding: 1em;
+}
+
+.currency-table {
+  border-radius: 0 0 10px 10px;
+}
+
 .market-up {
   color: var(--market-up-color);
 }
 
 .market-down {
   color: var(--market-down-color);
-}
-
-.currency-table {
-  margin: 0 auto;
-  margin-top: 5em;
-  max-width: 85%;
 }
 
 .first-cell {

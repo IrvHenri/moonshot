@@ -3,10 +3,10 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import Avatar from "@material-ui/core/Avatar";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
-import currencyFormatter from "../../helpers/currencyFormatter";
+import currencyFormatterHelpers from "../../helpers/currencyFormatterHelpers";
 import ProgressBar from "./Progressbar";
 import "./index.css";
-
+const { currencyFormatter } = currencyFormatterHelpers();
 const Row = (props) => {
   const {
     id,
@@ -26,7 +26,7 @@ const Row = (props) => {
     <TableRow hover role="checkbox" tabIndex={-1}>
       <TableCell align={"left"}>
         <Link
-          to={`/prices/${id}`}
+          to={`/currencies/${id}`}
           style={{ textDecoration: "none", color: "#232b2b" }}
         >
           <div className="first-cell">
