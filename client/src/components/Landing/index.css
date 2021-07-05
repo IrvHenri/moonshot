@@ -4,6 +4,11 @@
 
 .hero-header-grid {
   height: 100%;
+  background: no-repeat fixed;
+  background-image: url('../../images/moonshot-background.jpeg');
+  background-size: cover;
+  background-color: #717e7e;
+  background-blend-mode: multiply;
 }
 
 .hero-header-text {
