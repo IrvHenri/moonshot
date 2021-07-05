@@ -33,6 +33,13 @@
   margin-top: 1em;
 }
 
+.create-portfolio-btn {
+  margin-top: 0.5em;
+  width: 100%;
+  height: 3em;
+  font-size: 1.8em;
+}
+
 .portfolio-signup-links a {
   margin-left: 1em;
   color: inherit;
@@ -54,4 +61,119 @@
   width: 100%;
   max-width: 280px;
   height: auto;
+}
+
+.portfolio-dashboard{
+  display: flex;
+  flex-direction: column;
+  margin: 2em auto;
+  width: 90%;
+  height: 85vh;
+  border-radius: 10px;
+  color: white;
+  background-color: #222;
+  padding: 1em;
+}
+
+.portfolio-banner {
+  width: 100%;
+  height: 15vh;
+  margin-bottom: 2em;
+  background-color: #444;
+  display: flex;
+  justify-content: space-between;
+}
+
+.portfolio-banner-left{
+  display: flex;
+}
+
+.portfolio-banner-left div{
+  margin: 1em;
+}
+
+.portfolio-banner-left div p{
+  color: var(--market-up-color);
+  text-align: right;
+}
+
+.portfolio-banner-right{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1em;
+}
+
+.portfolio-banner-right button{
+  height: 50%;
+  width: 15vw;
+  border-radius: 15px;
+}
+
+.portfolio-info-container{
+  display: flex;
+  flex: 1;
+}
+
+.portfolio-graph{
+  flex: 1;
+  margin-right: 2em;
+  background-color: #444;
+}
+
+.portfolio-coin-data{
+  flex: 1;
+  background-color: #444;
+}
+
+.modal{
+  position: absolute;
+  top: 25vh;
+  left: 25vw;
+  width: 50vw;
+  background-color: #003;
+  color: white;
+  padding: 2em 0.5em;
+  border-radius: 12px;
+}
+
+.modal-title{
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
+.modal-form{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: auto;
+}
+
+.modal-form input{
+  height: 2em;
+}
+
+.modal-form button{
+  margin-top: 1em;
+}
+
+.modal-close{
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  font-size: 1.5em;
+  margin: 0.5em;
+}
+
+@media screen and (max-width: 600px) {
+  .portfolio-info-container{
+    flex-direction: column;
+  }
+
+  .portfolio-graph{
+    margin-right: 0;
+    margin-bottom: 1em;
+  }
 }
