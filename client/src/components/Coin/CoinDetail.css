@@ -4,9 +4,12 @@
   align-items: center;
   justify-content: center;
   background-color: var(--secondary-bg-color);
+  color: var(--secondary-font-color);
   border-radius: 10px;
+  /* width: 75%;
+  max-width: 1200px; */
   width: 75%;
-  max-width: 1200px;
+  max-width: 1350px;
   margin: 0 auto;
   margin-top: 5em;
   min-height: 60vh;
@@ -16,4 +19,9 @@
 .coin-detail-header {
   display: flex;
   justify-content: space-between;
+  width: 80%;
+  border: 2px solid red;
+}
+.coin-detail-header h1 {
+  font-size: 2rem;
 }

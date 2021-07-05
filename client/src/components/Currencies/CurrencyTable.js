@@ -33,7 +33,7 @@ const columns = [
   },
   {
     id: "market_cap_change_24h",
-    label: "Volume(24)",
+    label: "Market Cap Change(24h)",
     minWidth: 170,
     align: "right",
   },

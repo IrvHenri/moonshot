@@ -11,10 +11,10 @@ export default function Cryptocurrencies() {
       {loading ? (
         <CircularProgress />
       ) : (
-        <div>
+        <>
           <TableTitle data={coins} />
           <CurrencyTable data={coins} />
-        </div>
+        </>
       )}
     </div>
   );

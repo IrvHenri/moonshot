@@ -8,9 +8,6 @@ import DetailDescription from "./DetailDescription";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import useSingleCoinData from "../../hooks/useSingleCoinData";
 
-//axios call will be will be called here
-// coin data stored in state
-// having loading component? *** useState const  [loading, isLoading ] = useState(true)
 export default function CoinDetail() {
   const { id } = useParams();
   const [coin, loading] = useSingleCoinData(id);
@@ -20,14 +17,14 @@ export default function CoinDetail() {
       {loading ? (
         <CircularProgress />
       ) : (
-        <div>
+        <>
           <DetailHeader coin={coin} />
           <main className="coin-detail-main">
             <DetailGraph coin={coin} />
             <DetailStatistics coin={coin} />
           </main>
           <DetailDescription coin={coin} />
-        </div>
+        </>
       )}
     </div>
   );

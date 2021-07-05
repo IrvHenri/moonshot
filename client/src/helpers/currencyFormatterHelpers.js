@@ -8,7 +8,6 @@ export default function currencyFormatterHelpers() {
   const formatMoneyShort = (n) => {
     if (n < 0) {
       let positive = n * -1;
-      console.log(positive);
       if (positive < 1e3) return "-" + positive;
       if (positive >= 1e3 && positive < 1e6)
         return "-" + (positive / 1e3).toFixed(1) + "K";

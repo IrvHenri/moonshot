@@ -8,7 +8,11 @@
   margin-top: 5em;
   width: 75%;
   max-width: 1350px;
+  min-height: 60vh;
+  background-color: var(--secondary-bg-color);
+  border-radius: 10px;
 }
+
 .currencies-page-header {
   display: flex;
   justify-content: space-between;
