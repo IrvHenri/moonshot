@@ -1,4 +1,4 @@
-.nav-links{
+.nav-links {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -6,25 +6,24 @@
 }
 .nav-links .link {
   letter-spacing: 0.15em;
-  margin: auto 1em;
+  margin-right: 1.5em;
   color: var(--primary-font-color);
   text-decoration: none;
   font-weight: 800;
-  padding: 1em;
   align-self: center;
 }
-
-.nav-links .link:hover, .nav-links .link:focus{
-  transition: all 0.25s ease;
-  background-color: var(--accent-btn-color);
-  text-decoration: underline;
+.link:hover {
+  color: var(--accent-btn-color);
+}
+.link:focus {
+  border-bottom: 2px solid var(--accent-btn-color);
 }
 
 @media screen and (max-width: 600px) {
   .navbar .nav-right .nav-links {
     display: none;
   }
-  #visible{
+  #visible {
     position: absolute;
     width: 100vw;
     right: 0px;
