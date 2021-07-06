@@ -130,13 +130,15 @@
   position: absolute;
   top: 10vh;
   left: 25vw;
-  width: 50vw;
   background-color: #003;
   color: white;
   padding: 2em 0.5em;
   border-radius: 12px;
   max-height: 70vh;
   overflow-y: auto;
+  min-height: 70vh;
+  min-width: 50vw;
+  box-shadow: 0.5em 0.2em #222;
 }
 .modal::-webkit-scrollbar {
   width: 0;
@@ -200,6 +202,10 @@
 
 .coin:hover, .coin:focus{
   background-color: #000;
+}
+
+.coin h1{
+  font-size: 1.5em;
 }
 
 @media screen and (max-width: 600px) {

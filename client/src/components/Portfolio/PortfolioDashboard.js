@@ -3,24 +3,22 @@ import { useState } from 'react';
 import useCoinData from '../../hooks/useCoinData'
 import PortfolioModalCoin from './PortfolioModalCoin';
 import {AiFillCloseCircle} from 'react-icons/ai'
+
+import SelectedCoinModalPage from './SelectedCoinModalPage';
 const PortfolioDashboard = () => {
   const [coins, loading] = useCoinData();
   const [open, setOpen] = useState(false);
-  const [selectedCoin, setSelectedCoin] = useState("")
+  const [selectedCoin, setSelectedCoin] = useState(null)
+  const [portfolioCoins, setPortfolioCoins] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
 
   const body = (
     <div className="modal">
+      {selectedCoin ?
+        < SelectedCoinModalPage selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin} />
+      :
+      <>
       <h1 className="modal-title" id="simple-modal-title">Select Coin</h1>
-      {selectedCoin && 
-        <div className='modal-coin-select'>
-          <div>
-            <h5>SELECTED COIN {`${selectedCoin.id}`}</h5>
-            <input type='number' min={1} max={1000} />
-          </div>
-          <AiFillCloseCircle onClick={() => setSelectedCoin("")}/>
-        </div>
-      }
       <form className='modal-form'>
       <input 
         type='text'
@@ -28,14 +26,16 @@ const PortfolioDashboard = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <button>Search</button>
       </form>
       {loading ? null : 
-      <div className="modal-coin-list">
+        <div className="modal-coin-list">
         {coins.filter(coin => searchTerm ? coin.id.includes(searchTerm) : true).map(coin => <PortfolioModalCoin coin={coin} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin}/>)}
       </div>}
       <AiFillCloseCircle className='modal-close' onClick={() => setOpen(false)} />
+    </>
+    }
     </div>
+      
   );
   return <div className='portfolio-dashboard'>
     <div className='portfolio-banner'>
