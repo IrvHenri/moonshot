@@ -39,9 +39,9 @@ export default function DetailHeader({ coin }) {
           <h1>{currencyFormatter.format(current_price.usd)}</h1>{" "}
           <small>
             {price_change_percentage_24h > 0 ? (
-              <TiArrowSortedUp />
+              <TiArrowSortedUp color="16C784" />
             ) : (
-              <TiArrowSortedDown />
+              <TiArrowSortedDown color="EA3A43" />
             )}
             {price_change_percentage_24h.toFixed(2)}%
           </small>

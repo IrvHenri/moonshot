@@ -1,8 +1,7 @@
 .coin-detail-page {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  /* justify-content: center; */
+  justify-content: center;
   background-color: var(--secondary-bg-color);
   color: var(--secondary-font-color);
   border-radius: 10px;
@@ -19,6 +18,7 @@
 /* ------------- */
 /* Header */
 /* ------------- */
+
 .coin-detail-header {
   display: flex;
   justify-content: space-between;
@@ -85,7 +85,7 @@
   padding: 0.1em 0.3em;
   margin-left: 0.7em;
   font-size: 0.8em;
-  font-weight: 600;
+  font-weight: 900;
 }
 
 .high-low-price {
@@ -96,4 +96,37 @@
 .high-low-price p small {
   padding: 0;
   color: var(--secondary-font-color);
+}
+
+/* ------------- */
+/* Main */
+/* ------------- */
+
+.coin-detail-main {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+  border: 2px solid red;
+}
+.coin-stat {
+  display: flex;
+  justify-content: space-between;
+}
+
+.coin-stat p {
+  color: var(--primary-font-color);
+  font-size: 1em;
+  margin-bottom: 0.7em;
+}
+
+.coin-stat small {
+  font-weight: 600;
+  font-size: 0.9em;
+  color: var(--accent-btn-color);
+}
+
+.stat-stack p {
+  color: var(--accent-btn-color);
+  padding: 0;
+  margin: 0;
 }
