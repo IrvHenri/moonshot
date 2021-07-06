@@ -1,12 +1,12 @@
 import "./NavLinks.css";
 import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
-import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 const NavLinks = ({ toggle, setToggle }) => {
-  const [loggedIn, setLoggedIn] = useState(true); //We'll change this later, just a temp way to toggle for now
+  const {user, setUser} = useAuth()
   const signOut = () => {
-    setLoggedIn(false);
+    setUser("");
   };
   return (
     <CSSTransition in={toggle} timeout={100} classNames="my-node">
@@ -21,7 +21,7 @@ const NavLinks = ({ toggle, setToggle }) => {
         <Link to="/currencies" className="link">
           Cryptocurrencies
         </Link>
-        {loggedIn ? (
+        {user ? (
           <>
           <Link to="/portfolio" className="link">
             My Portfolio

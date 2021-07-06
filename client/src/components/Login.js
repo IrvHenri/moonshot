@@ -3,7 +3,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
+import { useAuth } from "../context/AuthContext";
 const Login = () => {
+  const {user, setUser} = useAuth()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   return (
