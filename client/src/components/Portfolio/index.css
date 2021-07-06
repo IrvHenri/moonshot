@@ -128,13 +128,19 @@
 
 .modal{
   position: absolute;
-  top: 25vh;
+  top: 2vh;
   left: 25vw;
   width: 50vw;
   background-color: #003;
   color: white;
   padding: 2em 0.5em;
   border-radius: 12px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.modal::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }
 
 .modal-title{
