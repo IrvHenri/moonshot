@@ -23,5 +23,4 @@ function useSingleCoinData(id) {
   }, [id]);
   return { coin, loading, chartData };
 }
-//coin ,dailyChart, weeklyChart, monthlyChart
 export default useSingleCoinData;
