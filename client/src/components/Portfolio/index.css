@@ -63,6 +63,7 @@
   height: auto;
 }
 
+/*Portfolio Dashboard*/
 .portfolio-dashboard{
   display: flex;
   flex-direction: column;
@@ -126,10 +127,11 @@
   background-color: #444;
 }
 
+/*Add Coin Modal*/
 .modal{
   position: absolute;
-  top: 10vh;
-  left: 25vw;
+  top: 15vh;
+  left: 30vw;
   background-color: #003;
   color: white;
   padding: 2em 0.5em;
@@ -137,7 +139,7 @@
   max-height: 70vh;
   overflow-y: auto;
   min-height: 70vh;
-  min-width: 50vw;
+  min-width: 40vw;
   box-shadow: 0.5em 0.2em #222;
 }
 .modal::-webkit-scrollbar {
@@ -192,6 +194,7 @@
   margin: 0.5em;
 }
 
+/*Modal Coin Row*/
 .coin{
   display: flex;
   justify-content: space-between;
@@ -206,6 +209,21 @@
 
 .coin h1{
   font-size: 1.5em;
+}
+
+/*Selected Coin Modal*/
+.selected-header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 80%;
+  margin: 0.5em auto;
+}
+
+.selected-header img {
+  height: 10vh;
+  width: 10vh;
+  margin-right: 1em;
 }
 
 @media screen and (max-width: 600px) {

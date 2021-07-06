@@ -10,6 +10,7 @@ const PortfolioDashboard = () => {
   const [open, setOpen] = useState(false);
   const [selectedCoin, setSelectedCoin] = useState(null)
   const [portfolioCoins, setPortfolioCoins] = useState([])
+  //^ [{coin: quantity}]
   const [searchTerm, setSearchTerm] = useState("")
 
   const body = (
@@ -29,7 +30,7 @@ const PortfolioDashboard = () => {
       </form>
       {loading ? null : 
         <div className="modal-coin-list">
-        {coins.filter(coin => searchTerm ? coin.id.includes(searchTerm) : true).map(coin => <PortfolioModalCoin coin={coin} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin}/>)}
+        {coins.filter(coin => searchTerm ? coin.id.includes(searchTerm) : true).map((coin, ind) => <PortfolioModalCoin key={ind} coin={coin} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin}/>)}
       </div>}
       <AiFillCloseCircle className='modal-close' onClick={() => setOpen(false)} />
     </>
@@ -61,6 +62,7 @@ const PortfolioDashboard = () => {
       </div>
       <div className='portfolio-coin-data'>
         <h1>Your Assets:</h1>
+        {portfolioCoins.map((coin, ind) => <coinAsset key={ind} coin={coin} />)}
       </div>
     </div>
     <Modal

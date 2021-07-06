@@ -5,7 +5,7 @@ const PortfolioModalCoin = ({coin, setSelectedCoin}) => {
   return <div 
     className='coin' 
     onClick={() => {setSelectedCoin(coin)}}> 
-    <Avatar alt="coin logo" src={coin.image} />
+    <Avatar alt={`${coin.id} logo`} src={coin.image} />
     <h1>{coin.id}</h1>
     <BiRightArrow />
   </div>
