@@ -23,8 +23,10 @@ const useStyles = makeStyles({
 });
 export default function DetailStatCard({ coin, chartData, coins }) {
   const totalMarketCap = coins.reduce((acc, c) => acc + c.market_cap, 0);
-  const { total_volumes } = chartData;
-  let tradingVolume = total_volumes[0][1];
+  const {
+    dailyChart: { total_volumes },
+  } = chartData;
+
   const {
     name,
     market_cap_rank,
@@ -37,6 +39,7 @@ export default function DetailStatCard({ coin, chartData, coins }) {
       market_cap: { usd },
     },
   } = coin;
+  const tradingVolume = total_volumes[25][1];
   const classes = useStyles();
   return (
     <Card className={classes.root} variant="outlined">
@@ -72,7 +75,7 @@ export default function DetailStatCard({ coin, chartData, coins }) {
         </div>
         <div className="coin-stat">
           <p>Volume / Market Cap</p>{" "}
-          <small>{(tradingVolume / usd).toFixed(4)}</small>
+          <small>{(tradingVolume / usd).toFixed(2)}</small>
         </div>
         <div className="coin-stat">
           <p>Market Dominance</p>{" "}

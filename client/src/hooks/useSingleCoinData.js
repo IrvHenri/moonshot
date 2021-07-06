@@ -2,18 +2,26 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 function useSingleCoinData(id) {
   const [coin, setCoin] = useState({});
-  const [chartData, setChartData] = useState({});
+  const [chartData, setChartData] = useState({
+    dailyChart: {},
+    weeklyChart: {},
+    monthlyChart: {},
+  });
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios.get(`http://localhost:3001/api/coins/${id}`).then((result) => {
-      const { coin, chartData } = result.data;
+      const { coin, dailyChart, weeklyChart, monthlyChart } = result.data;
       setCoin((prev) => ({ ...prev, ...coin }));
-      setChartData((prev) => ({ ...prev, ...chartData }));
+      setChartData((prev) => ({
+        ...prev,
+        dailyChart: { ...dailyChart },
+        weeklyChart: { ...weeklyChart },
+        monthlyChart: { ...monthlyChart },
+      }));
       setLoading(false);
     });
   }, [id]);
-
   return { coin, loading, chartData };
 }
-
+//coin ,dailyChart, weeklyChart, monthlyChart
 export default useSingleCoinData;
