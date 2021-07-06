@@ -1,11 +1,13 @@
 import { Avatar } from '@material-ui/core'
-const PortfolioCoin = ({coin, setSelectedCoin}) => {
+import {BiRightArrow} from "react-icons/bi"
+const PortfolioModalCoin = ({coin, selectedCoin, setSelectedCoin}) => {
   return <div 
     className='coin' 
     onClick={() => {setSelectedCoin(coin)}}> 
     <Avatar alt="coin logo" src={coin.image} />
     {coin.id}
+    <BiRightArrow />
   </div>
 }
 
-export default PortfolioCoin;
+export default PortfolioModalCoin;

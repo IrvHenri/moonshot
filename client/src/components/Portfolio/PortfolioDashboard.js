@@ -1,7 +1,7 @@
 import { Modal } from '@material-ui/core'
 import { useState } from 'react';
 import useCoinData from '../../hooks/useCoinData'
-import PortfolioCoin from './PortfolioCoin';
+import PortfolioModalCoin from './PortfolioModalCoin';
 const PortfolioDashboard = () => {
   const [coins, loading] = useCoinData();
   const [open, setOpen] = useState(false);
@@ -28,7 +28,7 @@ const PortfolioDashboard = () => {
       </form>
       {loading ? null : 
       <div className="modal-coin-list">
-        {coins.map(coin => <PortfolioCoin coin={coin} setSelectedCoin={setSelectedCoin}/>)}
+        {coins.filter(coin => searchTerm ? coin.id.includes(searchTerm) : true).map(coin => <PortfolioModalCoin coin={coin} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin}/>)}
       </div>}
       <p className='modal-close' onClick={() => setOpen(false)}>X</p>
     </div>
