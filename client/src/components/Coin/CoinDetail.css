@@ -1,0 +1,133 @@
+.coin-detail-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--secondary-bg-color);
+  color: var(--secondary-font-color);
+  border-radius: 10px;
+  /* width: 75%;
+  max-width: 1200px; */
+  width: 75%;
+  max-width: 1350px;
+  margin: 0 auto;
+  margin-top: 5em;
+  min-height: 60vh;
+  padding: 1.5em;
+}
+
+/* ------------- */
+/* Header */
+/* ------------- */
+
+.coin-detail-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.coin-detail-header h1 {
+  font-size: 2rem;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.header-left div {
+  display: flex;
+  align-items: center;
+}
+
+.header-left div h1 {
+  margin-left: 0.2em;
+}
+
+.header-left div small {
+  font-size: 0.8em;
+  margin-left: 0.5em;
+  color: #818b9e;
+  font-weight: 600;
+}
+
+.header-left p {
+  background: var(--accent-btn-color);
+  border-radius: 5px;
+  padding: 0.2em 0.6em;
+  font-size: 0.8em;
+  margin-top: 0.8em;
+  font-weight: 600;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.header-right p {
+  color: #818b9e;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+.header-right div:first-of-type {
+  display: flex;
+  align-items: center;
+}
+
+.header-right div:first-of-type small {
+  display: flex;
+  align-items: center;
+  color: var(--primary-font-color);
+  background: var(--primary-btn-color);
+  border-radius: 5px;
+  padding: 0.1em 0.3em;
+  margin-left: 0.7em;
+  font-size: 0.8em;
+  font-weight: 900;
+}
+
+.high-low-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.high-low-price p small {
+  padding: 0;
+  color: var(--secondary-font-color);
+}
+
+/* ------------- */
+/* Main */
+/* ------------- */
+
+.coin-detail-main {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+  border: 2px solid red;
+}
+.coin-stat {
+  display: flex;
+  justify-content: space-between;
+}
+
+.coin-stat p {
+  color: var(--primary-font-color);
+  font-size: 1em;
+  margin-bottom: 0.7em;
+  font-weight: 600;
+}
+
+.coin-stat small {
+  font-weight: 600;
+  font-size: 0.9em;
+  color: var(--accent-btn-color);
+}
+
+.stat-stack p {
+  color: var(--accent-btn-color);
+  padding: 0;
+  margin: 0;
+}
