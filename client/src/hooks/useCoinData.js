@@ -5,12 +5,10 @@ function useCoinData() {
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/api/coins/")
-      .then((result) => {
-        setCoins(result.data);
-        setLoading(false);
-      });
+    axios.get("http://localhost:3001/api/coins/").then((result) => {
+      setCoins(result.data);
+      setLoading(false);
+    });
   }, []);
 
   return [coins, loading];
