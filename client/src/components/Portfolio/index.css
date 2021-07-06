@@ -143,6 +143,14 @@
   background: transparent;
 }
 
+.modal input{
+  height: 2em;
+}
+
+.modal input:focus{
+  outline: none;
+}
+
 .modal-title{
   font-size: 2em;
   text-align: center;
@@ -156,13 +164,16 @@
   margin: 2em auto;
 }
 
-.modal-form input{
-  height: 2em;
-}
-
 .modal-form button{
   margin-top: 1em;
 }
+
+.modal-coin-select{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 
 .modal-coin-list{
   padding-bottom: 1em;
