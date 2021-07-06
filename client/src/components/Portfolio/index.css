@@ -224,6 +224,10 @@
   margin-bottom: 2em;
 }
 
+.modal-coin-select h1 span{
+  font-size: 1.1em;
+}
+
 .selected-header{
   display: flex;
   justify-content: center;
@@ -253,6 +257,14 @@
   flex: 1;
   text-align: center;
   height: 5vh;
+}
+
+.mkt-up {
+  color: var(--market-up-color);
+}
+
+.mkt-down {
+  color: var(--market-down-color);
 }
 
 @media screen and (max-width: 600px) {

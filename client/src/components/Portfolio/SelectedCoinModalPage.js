@@ -1,7 +1,12 @@
 import { useState } from "react"
-const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin}) => {
+
+ const formatMarketValColor = (num) => {
+   return num > 0 ? "up" : "down"
+ }
+
+const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, setPortfolioCoins}) => {
   const [quantity, setQuantity] = useState(null)
-  const {name, image, current_price, symbol} = selectedCoin
+  const {name, image, current_price, symbol, price_change_percentage_24h} = selectedCoin
   return <div>
     <div className="selected-header">
       <img alt={`${selectedCoin.name} logo`} src={image} />
@@ -10,15 +15,18 @@ const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin}) => {
     <div className='modal-coin-select'>
       <input type='number' value={quantity} onChange={(e) => setQuantity(e.target.value)} min={1} max={1000} />
       <h1>
-      Current {symbol.toUpperCase()} Price: {`$ ${current_price}`}
+        Current {symbol.toUpperCase()} Price: $ {current_price}
+      </h1>
+      <h1>
+        Price Change: <span className={`mkt-${formatMarketValColor(price_change_percentage_24h  )}`}>{price_change_percentage_24h}%</span>
       </h1>
       <h1>
       Total Cost: $ {current_price * quantity || "0.00"}
       </h1>
     </div>
     <div className="modal-select-btn-container">
-        <p onClick={() => setSelectedCoin(null)}>Clear Selection</p>
-        <p>Add Coin To Portfolio</p>
+        <button onClick={() => setSelectedCoin(null)}>Clear Selection</button>
+        <button onClick={() => setPortfolioCoins(prev => [...prev, {name: quantity}])}>Add Coin To Portfolio</button>
     </div>
   </div>
 }

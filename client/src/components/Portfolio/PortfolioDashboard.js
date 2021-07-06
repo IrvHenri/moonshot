@@ -2,6 +2,7 @@ import { Modal } from '@material-ui/core'
 import { useState } from 'react';
 import useCoinData from '../../hooks/useCoinData'
 import PortfolioModalCoin from './PortfolioModalCoin';
+import CoinAsset from './CoinAsset'
 import {AiFillCloseCircle} from 'react-icons/ai'
 
 import SelectedCoinModalPage from './SelectedCoinModalPage';
@@ -13,10 +14,11 @@ const PortfolioDashboard = () => {
   //^ [{coin: quantity}]
   const [searchTerm, setSearchTerm] = useState("")
 
+
   const body = (
     <div className="modal">
       {selectedCoin ?
-        < SelectedCoinModalPage selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin} />
+        < SelectedCoinModalPage setPortfolioCoins={setPortfolioCoins} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin} />
       :
       <>
       <h1 className="modal-title" id="simple-modal-title">Select Coin</h1>
@@ -62,7 +64,7 @@ const PortfolioDashboard = () => {
       </div>
       <div className='portfolio-coin-data'>
         <h1>Your Assets:</h1>
-        {portfolioCoins.map((coin, ind) => <coinAsset key={ind} coin={coin} />)}
+        {portfolioCoins.map((coin, ind) => <CoinAsset key={ind} coin={coin} />)}
       </div>
     </div>
     <Modal
