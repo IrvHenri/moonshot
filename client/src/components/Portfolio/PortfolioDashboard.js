@@ -1,15 +1,26 @@
 import { Modal } from '@material-ui/core'
 import { useState } from 'react';
 import useCoinData from '../../hooks/useCoinData'
+import PortfolioModalCoin from './PortfolioModalCoin';
+import {AiFillCloseCircle} from 'react-icons/ai'
 const PortfolioDashboard = () => {
   const [coins, loading] = useCoinData();
   const [open, setOpen] = useState(false);
   const [selectedCoin, setSelectedCoin] = useState("")
   const [searchTerm, setSearchTerm] = useState("")
+
   const body = (
     <div className="modal">
       <h1 className="modal-title" id="simple-modal-title">Select Coin</h1>
-      <h5>SELECTED COIN {`${selectedCoin.id}`}</h5>
+      {selectedCoin && 
+        <div className='modal-coin-select'>
+          <div>
+            <h5>SELECTED COIN {`${selectedCoin.id}`}</h5>
+            <input type='number' min={1} max={1000} />
+          </div>
+          <AiFillCloseCircle onClick={() => setSelectedCoin("")}/>
+        </div>
+      }
       <form className='modal-form'>
       <input 
         type='text'
@@ -20,14 +31,10 @@ const PortfolioDashboard = () => {
       <button>Search</button>
       </form>
       {loading ? null : 
-      <div>
-        {coins.map(coin => <p 
-        className='coin' 
-        onClick={() => {
-          setSelectedCoin(coin)
-        }}>{coin.id}</p>)}
+      <div className="modal-coin-list">
+        {coins.filter(coin => searchTerm ? coin.id.includes(searchTerm) : true).map(coin => <PortfolioModalCoin coin={coin} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin}/>)}
       </div>}
-      <p className='modal-close' onClick={() => setOpen(false)}>X</p>
+      <AiFillCloseCircle className='modal-close' onClick={() => setOpen(false)} />
     </div>
   );
   return <div className='portfolio-dashboard'>

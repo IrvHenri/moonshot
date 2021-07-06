@@ -128,13 +128,27 @@
 
 .modal{
   position: absolute;
-  top: 25vh;
+  top: 10vh;
   left: 25vw;
   width: 50vw;
   background-color: #003;
   color: white;
   padding: 2em 0.5em;
   border-radius: 12px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.modal::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.modal input{
+  height: 2em;
+}
+
+.modal input:focus{
+  outline: none;
 }
 
 .modal-title{
@@ -147,15 +161,24 @@
   display: flex;
   flex-direction: column;
   width: 50%;
-  margin: auto;
-}
-
-.modal-form input{
-  height: 2em;
+  margin: 2em auto;
 }
 
 .modal-form button{
   margin-top: 1em;
+}
+
+.modal-coin-select{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.modal-coin-list{
+  padding-bottom: 1em;
+  width: 80%;
+  margin: auto;
 }
 
 .modal-close{
@@ -165,6 +188,18 @@
   cursor: pointer;
   font-size: 1.5em;
   margin: 0.5em;
+}
+
+.coin{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin: 0.5em;
+}
+
+.coin:hover, .coin:focus{
+  background-color: #000;
 }
 
 @media screen and (max-width: 600px) {
