@@ -2,12 +2,10 @@ import "./CoinDetail.css";
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import currencyFormatterHelpers from "../../helpers/currencyFormatterHelpers";
-import ProgressBar from "../Currencies/Progressbar";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 const { currencyFormatter } = currencyFormatterHelpers();
 export default function DetailHeader({ coin }) {
   const {
-    price,
     name,
     image: { thumb },
     symbol,
@@ -17,9 +15,6 @@ export default function DetailHeader({ coin }) {
       low_24h,
       high_24h,
       price_change_percentage_24h,
-      market_cap: { usd },
-      circulating_supply,
-      max_supply,
     },
   } = coin;
   return (
@@ -41,9 +36,9 @@ export default function DetailHeader({ coin }) {
           <h1>{currencyFormatter.format(current_price.usd)}</h1>{" "}
           <small>
             {price_change_percentage_24h > 0 ? (
-              <TiArrowSortedUp />
+              <TiArrowSortedUp color="16C784" />
             ) : (
-              <TiArrowSortedDown />
+              <TiArrowSortedDown color="EA3A43" />
             )}
             {price_change_percentage_24h.toFixed(2)}%
           </small>
