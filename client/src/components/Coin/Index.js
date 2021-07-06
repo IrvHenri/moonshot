@@ -6,11 +6,13 @@ import DetailGraph from "./DetailGraph";
 import DetailStatCard from "./DetailStatCard";
 import DetailDescription from "./DetailDescription";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import useCoinData from "../../hooks/useCoinData";
 import useSingleCoinData from "../../hooks/useSingleCoinData";
 
 export default function CoinDetail() {
   const { id } = useParams();
-  const [coin, loading, chartData] = useSingleCoinData(id);
+  const [coins] = useCoinData();
+  const { coin, loading, chartData } = useSingleCoinData(id);
   return (
     <div className="coin-detail-page">
       {loading ? (
@@ -22,7 +24,7 @@ export default function CoinDetail() {
           <DetailHeader coin={coin} />
           <main className="coin-detail-main">
             <DetailGraph coin={coin} chartData={chartData} />
-            <DetailStatCard coin={coin} />
+            <DetailStatCard coin={coin} chartData={chartData} coins={coins} />
           </main>
           <DetailDescription coin={coin} />
         </>

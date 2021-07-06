@@ -15,9 +15,6 @@ export default function DetailHeader({ coin }) {
       low_24h,
       high_24h,
       price_change_percentage_24h,
-      market_cap: { usd },
-      circulating_supply,
-      max_supply,
     },
   } = coin;
   return (

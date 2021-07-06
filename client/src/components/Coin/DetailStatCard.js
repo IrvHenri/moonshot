@@ -1,20 +1,19 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import currencyFormatterHelpers from "../../helpers/currencyFormatterHelpers";
 const { currencyFormatter } = currencyFormatterHelpers();
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    minWidth: 340,
     background: "#132455",
   },
   title: {
     fontSize: 21,
     color: "#f3f3f3",
+    fontWeight: "bold",
     marginBottom: "1.5em",
   },
   listItem: { display: "flex" },
@@ -22,11 +21,12 @@ const useStyles = makeStyles({
     marginBottom: 12,
   },
 });
-export default function DetailStatCard({ coin }) {
+export default function DetailStatCard({ coin, chartData, coins }) {
+  const totalMarketCap = coins.reduce((acc, c) => acc + c.market_cap, 0);
+  const { total_volumes } = chartData;
+  let tradingVolume = total_volumes[0][1];
   const {
     name,
-    image: { thumb },
-    symbol,
     market_cap_rank,
     market_data: {
       current_price,
@@ -35,11 +35,8 @@ export default function DetailStatCard({ coin }) {
       price_change_24h_in_currency,
       price_change_percentage_24h,
       market_cap: { usd },
-      circulating_supply,
-      max_supply,
     },
   } = coin;
-  console.log(coin);
   const classes = useStyles();
   return (
     <Card className={classes.root} variant="outlined">
@@ -70,13 +67,16 @@ export default function DetailStatCard({ coin }) {
           </small>
         </div>
         <div className="coin-stat">
-          <p>Trading Volume 24h</p> <small></small>
+          <p>Trading Volume 24h</p>{" "}
+          <small>{currencyFormatter.format(tradingVolume)}</small>
         </div>
         <div className="coin-stat">
-          <p>Volume / Market Cap</p> <small></small>
+          <p>Volume / Market Cap</p>{" "}
+          <small>{(tradingVolume / usd).toFixed(4)}</small>
         </div>
         <div className="coin-stat">
-          <p>Market Dominance</p> <small></small>
+          <p>Market Dominance</p>{" "}
+          <small>{(usd / totalMarketCap).toFixed(2) * 100}%</small>
         </div>
         <div className="coin-stat">
           <p>Market Rank</p> <small>#{market_cap_rank}</small>

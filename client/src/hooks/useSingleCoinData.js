@@ -7,13 +7,13 @@ function useSingleCoinData(id) {
   useEffect(() => {
     axios.get(`http://localhost:3001/api/coins/${id}`).then((result) => {
       const { coin, chartData } = result.data;
-      setCoin(coin);
-      setChartData(chartData);
+      setCoin((prev) => ({ ...prev, ...coin }));
+      setChartData((prev) => ({ ...prev, ...chartData }));
       setLoading(false);
     });
   }, [id]);
 
-  return [coin, loading, chartData];
+  return { coin, loading, chartData };
 }
 
 export default useSingleCoinData;

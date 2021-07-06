@@ -117,6 +117,7 @@
   color: var(--primary-font-color);
   font-size: 1em;
   margin-bottom: 0.7em;
+  font-weight: 600;
 }
 
 .coin-stat small {

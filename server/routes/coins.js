@@ -12,7 +12,7 @@ router.get("/", function (req, res, next) {
     .catch((err) => res.status(400).json({ error: err }));
 });
 
-//Get a specific coin and chart data
+//Get a specific coin and chart data "Up to 30 days of prices, market-caps and total volume"
 router.get("/:id", function (req, res, next) {
   let one = `https://api.coingecko.com/api/v3/coins/${req.params.id}`;
   let two = `https://api.coingecko.com/api/v3/coins/${req.params.id}/market_chart?vs_currency=usd&days=30&interval=daily`;
