@@ -1,15 +1,22 @@
-import { Modal, Avatar } from '@material-ui/core'
+import { Modal } from '@material-ui/core'
 import { useState } from 'react';
 import useCoinData from '../../hooks/useCoinData'
+import PortfolioCoin from './PortfolioCoin';
 const PortfolioDashboard = () => {
   const [coins, loading] = useCoinData();
   const [open, setOpen] = useState(false);
   const [selectedCoin, setSelectedCoin] = useState("")
   const [searchTerm, setSearchTerm] = useState("")
+
   const body = (
     <div className="modal">
       <h1 className="modal-title" id="simple-modal-title">Select Coin</h1>
-      <h5>SELECTED COIN {`${selectedCoin.id}`}</h5>
+      {selectedCoin && 
+        <div className='modal-coin-select'>
+          <h5>SELECTED COIN {`${selectedCoin.id}`}</h5>
+          <input type='number' min={1} max={1000} />
+        </div>
+      }
       <form className='modal-form'>
       <input 
         type='text'
@@ -20,13 +27,8 @@ const PortfolioDashboard = () => {
       <button>Search</button>
       </form>
       {loading ? null : 
-      <div>
-        {coins.map(coin => <div
-        className='coin' 
-        onClick={() => {
-          setSelectedCoin(coin)
-          setOpen(false)
-        }}><Avatar alt="coin logo" src={coin.image} />{coin.id}</div>)}
+      <div className="modal-coin-list">
+        {coins.map(coin => <PortfolioCoin coin={coin} setSelectedCoin={setSelectedCoin}/>)}
       </div>}
       <p className='modal-close' onClick={() => setOpen(false)}>X</p>
     </div>
