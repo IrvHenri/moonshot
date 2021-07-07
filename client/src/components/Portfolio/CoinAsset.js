@@ -50,7 +50,7 @@ const CoinAsset = ({coinData, updateCoin, removeCoin, portfolioCoins}) => {
       aria-labelledby="update-asset-modal-title"
     >
       <div className='update-asset-modal'>
-        <input type="number" value={updatedCoinQuantity} onChange={e => setUpdateModalOpen(e.target.value)}/>
+        <input type="number" value={updatedCoinQuantity} onChange={e => setUpdatedCoinQuantity(e.target.value)}/>
         <button onClick={() => updateCoin(id, updatedCoinQuantity, coin.market_data.current_price.usd )}>Update</button>
       </div>
     </Modal>

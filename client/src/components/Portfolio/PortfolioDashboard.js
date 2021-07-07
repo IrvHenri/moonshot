@@ -24,13 +24,10 @@ const PortfolioDashboard = ({setUserHasPortfolio}) => {
   }
 
   const updateCoin = (id, quantity, purchasePrice) => {
-    setPortfolioCoins(prev => {
-      if(prev.filter(coin => coin.id === id).length > 0){
-        return prev.map(coin => coin.id === id ? {id, quantity: parseInt(coin.quantity) + parseInt(quantity), purchasePrice} : coin)
-      } else {
-        return [...prev, {id, quantity, purchasePrice}]
-      }
-    })
+    setPortfolioCoins(prev => prev.length === 0 ? 
+      [{id, quantity, purchasePrice}] :
+      prev.map(coin => coin.id === id ? {id, quantity: parseInt(coin.quantity) + parseInt(quantity), purchasePrice} : coin) 
+    )
   }
 
   const removeCoin = coinId => {
