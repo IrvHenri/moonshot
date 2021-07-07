@@ -44,6 +44,7 @@ export default function DetailGraph({ coin, chartData }) {
     },
     //bottom bar that's draggable. fix issue that is similar to x-axis
     navigator: {
+      // enabled: false,
       handles: {
         enabled: true,
       },
