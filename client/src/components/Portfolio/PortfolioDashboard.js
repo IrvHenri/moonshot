@@ -103,7 +103,7 @@ const PortfolioDashboard = ({setUserHasPortfolio}) => {
         <h1>Your Assets:</h1>
         <p className='clear-portfolio-btn' onClick={() => setClearPortfolioConfirm(true)}>Clear Portfolio</p>
 
-        {portfolioCoins.map((coin, ind) => <CoinAsset key={ind} portfolioCoins={portfolioCoins} coinData={coin} removeCoin={removeCoin}/>)}
+        {portfolioCoins.map((coin, ind) => <CoinAsset key={ind} portfolioCoins={portfolioCoins} coinData={coin} updateCoin={updateCoin} removeCoin={removeCoin}/>)}
 
       </div>
     </div>
