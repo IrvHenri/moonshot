@@ -1,0 +1,21 @@
+http://localhost:3001/api/users
+
+http://localhost:3001/api/portfolios/
+
+DELETE http://localhost:3001/api/portfolios/ 
+
+POST http://localhost:3001/api/users/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "jim@jim.com",
+    "password": "123456"
+}
+
+POST http://localhost:3001/api/portfolios/bitcoin HTTP/1.1
+content-type: application/json
+
+{
+    "quantity": "1",
+    "purchasePrice": "100"
+}
