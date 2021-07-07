@@ -39,7 +39,8 @@ export default function DetailStatCard({ coin, chartData, coins }) {
       market_cap: { usd },
     },
   } = coin;
-  const tradingVolume = total_volumes[25][1];
+
+  const tradingVolume = total_volumes[24][1];
   const classes = useStyles();
   return (
     <Card className={classes.root} variant="outlined">
@@ -71,11 +72,13 @@ export default function DetailStatCard({ coin, chartData, coins }) {
         </div>
         <div className="coin-stat">
           <p>Trading Volume 24h</p>{" "}
-          <small>{currencyFormatter.format(tradingVolume)}</small>
+          <small>
+            {tradingVolume && currencyFormatter.format(tradingVolume)}
+          </small>
         </div>
         <div className="coin-stat">
           <p>Volume / Market Cap</p>{" "}
-          <small>{(tradingVolume / usd).toFixed(2)}</small>
+          <small>{tradingVolume && (tradingVolume / usd).toFixed(2)}</small>
         </div>
         <div className="coin-stat">
           <p>Market Dominance</p>{" "}

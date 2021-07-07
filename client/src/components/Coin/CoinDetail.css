@@ -106,7 +106,6 @@
   display: flex;
   justify-content: space-between;
   margin-top: 1em;
-  border: 2px solid red;
 }
 .coin-stat {
   display: flex;

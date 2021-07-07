@@ -9,17 +9,20 @@ function useSingleCoinData(id) {
   });
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/coins/${id}`).then((result) => {
-      const { coin, dailyChart, weeklyChart, monthlyChart } = result.data;
-      setCoin((prev) => ({ ...prev, ...coin }));
-      setChartData((prev) => ({
-        ...prev,
-        dailyChart: { ...dailyChart },
-        weeklyChart: { ...weeklyChart },
-        monthlyChart: { ...monthlyChart },
-      }));
-      setLoading(false);
-    });
+    axios
+      .get(`http://localhost:3001/api/coins/${id}`)
+      .then((result) => {
+        const { coin, dailyChart, weeklyChart, monthlyChart } = result.data;
+        setCoin((prev) => ({ ...prev, ...coin }));
+        setChartData((prev) => ({
+          ...prev,
+          dailyChart: { ...dailyChart },
+          weeklyChart: { ...weeklyChart },
+          monthlyChart: { ...monthlyChart },
+        }));
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
   }, [id]);
   return { coin, loading, chartData };
 }
