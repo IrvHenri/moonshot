@@ -12,10 +12,12 @@ content-type: application/json
     "password": "123456"
 }
 
-POST http://localhost:3001/api/portfolios/bitcoin HTTP/1.1
+POST http://localhost:3001/api/portfolios/ethereum HTTP/1.1
 content-type: application/json
 
 {
     "quantity": "1",
     "purchasePrice": "100"
 }
+
+DELETE http://localhost:3001/api/portfolios/bitcoin
