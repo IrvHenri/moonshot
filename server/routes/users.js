@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
+const validation = require('../routes/validation');
 const saltRounds = 10;
 
 //Sign Up
@@ -44,6 +45,9 @@ router.post('/login', function(req, res, next) {
       } else {
         res.status(400).json("wrong password");
       }
+
+      const token = jwt.sign({_id: user._id}, process.env.SECRET_TOKEN);
+      res.header('auth-token',token).send(token);
 
     })
     .catch(error => res.status(400).json(error));
