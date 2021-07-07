@@ -1,21 +1,5 @@
 const mongoose = require("mongoose")
 
-const portfolioSchema = mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    min: 5
-  },
-  coins: {
-    type: Array,
-    required: true
-  },
-  money: {
-    type: Number,
-    default: 0
-  }
-}, {timestamps: true})
-
 const userSchema = mongoose.Schema({
     name: {
         type: String,
@@ -32,7 +16,16 @@ const userSchema = mongoose.Schema({
         required: true,
         min: 5
     },
-    portfolios: [portfolioSchema]
+    portfolio: {
+      name: {
+        type: String,
+        default: "My Portfolio"
+      },  
+      coins: {
+        type: Array,
+        default: []
+      }
+    }
 }, {timestamps: true})
 
 module.exports = mongoose.model("User", userSchema);
