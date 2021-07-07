@@ -9,6 +9,7 @@ import SelectedCoinModalPage from './SelectedCoinModalPage';
 const PortfolioDashboard = () => {
   const [coins, loading] = useCoinData();
   const [open, setOpen] = useState(false);
+  const [clearPortfolioConfirm, setClearPortfolioConfirm] = useState(false);
   const [selectedCoin, setSelectedCoin] = useState(null)
   const [portfolioCoins, setPortfolioCoins] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
@@ -28,6 +29,11 @@ const PortfolioDashboard = () => {
   //   }
   // },[selectedCoin])
   
+  const clearPortfolio = () => {
+    setPortfolioCoins([])
+    setClearPortfolioConfirm(false)
+  }
+
   const body = (
     <div className="modal">
       {selectedCoin ?
@@ -84,6 +90,7 @@ const PortfolioDashboard = () => {
       </div>
       <div className='portfolio-coin-data'>
         <h1>Your Assets:</h1>
+        <p className='clear-portfolio-btn' onClick={() => setClearPortfolioConfirm(true)}>Clear Portfolio</p>
         {portfolioCoins.map((coin, ind) => <CoinAsset key={ind} coinData={coin} setPortfolioCoins={setPortfolioCoins}/>)}
       </div>
     </div>
@@ -93,6 +100,17 @@ const PortfolioDashboard = () => {
       aria-labelledby="simple-modal-title"
     >
         {body}
+    </Modal>
+    <Modal
+      open={clearPortfolioConfirm}
+      onClose={() => setClearPortfolioConfirm(false)}
+      aria-labelledby="simple-modal-title"
+    >
+      <div className='clear-portfolio-modal'>
+        <h1>Are you sure?</h1>
+        <button onClick={clearPortfolio}>Yes</button>
+        <button onClick={() => setClearPortfolioConfirm(false)}>No</button>
+      </div>
     </Modal>
   </div>
 }

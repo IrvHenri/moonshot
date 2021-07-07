@@ -15,8 +15,8 @@ const CoinAsset = ({coinData, setPortfolioCoins}) => {
 
   const removeCoin = coinId => {
     setPortfolioCoins(prev => {
-      const newPrev = prev.filter(coin => coin.id !== coinId)
-      return newPrev
+      const updatedCoins = prev.filter(coin => coin.id !== coinId)
+      return updatedCoins
     })
   }
 
