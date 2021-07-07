@@ -7,7 +7,7 @@ const CoinAsset = ({coinData, updateCoin, removeCoin, portfolioCoins}) => {
   const [updateModalOpen, setUpdateModalOpen] = useState(false)
   const [updatedCoinQuantity, setUpdatedCoinQuantity] = useState(1)
   const {id, quantity, purchasePrice} = coinData
-  
+
   useEffect(() => {
     axios.get(`http://localhost:3001/api/coins/${id}`).then((result) => {
       const { coin } = result.data;
@@ -16,6 +16,10 @@ const CoinAsset = ({coinData, updateCoin, removeCoin, portfolioCoins}) => {
     });
   }, [portfolioCoins]);
 
+  const handleUpdate = () => {
+    updateCoin(id, updatedCoinQuantity, coin.market_data.current_price.usd )
+    setUpdateModalOpen(false)
+  }
 
   return loading ? 
   <div>Loading</div> : 
@@ -52,7 +56,7 @@ const CoinAsset = ({coinData, updateCoin, removeCoin, portfolioCoins}) => {
     >
       <div className='update-asset-modal'>
         <input type="number" value={updatedCoinQuantity} onChange={e => setUpdatedCoinQuantity(e.target.value)}/>
-        <button onClick={() => updateCoin(id, updatedCoinQuantity, coin.market_data.current_price.usd )}>Update</button>
+        <button onClick={() => handleUpdate()}>Update</button>
       </div>
     </Modal>
   </div>
