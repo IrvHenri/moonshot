@@ -41,6 +41,7 @@ const CoinAsset = ({coinData, setPortfolioCoins}) => {
     </div>
     <div>
       <h1>P/L Since Purchase:</h1>
+      <h1>{purchasePrice} | {coin.market_data.current_price.usd}</h1>
       <h1>{purchasePrice - coin.market_data.current_price.usd}</h1>
     </div>
     <div>

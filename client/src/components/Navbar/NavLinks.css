@@ -26,23 +26,25 @@
   #visible {
     position: absolute;
     width: 100vw;
+    height: 92vh;
     right: 0px;
     top: 8vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     background-color: var(--primary-bg-color);
     z-index: 100;
+    opacity: 0.9;
     transition: all 1000ms ease;
   }
   #visible .link {
     width: 100%;
     text-align: center;
+    height: 100%;
   }
 
   .my-node-enter {
     opacity: 0;
-    transform: translateY(-100vh);
+    transform: translateX(100vw);
   }
   .my-node-enter-active {
     opacity: 0.5;

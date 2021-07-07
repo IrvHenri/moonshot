@@ -51,7 +51,7 @@ const PortfolioDashboard = () => {
       {loading ? null : 
         <div className="modal-coin-list">
         {coins
-        .filter(coin => searchTerm ? coin.id.includes(searchTerm) : true)
+        .filter(coin => searchTerm ? coin.id.toLowerCase().includes(searchTerm.toLowerCase()) || coin.symbol.toLowerCase() === searchTerm.toLocaleLowerCase() : true)
         .map((coin, ind) => <PortfolioModalCoin key={ind} coin={coin} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin}/>)}
       </div>}
       <AiFillCloseCircle className='modal-close' onClick={() => setOpen(false)} />

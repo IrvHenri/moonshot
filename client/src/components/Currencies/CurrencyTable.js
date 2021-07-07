@@ -67,7 +67,6 @@ const CurrencyTable = ({ data }) => {
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
           <Table
-            stickyHeader
             aria-label="sticky table"
             className={classes.table}
           >
