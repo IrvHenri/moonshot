@@ -6,14 +6,23 @@ const formatMarketValColor = (num) => {
 const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, setPortfolioCoins, setOpen}) => {
   const [quantity, setQuantity] = useState(1)
   const [error, setError] = useState(null)
-  const {id, name, image, current_price, symbol, price_change_percentage_24h} = selectedCoin
+  const {
+    id, 
+    name, 
+    image, 
+    current_price, 
+    symbol, 
+    market_cap, 
+    market_cap_rank, 
+    price_change_percentage_24h, 
+    ath} = selectedCoin
 
-  const addCoin = (id, quantity) => {
+  const addCoin = (id, quantity, purchasePrice) => {
     if (quantity <= 0){
       setError("Error: Quantity must be a positive number.")
     } else {
       //Add a condition to check if the coin is already in the portfolio
-      setPortfolioCoins(prev => [...prev, {id, quantity}])
+      setPortfolioCoins(prev => [...prev, {id, quantity, purchasePrice}])
       setOpen(false)
       setSelectedCoin(null)
     }
@@ -31,15 +40,18 @@ const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, setPortfolioCoins
         Current {symbol.toUpperCase()} Price: $ {current_price}
       </h1>
       <h1>
-        Price Change: <span className={`mkt-${formatMarketValColor(price_change_percentage_24h  )}`}>{price_change_percentage_24h}%</span>
+        24h Price Change: <span className={`mkt-${formatMarketValColor(price_change_percentage_24h  )}`}>{price_change_percentage_24h}%</span>
       </h1>
       <h1>
-      Total Cost: $ {current_price * quantity || "0.00"}
+        All Time High: ${ath}
+      </h1>
+      <h1>
+        Total Cost: $ {current_price * quantity || "0.00"}
       </h1>
     </div>
     <div className="modal-select-btn-container">
         <button onClick={() => setSelectedCoin(null)}>Clear Selection</button>
-        <button onClick={() => addCoin(id, quantity)}>Add Coin To Portfolio</button>
+        <button onClick={() => addCoin(id, quantity, current_price)}>Add Coin To Portfolio</button>
     </div>
   </div>
 }

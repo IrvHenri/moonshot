@@ -4,7 +4,7 @@ import axios from 'axios'
 const CoinAsset = ({coinData, setPortfolioCoins}) => {
   const [coin, setCoin] = useState({})
   const [loading, setLoading] = useState(true)
-  const {id, quantity} = coinData
+  const {id, quantity, purchasePrice} = coinData
   useEffect(() => {
     axios.get(`http://localhost:3001/api/coins/${id}`).then((result) => {
       const { coin } = result.data;
@@ -36,8 +36,12 @@ const CoinAsset = ({coinData, setPortfolioCoins}) => {
     <h1>{coin.market_data.price_change_percentage_7d} </h1>
     </div>
     <div>
-    <h1>Currently Holding:</h1>
-    <h1>{coin.market_data.current_price.usd * quantity} ({quantity} {coin.symbol})</h1>
+      <h1>Currently Holding:</h1>
+      <h1>{coin.market_data.current_price.usd * quantity} ({quantity} {coin.symbol})</h1>
+    </div>
+    <div>
+      <h1>P/L Since Purchase:</h1>
+      <h1>{purchasePrice - coin.market_data.current_price.usd}</h1>
     </div>
     <div>
       <p>Update</p>

@@ -88,12 +88,12 @@ const PortfolioDashboard = () => {
       </div>
     </div>
     <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        aria-labelledby="simple-modal-title"
-      >
+      open={open}
+      onClose={() => setOpen(false)}
+      aria-labelledby="simple-modal-title"
+    >
         {body}
-      </Modal>
+    </Modal>
   </div>
 }
 
