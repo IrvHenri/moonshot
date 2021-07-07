@@ -3,7 +3,6 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
-const validation = require('../routes/validation');
 const saltRounds = 10;
 
 //Sign Up
@@ -36,13 +35,12 @@ router.post('/login', function(req, res, next) {
 
   User.findOne({email})
     .then((user) => {
+
       if (user === null) {
         res.status(404).json("email does not exist");
       }
 
-      if (bcrypt.compareSync(user.password, password)) {
-        res.json(user);
-      } else {
+      if (!bcrypt.compareSync(password, user.password)) {
         res.status(400).json("wrong password");
       }
 
