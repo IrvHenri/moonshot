@@ -7,6 +7,7 @@ const CoinAsset = ({coinData, updateCoin, removeCoin, portfolioCoins}) => {
   const [updateModalOpen, setUpdateModalOpen] = useState(false)
   const [updatedCoinQuantity, setUpdatedCoinQuantity] = useState(1)
   const {id, quantity, purchasePrice} = coinData
+  
   useEffect(() => {
     axios.get(`http://localhost:3001/api/coins/${id}`).then((result) => {
       const { coin } = result.data;

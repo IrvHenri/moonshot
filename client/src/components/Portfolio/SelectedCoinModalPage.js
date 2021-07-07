@@ -21,7 +21,6 @@ const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, updateCoin, setOp
     if (quantity <= 0){
       setError("Error: Quantity must be a positive number.")
     } else {
-      //Add a condition to check if the coin is already in the portfolio
       updateCoin(id, quantity, purchasePrice)
       setOpen(false)
       setSelectedCoin(null)
