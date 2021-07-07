@@ -13,6 +13,7 @@ export default function CoinDetail() {
   const { id } = useParams();
   const [coins] = useCoinData();
   const { coin, loading, chartData } = useSingleCoinData(id);
+
   return (
     <div className="coin-detail-page">
       {loading ? (
@@ -22,6 +23,7 @@ export default function CoinDetail() {
       ) : (
         <>
           <DetailHeader coin={coin} />
+
           <main className="coin-detail-main">
             <DetailGraph coin={coin} chartData={chartData} />
             <DetailStatCard coin={coin} chartData={chartData} coins={coins} />

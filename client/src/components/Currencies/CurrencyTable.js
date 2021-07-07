@@ -66,11 +66,7 @@ const CurrencyTable = ({ data }) => {
     <div className="currency-table">
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
-          <Table
-            stickyHeader
-            aria-label="sticky table"
-            className={classes.table}
-          >
+          <Table aria-label="sticky table" className={classes.table}>
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
