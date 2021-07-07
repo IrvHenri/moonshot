@@ -134,7 +134,16 @@
 }
 
 /*Portfolio Coin Data Section*/
+.coin-asset-row{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1em;
+}
 
+.coin-asset-row-name{
+  font-size: 1em;
+}
 
 /*Add Coin Modal*/
 .modal{
@@ -203,6 +212,7 @@
   align-items: center;
   cursor: pointer;
   margin: 0.5em;
+  padding: 1em 0.5em;
 }
 
 .coin:hover, .coin:focus{
@@ -223,20 +233,6 @@
   margin: auto;
 }
 
-.modal-coin-select input{
-  width: 100%;
-  margin-bottom: 1em;
-}
-
-.modal-coin-select h1{
-  font-size: 1.5em;
-  margin-bottom: 2em;
-}
-
-.modal-coin-select h1 span{
-  font-size: 1.1em;
-}
-
 .selected-header{
   display: flex;
   justify-content: center;
@@ -249,6 +245,20 @@
   height: 10vh;
   width: 10vh;
   margin-right: 1em;
+}
+
+.modal-coin-select input{
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.modal-coin-select h1{
+  font-size: 1.5em;
+  margin-bottom: 2em;
+}
+
+.modal-coin-select h1 span{
+  font-size: 1.1em;
 }
 
 .modal-select-btn-container{

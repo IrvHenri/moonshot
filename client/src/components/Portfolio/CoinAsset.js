@@ -15,13 +15,28 @@ const CoinAsset = ({coinData}) => {
 
   return loading ? 
   <div>Loading</div> : 
-  <div className='coin-asset'> 
+  <div className='coin-asset-row'> 
     {console.log(coin)}
+    <div>
     <Avatar alt={`${coin.id} logo`} src={coin.image.thumb} />
-    <h1>{coin.id}</h1>
-    <h1>Price: {coin.market_data.current_price.usd}</h1>
-    <h1>7D: {coin.market_data.price_change_percentage_7d} </h1>
-    <h1>Currently Holding: {coin.market_data.current_price.usd * quantity} {quantity} {coin.symbol}</h1>
+    <h1 className='coin-asset-row-name'>{coin.id}</h1>
+    </div>
+    <div>
+    <h1>Price:</h1>
+    <h1>{coin.market_data.current_price.usd}</h1>
+    </div>
+    <div>
+    <h1>7D:</h1>
+    <h1>{coin.market_data.price_change_percentage_7d} </h1>
+    </div>
+    <div>
+    <h1>Currently Holding:</h1>
+    <h1>{coin.market_data.current_price.usd * quantity} ({quantity} {coin.symbol})</h1>
+    </div>
+    <div>
+      <p>Update</p>
+      <p>Delete</p>
+    </div>
   </div>
 }
 

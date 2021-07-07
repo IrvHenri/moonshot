@@ -5,12 +5,17 @@ const formatMarketValColor = (num) => {
 
 const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, setPortfolioCoins, setOpen}) => {
   const [quantity, setQuantity] = useState(1)
+  const [error, setError] = useState(null)
   const {id, name, image, current_price, symbol, price_change_percentage_24h} = selectedCoin
 
-  const addCoin = (data) => {
-    setPortfolioCoins(prev => [...prev, data])
-    setOpen(false)
-    setSelectedCoin(null)
+  const addCoin = (id, quantity) => {
+    if (quantity <= 0){
+      setError("Error: Quantity must be a positive number.")
+    } else {
+      setPortfolioCoins(prev => [...prev, {id, quantity}])
+      setOpen(false)
+      setSelectedCoin(null)
+    }
   }
 
   return <div>
@@ -19,6 +24,7 @@ const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, setPortfolioCoins
       <h1 className="modal-title">{`${name.toUpperCase()}`}</h1>
     </div>
     <div className='modal-coin-select'>
+      {error && <p>{error}</p>}
       <input type='number' value={quantity} onChange={(e) => setQuantity(e.target.value)} min={1} max={1000} />
       <h1>
         Current {symbol.toUpperCase()} Price: $ {current_price}
@@ -32,7 +38,7 @@ const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, setPortfolioCoins
     </div>
     <div className="modal-select-btn-container">
         <button onClick={() => setSelectedCoin(null)}>Clear Selection</button>
-        <button onClick={() => addCoin({id, quantity})}>Add Coin To Portfolio</button>
+        <button onClick={() => addCoin(id, quantity)}>Add Coin To Portfolio</button>
     </div>
   </div>
 }
