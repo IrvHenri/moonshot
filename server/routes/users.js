@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
 router.post('/login', function(req, res, next) {
 
   const email = req.body.email;
-  const password = bcrypt.hashSync(req.body.password, saltRounds);
+  const password = req.body.password;
 
   User.findOne({email})
     .then((user) => {
