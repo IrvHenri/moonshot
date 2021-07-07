@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import { Avatar } from '@material-ui/core'
 import axios from 'axios'
-const CoinAsset = ({coinData, setPortfolioCoins}) => {
+const CoinAsset = ({coinData, removeCoin, portfolioCoins}) => {
   const [coin, setCoin] = useState({})
   const [loading, setLoading] = useState(true)
   const {id, quantity, purchasePrice} = coinData
@@ -11,14 +11,8 @@ const CoinAsset = ({coinData, setPortfolioCoins}) => {
       setCoin(coin);
       setLoading(false);
     });
-  }, []);
+  }, [portfolioCoins]);
 
-  const removeCoin = coinId => {
-    setPortfolioCoins(prev => {
-      const updatedCoins = prev.filter(coin => coin.id !== coinId)
-      return updatedCoins
-    })
-  }
 
   return loading ? 
   <div>Loading</div> : 
@@ -45,8 +39,8 @@ const CoinAsset = ({coinData, setPortfolioCoins}) => {
       <h1>{purchasePrice - coin.market_data.current_price.usd}</h1>
     </div>
     <div>
-      <p>Update</p>
-      <p onClick={() => removeCoin(coin.id)}>Delete</p>
+      <button>Update</button>
+      <button onClick={() => removeCoin(id)}>Delete</button>
     </div>
   </div>
 }

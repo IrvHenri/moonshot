@@ -6,7 +6,9 @@ import CoinAsset from './CoinAsset'
 import {AiFillCloseCircle} from 'react-icons/ai'
 
 import SelectedCoinModalPage from './SelectedCoinModalPage';
-const PortfolioDashboard = () => {
+
+const PortfolioDashboard = ({setUserHasPortfolio}) => {
+
   const [coins, loading] = useCoinData();
   const [open, setOpen] = useState(false);
   const [clearPortfolioConfirm, setClearPortfolioConfirm] = useState(false);
@@ -14,24 +16,24 @@ const PortfolioDashboard = () => {
   const [portfolioCoins, setPortfolioCoins] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
 
-  //Probably gonna need a useEffect to re-call API when a coin is added/removed/updated
-  // useEffect(() => {
-  //   if (portfolioCoins.length > 0) {
-  //     axios.get("http://localhost:3001/api/coins/")
-  //     .then(res => {
-  //       console.log(portfolioCoins, "before")
-  //       setPortfolioCoins(prev => {
-  //         prev
-  //         .map(asset => asset.coin = res.data.filter(coin => asset.coin.name === coin.name)[0])
-  //       })
-  //       console.log(portfolioCoins, "after")
-  //     })
-  //   }
-  // },[selectedCoin])
+  const filterCoinList = () => {
+    return coins
+      .filter(coin => searchTerm ? coin.id.toLowerCase().includes(searchTerm.toLowerCase()) || coin.symbol.toLowerCase() === searchTerm.toLocaleLowerCase() : true)
+      .map((coin, ind) => <PortfolioModalCoin key={ind} coin={coin} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin}/>)
+  }
+
+  const removeCoin = coinId => {
+    console.log(coinId)
+    setPortfolioCoins(prev => prev.filter(coin => coin.id !== coinId))
+    if(portfolioCoins.length === 1) {
+      setUserHasPortfolio(false)
+    }
+  }
   
   const clearPortfolio = () => {
     setPortfolioCoins([])
     setClearPortfolioConfirm(false)
+    setUserHasPortfolio(false)
   }
 
   const body = (
@@ -56,10 +58,8 @@ const PortfolioDashboard = () => {
       </form>
       {loading ? null : 
         <div className="modal-coin-list">
-        {coins
-        .filter(coin => searchTerm ? coin.id.toLowerCase().includes(searchTerm.toLowerCase()) || coin.symbol.toLowerCase() === searchTerm.toLocaleLowerCase() : true)
-        .map((coin, ind) => <PortfolioModalCoin key={ind} coin={coin} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin}/>)}
-      </div>}
+          {filterCoinList()}
+        </div>}
       <AiFillCloseCircle className='modal-close' onClick={() => setOpen(false)} />
     </>
     }
@@ -91,16 +91,20 @@ const PortfolioDashboard = () => {
       <div className='portfolio-coin-data'>
         <h1>Your Assets:</h1>
         <p className='clear-portfolio-btn' onClick={() => setClearPortfolioConfirm(true)}>Clear Portfolio</p>
-        {portfolioCoins.map((coin, ind) => <CoinAsset key={ind} coinData={coin} setPortfolioCoins={setPortfolioCoins}/>)}
+
+        {portfolioCoins.map((coin, ind) => <CoinAsset key={ind} portfolioCoins={portfolioCoins} coinData={coin} removeCoin={removeCoin}/>)}
+
       </div>
     </div>
+
     <Modal
       open={open}
       onClose={() => setOpen(false)}
       aria-labelledby="simple-modal-title"
     >
-        {body}
+      {body}
     </Modal>
+
     <Modal
       open={clearPortfolioConfirm}
       onClose={() => setClearPortfolioConfirm(false)}

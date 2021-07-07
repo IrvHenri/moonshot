@@ -6,7 +6,7 @@ const LoggedIn = () => {
   return userHasPortfolio 
   ? 
   //View My Portfolio
-  <PortfolioDashboard />
+  <PortfolioDashboard setUserHasPortfolio={setUserHasPortfolio}/>
   :
   //Create A New Portfolio
   <div className="portfolio-jumbo">

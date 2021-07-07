@@ -145,6 +145,10 @@
   font-size: 1em;
 }
 
+.coin-asset-row p{
+  border: solid 1px white;
+}
+
 /*Add Coin Modal*/
 .modal{
   position: absolute;
