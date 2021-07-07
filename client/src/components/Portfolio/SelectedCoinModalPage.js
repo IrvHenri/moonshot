@@ -1,12 +1,18 @@
 import { useState } from "react"
+const formatMarketValColor = (num) => {
+  return num > 0 ? "up" : "down"
+}
 
- const formatMarketValColor = (num) => {
-   return num > 0 ? "up" : "down"
- }
-
-const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, setPortfolioCoins}) => {
-  const [quantity, setQuantity] = useState(null)
+const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, setPortfolioCoins, setOpen}) => {
+  const [quantity, setQuantity] = useState(1)
   const {name, image, current_price, symbol, price_change_percentage_24h} = selectedCoin
+
+  const addCoin = (data) => {
+    setPortfolioCoins(prev => [...prev, data])
+    setOpen(false)
+    selectedCoin(null)
+  }
+
   return <div>
     <div className="selected-header">
       <img alt={`${selectedCoin.name} logo`} src={image} />
@@ -26,7 +32,7 @@ const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, setPortfolioCoins
     </div>
     <div className="modal-select-btn-container">
         <button onClick={() => setSelectedCoin(null)}>Clear Selection</button>
-        <button onClick={() => setPortfolioCoins(prev => [...prev, {name: quantity}])}>Add Coin To Portfolio</button>
+        <button onClick={() => addCoin({name, quantity})}>Add Coin To Portfolio</button>
     </div>
   </div>
 }

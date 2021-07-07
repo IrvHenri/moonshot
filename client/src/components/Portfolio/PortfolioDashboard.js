@@ -11,14 +11,18 @@ const PortfolioDashboard = () => {
   const [open, setOpen] = useState(false);
   const [selectedCoin, setSelectedCoin] = useState(null)
   const [portfolioCoins, setPortfolioCoins] = useState([])
-  //^ [{coin: quantity}]
   const [searchTerm, setSearchTerm] = useState("")
 
-
+  //Probably gonna need a useEffect to re-call API when a coin is added/removed/updated
   const body = (
     <div className="modal">
       {selectedCoin ?
-        < SelectedCoinModalPage setPortfolioCoins={setPortfolioCoins} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin} />
+        < SelectedCoinModalPage 
+        selectedCoin={selectedCoin} 
+        setSelectedCoin={setSelectedCoin} 
+        setOpen={setOpen} 
+        setPortfolioCoins={setPortfolioCoins}
+        />
       :
       <>
       <h1 className="modal-title" id="simple-modal-title">Select Coin</h1>
@@ -32,7 +36,9 @@ const PortfolioDashboard = () => {
       </form>
       {loading ? null : 
         <div className="modal-coin-list">
-        {coins.filter(coin => searchTerm ? coin.id.includes(searchTerm) : true).map((coin, ind) => <PortfolioModalCoin key={ind} coin={coin} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin}/>)}
+        {coins
+        .filter(coin => searchTerm ? coin.id.includes(searchTerm) : true)
+        .map((coin, ind) => <PortfolioModalCoin key={ind} coin={coin} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin}/>)}
       </div>}
       <AiFillCloseCircle className='modal-close' onClick={() => setOpen(false)} />
     </>
@@ -64,7 +70,15 @@ const PortfolioDashboard = () => {
       </div>
       <div className='portfolio-coin-data'>
         <h1>Your Assets:</h1>
-        {portfolioCoins.map((coin, ind) => <CoinAsset key={ind} coin={coin} />)}
+        {coins
+        .filter(coin => portfolioCoins.filter(portfolioCoin => 
+          {if (portfolioCoin.name === coin.name){
+            coin.quantity = portfolioCoin.quantity
+            return true
+          }
+          return false
+          }).length > 0)
+        .map((coin, ind) => <CoinAsset key={ind} coin={coin} />)}
       </div>
     </div>
     <Modal
