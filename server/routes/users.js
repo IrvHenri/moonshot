@@ -1,13 +1,16 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
+const saltRounds = 10;
 
 //Sign Up
 router.post('/signup', function(req, res, next) {
 
   const name = req.body.name;
   const email = req.body.email;
-  const password = req.body.password;
+  const password = bcrypt.hashSync(req.body.password, saltRounds);
 
   const newUser = new User({name, email, password});
 
@@ -28,19 +31,16 @@ router.get('/', function(req, res, next) {
 router.post('/login', function(req, res, next) {
 
   const email = req.body.email;
-  const password = req.body.password;
-
-  console.log('email', email);
-  console.log('password', password);
+  const password = bcrypt.hashSync(req.body.password, saltRounds);
 
   User.findOne({email})
-    .then((data) => {
-      if (data === null) {
+    .then((user) => {
+      if (user === null) {
         res.status(404).json("email does not exist");
       }
 
-      if (data.password === password) {
-        res.json(data);
+      if (bcrypt.compareSync(user.password, password)) {
+        res.json(user);
       } else {
         res.status(400).json("wrong password");
       }
