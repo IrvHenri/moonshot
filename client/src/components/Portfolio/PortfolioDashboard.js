@@ -1,6 +1,5 @@
 import { Modal } from '@material-ui/core'
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import useCoinData from '../../hooks/useCoinData'
 import PortfolioModalCoin from './PortfolioModalCoin';
 import CoinAsset from './CoinAsset'
@@ -85,7 +84,7 @@ const PortfolioDashboard = () => {
       </div>
       <div className='portfolio-coin-data'>
         <h1>Your Assets:</h1>
-        {portfolioCoins.map((coin, ind) => <CoinAsset key={ind} coinData={coin} />)}
+        {portfolioCoins.map((coin, ind) => <CoinAsset key={ind} coinData={coin} setPortfolioCoins={setPortfolioCoins}/>)}
       </div>
     </div>
     <Modal
