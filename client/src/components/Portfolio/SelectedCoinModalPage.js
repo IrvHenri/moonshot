@@ -3,7 +3,7 @@ const formatMarketValColor = (num) => {
   return num > 0 ? "up" : "down"
 }
 
-const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, setPortfolioCoins, setOpen}) => {
+const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, updateCoin, setOpen}) => {
   const [quantity, setQuantity] = useState(1)
   const [error, setError] = useState(null)
   const {
@@ -22,7 +22,7 @@ const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, setPortfolioCoins
       setError("Error: Quantity must be a positive number.")
     } else {
       //Add a condition to check if the coin is already in the portfolio
-      setPortfolioCoins(prev => [...prev, {id, quantity, purchasePrice}])
+      updateCoin(id, quantity, purchasePrice)
       setOpen(false)
       setSelectedCoin(null)
     }

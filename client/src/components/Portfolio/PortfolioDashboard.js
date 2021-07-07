@@ -16,10 +16,21 @@ const PortfolioDashboard = ({setUserHasPortfolio}) => {
   const [portfolioCoins, setPortfolioCoins] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
 
+  //Will likely need a useEffect to re-call API on portfolio update here
   const filterCoinList = () => {
     return coins
       .filter(coin => searchTerm ? coin.id.toLowerCase().includes(searchTerm.toLowerCase()) || coin.symbol.toLowerCase() === searchTerm.toLocaleLowerCase() : true)
       .map((coin, ind) => <PortfolioModalCoin key={ind} coin={coin} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin}/>)
+  }
+
+  const updateCoin = (id, quantity, purchasePrice) => {
+    setPortfolioCoins(prev => {
+      if(prev.filter(coin => coin.id === id).length > 0){
+        return prev.map(coin => coin.id === id ? {id, quantity: parseInt(coin.quantity) + parseInt(quantity), purchasePrice} : coin)
+      } else {
+        return [...prev, {id, quantity, purchasePrice}]
+      }
+    })
   }
 
   const removeCoin = coinId => {
@@ -43,7 +54,7 @@ const PortfolioDashboard = ({setUserHasPortfolio}) => {
         selectedCoin={selectedCoin} 
         setSelectedCoin={setSelectedCoin} 
         setOpen={setOpen} 
-        setPortfolioCoins={setPortfolioCoins}
+        updateCoin={updateCoin}
         />
       :
       <>
