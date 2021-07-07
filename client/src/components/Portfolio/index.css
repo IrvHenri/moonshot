@@ -125,7 +125,16 @@
 .portfolio-coin-data{
   flex: 1;
   background-color: #444;
+  overflow-y: auto;
 }
+
+.portfolio-coin-data::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+/*Portfolio Coin Data Section*/
+
 
 /*Add Coin Modal*/
 .modal{

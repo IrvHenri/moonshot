@@ -1,5 +1,6 @@
 import { Modal } from '@material-ui/core'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import useCoinData from '../../hooks/useCoinData'
 import PortfolioModalCoin from './PortfolioModalCoin';
 import CoinAsset from './CoinAsset'
@@ -14,6 +15,20 @@ const PortfolioDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("")
 
   //Probably gonna need a useEffect to re-call API when a coin is added/removed/updated
+  // useEffect(() => {
+  //   if (portfolioCoins.length > 0) {
+  //     axios.get("http://localhost:3001/api/coins/")
+  //     .then(res => {
+  //       console.log(portfolioCoins, "before")
+  //       setPortfolioCoins(prev => {
+  //         prev
+  //         .map(asset => asset.coin = res.data.filter(coin => asset.coin.name === coin.name)[0])
+  //       })
+  //       console.log(portfolioCoins, "after")
+  //     })
+  //   }
+  // },[selectedCoin])
+  
   const body = (
     <div className="modal">
       {selectedCoin ?
@@ -70,15 +85,7 @@ const PortfolioDashboard = () => {
       </div>
       <div className='portfolio-coin-data'>
         <h1>Your Assets:</h1>
-        {coins
-        .filter(coin => portfolioCoins.filter(portfolioCoin => 
-          {if (portfolioCoin.name === coin.name){
-            coin.quantity = portfolioCoin.quantity
-            return true
-          }
-          return false
-          }).length > 0)
-        .map((coin, ind) => <CoinAsset key={ind} coin={coin} />)}
+        {portfolioCoins.map((coin, ind) => <CoinAsset key={ind} coinData={coin} />)}
       </div>
     </div>
     <Modal
