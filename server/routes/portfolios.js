@@ -46,18 +46,25 @@ router.post("/:coinId", function(req, res) {
   .catch(err => res.status(400).json(`Error ${err}`))
 })
 
-/* Update a single coin in the user's portfolio */
-router.put("/:coinId", function(req, res) {
-  const {quantity, purchasePrice} = req.body;
+/* Update the portfolio's name */
+router.put('/change-name', function(req, res){
   User.findById("60e4bbcfe0f013cb5cf16465")
   .then(user => {
-    user.portfolio.coins.push(
-      {
-        id: req.params.coinId,
-        quantity,
-        purchasePrice
-      }
-    )
+    user.portfolio.name = req.body.newName
+
+    user.save()
+    .then(res.json("Portfolio name changed"))
+    .catch(err => res.status(400).json(`Error ${err}`))
+  })
+  .catch(err => res.status(400).json(`Error ${err}`))
+})
+
+/* Update a single coin in the user's portfolio */
+router.put("/:coinId", function(req, res) {
+  const {updatedCoinData} = req.body;
+  User.findById("60e4bbcfe0f013cb5cf16465")
+  .then(user => {
+    user.portfolio.coins = updatedCoinData //Bad practice, but using as a test for now
 
     user.save()
     .then(() => res.json("Coin Added to portfolio"))
