@@ -11,17 +11,14 @@ export default function DetailGraph({ coin, chartData }) {
   const [chartMode, setChartMode] = useState(dayData);
   const options = {
     title: {
-      text: "Price (USD)", //needs to be dynamic if including market cap volume
+      text: `${name} Price Chart (USD)`, //needs to be dynamic if including market cap volume
     },
 
     chart: {
       borderRadius: 10,
       shadow: true,
-      loading: {
-        hideDuration: 1000,
-        showDuration: 1000,
-      },
     },
+
     // issue with current x value being one day in the future (JS array index based)
     // fix amount of x points (ticks)
     xAxis: {
@@ -32,6 +29,7 @@ export default function DetailGraph({ coin, chartData }) {
       startOnTick: true, //expands x-axis
       endOnTick: true,
     },
+
     // fix y-axis baseline - should start at 0 - has to do with logarithmic scale not compatible with 0
     yAxis: {
       type: "logarithmic", // sets short form currency
@@ -68,7 +66,6 @@ export default function DetailGraph({ coin, chartData }) {
           events: {
             click: function () {
               setChartMode(dayData);
-              console.log("D:", dayData);
             },
           },
         },
@@ -79,7 +76,6 @@ export default function DetailGraph({ coin, chartData }) {
           events: {
             click: function () {
               setChartMode(weeklyData);
-              console.log("W:", weeklyData);
             },
           },
         },
@@ -90,13 +86,13 @@ export default function DetailGraph({ coin, chartData }) {
           events: {
             click: function () {
               setChartMode(monthlyData);
-              console.log("M:", monthlyData);
             },
           },
         },
       ],
       selected: 0,
     },
+
     //Hover on data point styling
     tooltip: {
       valuePrefix: "$",
@@ -105,14 +101,10 @@ export default function DetailGraph({ coin, chartData }) {
   };
 
   return (
-    <div>
-      <div>
-        <HighchartsReact
-          highcharts={Highcharts}
-          constructorType={"stockChart"}
-          options={options}
-        />
-      </div>
-    </div>
+    <HighchartsReact
+      highcharts={Highcharts}
+      constructorType={"stockChart"}
+      options={options}
+    />
   );
 }

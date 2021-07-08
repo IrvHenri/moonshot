@@ -12,6 +12,12 @@ import Row from "./Row";
 import "./index.css";
 
 const columns = [
+  {
+    id: "market_cap_rank",
+    label: "#",
+    align: "right",
+    minWidth: 100,
+  },
   { id: "name", label: "Name", minWidth: 170 },
   {
     id: "current_price",

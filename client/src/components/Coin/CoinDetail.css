@@ -5,8 +5,6 @@
   background-color: var(--secondary-bg-color);
   color: var(--secondary-font-color);
   border-radius: 10px;
-  /* width: 75%;
-  max-width: 1200px; */
   width: 75%;
   max-width: 1350px;
   margin: 0 auto;
@@ -100,10 +98,22 @@
 
 .coin-description {
   margin-top: 2em;
+  width: 65%;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 1em;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.coin-description h1 {
+  font-size: 2em;
+  margin-bottom: 1em;
 }
 
 .coin-description p {
   font-size: 0.9em;
+  overflow: scroll;
 }
 
 /* ------------- */
@@ -115,7 +125,27 @@
   justify-content: space-between;
   margin-top: 1em;
 }
-.coin-stat {
+
+/* ------------- */
+/* Stat Card */
+/* ------------- */
+
+.stats-card {
+  background: var(--primary-btn-color);
+  width: 45%;
+  padding: 1em;
+  border-radius: 10px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.stats-card h3 {
+  font-size: 1.5em;
+  color: var(--primary-font-color);
+  margin-bottom: 1em;
+}
+
+.stats-card .coin-stat {
   display: flex;
   justify-content: space-between;
 }
@@ -133,8 +163,13 @@
   color: var(--accent-btn-color);
 }
 
+.stat-stack {
+  display: flex;
+}
+
 .stat-stack p {
   color: var(--accent-btn-color);
+
   padding: 0;
   margin: 0;
 }

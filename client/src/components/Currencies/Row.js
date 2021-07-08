@@ -8,6 +8,7 @@ import currencyFormatterHelpers from "../../helpers/currencyFormatterHelpers";
 import ProgressBar from "./Progressbar";
 import "./index.css";
 const { currencyFormatter } = currencyFormatterHelpers();
+
 const Row = (props) => {
   const {
     id,
@@ -20,12 +21,15 @@ const Row = (props) => {
     market_cap_change_24h,
     circulating_supply,
     max_supply,
+    market_cap_rank,
   } = props;
+
   const priceStyling =
     price_change_percentage_24h > 0 ? "market-up" : "market-down";
 
   return (
     <TableRow hover role="checkbox" tabIndex={-1}>
+      <TableCell align={"right"}>{market_cap_rank}</TableCell>
       <TableCell align={"left"}>
         <Link
           to={`/currencies/${id}`}
@@ -40,7 +44,12 @@ const Row = (props) => {
       </TableCell>
 
       <TableCell align={"right"}>
-        <p>{currencyFormatter.format(current_price)}</p>
+        <Link
+          to={`/currencies/${id}`}
+          style={{ textDecoration: "none", color: "#232b2b" }}
+        >
+          <p>{currencyFormatter.format(current_price)}</p>{" "}
+        </Link>
       </TableCell>
       <TableCell align={"right"}>
         <p className={`${priceStyling} second-cell `}>
