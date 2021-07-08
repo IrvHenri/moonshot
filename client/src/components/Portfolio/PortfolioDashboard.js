@@ -1,20 +1,21 @@
 import { Modal } from '@material-ui/core'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import useCoinData from '../../hooks/useCoinData'
 import PortfolioModalCoin from './PortfolioModalCoin';
 import CoinAsset from './CoinAsset'
 import {AiFillCloseCircle} from 'react-icons/ai'
-
 import SelectedCoinModalPage from './SelectedCoinModalPage';
 import axios from 'axios';
 
-const PortfolioDashboard = ({setUserHasPortfolio, user}) => {
+import { useAuth } from '../../context/AuthContext';
 
+const PortfolioDashboard = ({setUserHasPortfolio}) => {
+  const {user, setUser} = useAuth()
   const [coins, loading] = useCoinData();
   const [open, setOpen] = useState(false);
   const [clearPortfolioConfirm, setClearPortfolioConfirm] = useState(false);
   const [selectedCoin, setSelectedCoin] = useState(null)
-  const [portfolioCoins, setPortfolioCoins] = useState([])
+  const [portfolioCoins, setPortfolioCoins] = useState(user.portfolio.coins)
   const [searchTerm, setSearchTerm] = useState("")
 
   const filterCoinList = () => {
@@ -24,9 +25,16 @@ const PortfolioDashboard = ({setUserHasPortfolio, user}) => {
   }
 
   const updateCoin = (id, quantity, purchasePrice) => {
+    //If user.portfolio doesn't have coin
     axios.post(`http://localhost:3001/api/portfolios/${id}`, 
     {quantity, purchasePrice}, 
     {headers: {'auth-token': localStorage.getItem("auth-token")}})
+    .then(res => setUser(res.data.user))
+    .catch(err => console.log(err))
+    //If user.portfolio already has coin
+      // axios.put(`http://localhost:3001/api/portfolios/${id}`, 
+      // {quantity, purchasePrice}, 
+      // {headers: {'auth-token': localStorage.getItem("auth-token")}})
     // setPortfolioCoins(prev => prev.length === 0 ? 
     //   [{id, quantity, purchasePrice}] 
     //   :
@@ -45,9 +53,12 @@ const PortfolioDashboard = ({setUserHasPortfolio, user}) => {
   }
   
   const clearPortfolio = () => {
-    setPortfolioCoins([])
-    setClearPortfolioConfirm(false)
-    setUserHasPortfolio(false)
+    axios.delete("http://localhost:3001/api/portfolios/", {headers: {'auth-token': localStorage.getItem("auth-token")}})
+    .then(res => setUser(res.data.user))
+    .catch(err => console.log(err))
+    // setPortfolioCoins([])
+    // setClearPortfolioConfirm(false)
+    // setUserHasPortfolio(false)
   }
 
   const body = (
