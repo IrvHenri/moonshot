@@ -21,17 +21,14 @@ const PortfolioDashboard = () => {
   const [updatedCoinState, setUpdatedCoinState] = useState([])
   const [chartMode, setChartMode] = useState(0)
 
-  console.log(updatedCoinState)
+  //console.log(updatedCoinState)
+  //console.log(updatedCoinState.reduce((total, val) => total + val.dailyChart.prices[0][1], 0) / updatedCoinState.length)
   const getPortfolioBalance = () => {
     let total = 0
     for (let coin of user.portfolio.coins) {
       total += coin.purchasePrice
     }
     return total
-  }
-
-  const getPortfolioPL = () => {
-
   }
 
   const filterCoinList = () => {
@@ -122,7 +119,6 @@ const PortfolioDashboard = () => {
         </div>
         <div>
           <h2>Balance: {getPortfolioBalance()}</h2>
-          <p>+3.00%</p>
         </div>
       </div>
       <div className='portfolio-banner-right'>
@@ -134,7 +130,7 @@ const PortfolioDashboard = () => {
     <div className='portfolio-info-container'>
       <div className='portfolio-graph'>
         <h1>Graph:</h1>
-        <DetailGraph />
+        
       </div>
       <div className='portfolio-coin-data'>
         <h1>Your Assets:</h1>
