@@ -13,23 +13,14 @@ router.post('/signup', function(req, res, next) {
   const password = bcrypt.hashSync(req.body.password, saltRounds);
 
   const newUser = new User({name, email, password});
-
-  if (email) {
-    User.findOne({email})
-      .then((user) => {
-        if (user.email === email) {
-          res.json("This email has already been registered");
-        }
-      });
-  } else {
-    newUser.save()
-      .then(() => res.json("User Added!"))
-      .catch(error => res.status(400).json('Error: ' + error));
-  }
+ 
+  newUser.save()
+    .then(() => res.json("User Added!"))
+    .catch(error => res.status(400).json('Error: ' + error));
 
 });
 
-//to test login function
+// to test login function
 router.get('/', function(req, res, next) {
   User.find() //find is a mongodb function to find user
     .then(users => res.json(users))
