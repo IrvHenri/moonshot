@@ -8,6 +8,7 @@ import currencyFormatterHelpers from "../../helpers/currencyFormatterHelpers";
 import ProgressBar from "./Progressbar";
 import "./index.css";
 const { currencyFormatter } = currencyFormatterHelpers();
+
 const Row = (props) => {
   const {
     id,
