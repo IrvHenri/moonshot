@@ -62,11 +62,17 @@ router.put('/change-name', validateToken, function(req, res){
 
 /* Update a single coin in the user's portfolio */
 router.put("/:coinId", validateToken, function(req, res) {
-  const {quantity} = req.body;
+  const {quantity, purchasePrice} = req.body;
   User.findById(req.userId)
   .then(user => {
-    //user.portfolio.coins = updatedCoinData //Bad practice, but using as a test for now
-    user.portfolio.coins.map(coin => coin.id === req.params.id ? coin.quantity += quantity : coin)
+    const updatedPortfolio = user.portfolio.coins.map(coin => {
+      if (coin.id === req.params.coinId){
+        return {id: coin.id, quantity: parseInt(quantity) + parseInt(coin.quantity), purchasePrice}
+      } else {
+        return coin
+      }
+    })
+    user.portfolio.coins = updatedPortfolio
     user.save()
     .then(() => res.json({user}))
     .catch(err => res.status(400).json(`Error ${err}`))
