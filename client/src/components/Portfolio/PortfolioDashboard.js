@@ -6,8 +6,9 @@ import CoinAsset from './CoinAsset'
 import {AiFillCloseCircle} from 'react-icons/ai'
 
 import SelectedCoinModalPage from './SelectedCoinModalPage';
+import axios from 'axios';
 
-const PortfolioDashboard = ({setUserHasPortfolio}) => {
+const PortfolioDashboard = ({setUserHasPortfolio, user}) => {
 
   const [coins, loading] = useCoinData();
   const [open, setOpen] = useState(false);
@@ -23,14 +24,17 @@ const PortfolioDashboard = ({setUserHasPortfolio}) => {
   }
 
   const updateCoin = (id, quantity, purchasePrice) => {
-    setPortfolioCoins(prev => prev.length === 0 ? 
-      [{id, quantity, purchasePrice}] 
-      :
-      prev.filter(coin => coin.id === id).length > 0 ?
-      prev.map(coin => coin.id === id ? {id, quantity: parseInt(coin.quantity) + parseInt(quantity), purchasePrice} : coin) 
-      :
-      [...prev, {id, quantity, purchasePrice}]
-    )
+    axios.post(`http://localhost:3001/api/portfolios/${id}`, 
+    {quantity, purchasePrice}, 
+    {headers: {'auth-token': localStorage.getItem("auth-token")}})
+    // setPortfolioCoins(prev => prev.length === 0 ? 
+    //   [{id, quantity, purchasePrice}] 
+    //   :
+    //   prev.filter(coin => coin.id === id).length > 0 ?
+    //   prev.map(coin => coin.id === id ? {id, quantity: parseInt(coin.quantity) + parseInt(quantity), purchasePrice} : coin) 
+    //   :
+    //   [...prev, {id, quantity, purchasePrice}]
+    // )
   }
 
   const removeCoin = coinId => {
@@ -79,14 +83,14 @@ const PortfolioDashboard = ({setUserHasPortfolio}) => {
   return <div className='portfolio-dashboard'>
     <div className='portfolio-banner'>
       <div className='portfolio-banner-left'>
-      <div>
-      <h1>Welcome Back User!</h1>
-      <h2>My Portfolio</h2>
-      </div>
-      <div>
-        <h2>Balance: $34,000.00</h2>
-        <p>+3.00%</p>
-      </div>
+        <div>
+          <h1>Welcome Back User!</h1>
+          <h2>My Portfolio</h2>
+        </div>
+        <div>
+          <h2>Balance: $34,000.00</h2>
+          <p>+3.00%</p>
+        </div>
       </div>
       <div className='portfolio-banner-right'>
         <button onClick={() => setOpen(true)}>

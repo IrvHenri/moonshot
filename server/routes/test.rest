@@ -3,7 +3,8 @@ http://localhost:3001/api/users
 ###
 http://localhost:3001/api/portfolios/ HTTP/1.1
 content-type: application/json
-auth-token: token
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU2MzFjOWQ1OWExMDI3YzFmYmQ2YzQiLCJpYXQiOjE2MjU3Njg3ODR9.PqBTBu1l7eYIin1wA5jd0iZBtyDvdDyDHXZNp0FH-CQ
+
 //Note: Change token to the token received on login
 
 ###
