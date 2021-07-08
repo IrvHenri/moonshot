@@ -1,10 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const User = require('../models/userModel');
+const validateToken = require('../routes/validateToken')
 
 /* GET user's info. */
-router.get('/', function(req, res) {
-  User.findById("60e4bbcfe0f013cb5cf16465")
+router.get('/', validateToken, function(req, res) {
+  User.findById(req.userId)
   .then(user => {
       res.json({user})
   })
@@ -13,8 +14,8 @@ router.get('/', function(req, res) {
   })
 });
 
-router.delete('/', function(req, res) {
-  User.findById("60e4bbcfe0f013cb5cf16465")
+router.delete('/', validateToken, function(req, res) {
+  User.findById(req.userId)
   .then(user => {
     user.portfolio.coins = []
     user.save()
@@ -27,9 +28,9 @@ router.delete('/', function(req, res) {
 })
 
 /* Add a single coin to user's portfolio*/
-router.post("/:coinId", function(req, res) {
+router.post("/:coinId", validateToken, function(req, res) {
   const {quantity, purchasePrice} = req.body;
-  User.findById("60e4bbcfe0f013cb5cf16465")
+  User.findById(req.userId)
   .then(user => {
     user.portfolio.coins.push(
       {
@@ -47,8 +48,8 @@ router.post("/:coinId", function(req, res) {
 })
 
 /* Update the portfolio's name */
-router.put('/change-name', function(req, res){
-  User.findById("60e4bbcfe0f013cb5cf16465")
+router.put('/change-name', validateToken, function(req, res){
+  User.findById(req.userId)
   .then(user => {
     user.portfolio.name = req.body.newName
 
@@ -60,9 +61,9 @@ router.put('/change-name', function(req, res){
 })
 
 /* Update a single coin in the user's portfolio */
-router.put("/:coinId", function(req, res) {
+router.put("/:coinId", validateToken, function(req, res) {
   const {updatedCoinData} = req.body;
-  User.findById("60e4bbcfe0f013cb5cf16465")
+  User.findById(req.userId)
   .then(user => {
     user.portfolio.coins = updatedCoinData //Bad practice, but using as a test for now
 
@@ -74,8 +75,8 @@ router.put("/:coinId", function(req, res) {
 })
 
 /* Remove a single coin from a uswr's portfolio */
-router.delete("/:coinId", function(req, res) {
-  User.findById("60e4bbcfe0f013cb5cf16465")
+router.delete("/:coinId", validateToken, function(req, res) {
+  User.findById(req.userId)
   .then(user => {
     user.portfolio.coins = user.portfolio.coins.filter(coin => coin.id !== req.params.coinId)
 

@@ -1,9 +1,15 @@
 http://localhost:3001/api/users
 
-http://localhost:3001/api/portfolios/
+###
+http://localhost:3001/api/portfolios/ HTTP/1.1
+content-type: application/json
+auth-token: Bearer token
+//Note: Change token to the token received on login
 
+###
 DELETE http://localhost:3001/api/portfolios/ 
 
+###
 POST http://localhost:3001/api/users/login HTTP/1.1
 content-type: application/json
 
@@ -12,12 +18,15 @@ content-type: application/json
     "password": "123456"
 }
 
+###
 POST http://localhost:3001/api/portfolios/ethereum HTTP/1.1
 content-type: application/json
+
 
 {
     "quantity": "1",
     "purchasePrice": "100"
 }
 
+###
 DELETE http://localhost:3001/api/portfolios/bitcoin
