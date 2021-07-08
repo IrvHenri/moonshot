@@ -2,25 +2,77 @@ import { Modal } from '@material-ui/core'
 import { useState } from 'react';
 import useCoinData from '../../hooks/useCoinData'
 import PortfolioModalCoin from './PortfolioModalCoin';
+import CoinAsset from './CoinAsset'
 import {AiFillCloseCircle} from 'react-icons/ai'
-const PortfolioDashboard = () => {
+import SelectedCoinModalPage from './SelectedCoinModalPage';
+import axios from 'axios';
+
+import { useAuth } from '../../context/AuthContext';
+
+const PortfolioDashboard = ({setUserHasPortfolio}) => {
+  const {user, setUser} = useAuth()
   const [coins, loading] = useCoinData();
   const [open, setOpen] = useState(false);
-  const [selectedCoin, setSelectedCoin] = useState("")
+  const [clearPortfolioConfirm, setClearPortfolioConfirm] = useState(false);
+  const [selectedCoin, setSelectedCoin] = useState(null)
+  const [portfolioCoins, setPortfolioCoins] = useState(user.portfolio.coins)
   const [searchTerm, setSearchTerm] = useState("")
+
+  const filterCoinList = () => {
+    return coins
+      .filter(coin => searchTerm ? coin.id.toLowerCase().includes(searchTerm.toLowerCase()) || coin.symbol.toLowerCase() === searchTerm.toLocaleLowerCase() : true)
+      .map((coin, ind) => <PortfolioModalCoin key={ind} coin={coin} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin}/>)
+  }
+
+  const updateCoin = (id, quantity, purchasePrice) => {
+    //If user.portfolio doesn't have coin
+    axios.post(`http://localhost:3001/api/portfolios/${id}`, 
+    {quantity, purchasePrice}, 
+    {headers: {'auth-token': localStorage.getItem("auth-token")}})
+    .then(res => setUser(res.data.user))
+    .catch(err => console.log(err))
+    //If user.portfolio already has coin
+      // axios.put(`http://localhost:3001/api/portfolios/${id}`, 
+      // {quantity, purchasePrice}, 
+      // {headers: {'auth-token': localStorage.getItem("auth-token")}})
+    // setPortfolioCoins(prev => prev.length === 0 ? 
+    //   [{id, quantity, purchasePrice}] 
+    //   :
+    //   prev.filter(coin => coin.id === id).length > 0 ?
+    //   prev.map(coin => coin.id === id ? {id, quantity: parseInt(coin.quantity) + parseInt(quantity), purchasePrice} : coin) 
+    //   :
+    //   [...prev, {id, quantity, purchasePrice}]
+    // )
+  }
+
+  const removeCoin = coinId => {
+    setPortfolioCoins(prev => prev.filter(coin => coin.id !== coinId))
+    if(portfolioCoins.length === 1) {
+      setUserHasPortfolio(false)
+    }
+  }
+  
+  const clearPortfolio = () => {
+    axios.delete("http://localhost:3001/api/portfolios/", {headers: {'auth-token': localStorage.getItem("auth-token")}})
+    .then(res => setUser(res.data.user))
+    .catch(err => console.log(err))
+    // setPortfolioCoins([])
+    // setClearPortfolioConfirm(false)
+    // setUserHasPortfolio(false)
+  }
 
   const body = (
     <div className="modal">
+      {selectedCoin ?
+        < SelectedCoinModalPage 
+        selectedCoin={selectedCoin} 
+        setSelectedCoin={setSelectedCoin} 
+        setOpen={setOpen} 
+        updateCoin={updateCoin}
+        />
+      :
+      <>
       <h1 className="modal-title" id="simple-modal-title">Select Coin</h1>
-      {selectedCoin && 
-        <div className='modal-coin-select'>
-          <div>
-            <h5>SELECTED COIN {`${selectedCoin.id}`}</h5>
-            <input type='number' min={1} max={1000} />
-          </div>
-          <AiFillCloseCircle onClick={() => setSelectedCoin("")}/>
-        </div>
-      }
       <form className='modal-form'>
       <input 
         type='text'
@@ -28,26 +80,28 @@ const PortfolioDashboard = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <button>Search</button>
       </form>
       {loading ? null : 
-      <div className="modal-coin-list">
-        {coins.filter(coin => searchTerm ? coin.id.includes(searchTerm) : true).map(coin => <PortfolioModalCoin coin={coin} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin}/>)}
-      </div>}
+        <div className="modal-coin-list">
+          {filterCoinList()}
+        </div>}
       <AiFillCloseCircle className='modal-close' onClick={() => setOpen(false)} />
+    </>
+    }
     </div>
+      
   );
   return <div className='portfolio-dashboard'>
     <div className='portfolio-banner'>
       <div className='portfolio-banner-left'>
-      <div>
-      <h1>Welcome Back User!</h1>
-      <h2>My Portfolio</h2>
-      </div>
-      <div>
-        <h2>Balance: $34,000.00</h2>
-        <p>+3.00%</p>
-      </div>
+        <div>
+          <h1>Welcome Back User!</h1>
+          <h2>My Portfolio</h2>
+        </div>
+        <div>
+          <h2>Balance: $34,000.00</h2>
+          <p>+3.00%</p>
+        </div>
       </div>
       <div className='portfolio-banner-right'>
         <button onClick={() => setOpen(true)}>
@@ -61,15 +115,32 @@ const PortfolioDashboard = () => {
       </div>
       <div className='portfolio-coin-data'>
         <h1>Your Assets:</h1>
+        <p className='clear-portfolio-btn' onClick={() => setClearPortfolioConfirm(true)}>Clear Portfolio</p>
+
+        {portfolioCoins.map((coin, ind) => <CoinAsset key={ind} portfolioCoins={portfolioCoins} coinData={coin} updateCoin={updateCoin} removeCoin={removeCoin}/>)}
+
       </div>
     </div>
+
     <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        aria-labelledby="simple-modal-title"
-      >
-        {body}
-      </Modal>
+      open={open}
+      onClose={() => setOpen(false)}
+      aria-labelledby="simple-modal-title"
+    >
+      {body}
+    </Modal>
+
+    <Modal
+      open={clearPortfolioConfirm}
+      onClose={() => setClearPortfolioConfirm(false)}
+      aria-labelledby="simple-modal-title"
+    >
+      <div className='clear-portfolio-modal'>
+        <h1>Are you sure?</h1>
+        <button onClick={clearPortfolio}>Yes</button>
+        <button onClick={() => setClearPortfolioConfirm(false)}>No</button>
+      </div>
+    </Modal>
   </div>
 }
 

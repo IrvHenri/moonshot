@@ -12,19 +12,31 @@ router.get("/", function (req, res, next) {
     .catch((err) => res.status(400).json({ error: err }));
 });
 
-//Get a specific coin and chart data "Up to 30 days of prices, market-caps and total volume"
+//Get a specific coin and chart data "24h,7day,30day"
 router.get("/:id", function (req, res, next) {
   let one = `https://api.coingecko.com/api/v3/coins/${req.params.id}`;
-  let two = `https://api.coingecko.com/api/v3/coins/${req.params.id}/market_chart?vs_currency=usd&days=30&interval=daily`;
-  const requestOne = axios.get(one);
-  const requestTwo = axios.get(two);
+  let two = `https://api.coingecko.com/api/v3/coins/${req.params.id}/market_chart?vs_currency=usd&days=1&interval=hourly`;
+  let three = `https://api.coingecko.com/api/v3/coins/${req.params.id}/market_chart?vs_currency=usd&days=7&interval=daily`;
+  let four = `https://api.coingecko.com/api/v3/coins/${req.params.id}/market_chart?vs_currency=usd&days=30&interval=daily`;
+
+  const coinData = axios.get(one);
+  const dailyChart = axios.get(two);
+  const weeklyChart = axios.get(three);
+  const monthlyChart = axios.get(four);
   axios
-    .all([requestOne, requestTwo])
+    .all([coinData, dailyChart, weeklyChart, monthlyChart])
     .then(
       axios.spread((...responses) => {
         const responseOne = responses[0].data;
         const responseTwo = responses[1].data;
-        res.send({ coin: responseOne, chartData: responseTwo });
+        const responseThree = responses[2].data;
+        const responseFour = responses[3].data;
+        res.send({
+          coin: responseOne,
+          dailyChart: responseTwo,
+          weeklyChart: responseThree,
+          monthlyChart: responseFour,
+        });
       })
     )
     .catch((err) => res.status(400).json({ error: err }));

@@ -3,9 +3,28 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
+import axios from "axios";
+
 const Login = () => {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const user = {
+      email,
+      password
+    }
+    
+    axios.post("http://localhost:3001/api/users/login", user)
+    .then(res => {
+      localStorage.setItem("auth-token", res.data)
+      window.location = '/'
+    })
+    .catch(err => console.log(err))
+  }
+
   return (
     <div className="login-section">
       <img className="login-img" src="img/stock_login.jpg" alt="login logo" />
@@ -36,7 +55,7 @@ const Login = () => {
             />
           </div>
           <div>
-            <Button fullWidth color="primary" type="submit" variant="contained">
+            <Button onClick={(e) => handleSubmit(e)} fullWidth color="primary" type="submit" variant="contained">
               Log in
             </Button>
           </div>

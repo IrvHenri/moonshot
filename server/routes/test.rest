@@ -1,0 +1,42 @@
+http://localhost:3001/api/users
+
+###
+http://localhost:3001/api/portfolios/ HTTP/1.1
+content-type: application/json
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU2MzFjOWQ1OWExMDI3YzFmYmQ2YzQiLCJpYXQiOjE2MjU3Njg3ODR9.PqBTBu1l7eYIin1wA5jd0iZBtyDvdDyDHXZNp0FH-CQ
+
+//Note: Change token to the token received on login
+
+###
+DELETE http://localhost:3001/api/portfolios/ 
+
+###
+POST http://localhost:3001/api/users/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "jim@jim.com",
+    "password": "123456"
+}
+
+###
+POST http://localhost:3001/api/portfolios/ethereum HTTP/1.1
+content-type: application/json
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU2MzFjOWQ1OWExMDI3YzFmYmQ2YzQiLCJpYXQiOjE2MjU3Njg3ODR9.PqBTBu1l7eYIin1wA5jd0iZBtyDvdDyDHXZNp0FH-CQ
+
+{
+    "quantity": "1",
+    "purchasePrice": "100"
+}
+
+###
+PUT http://localhost:3001/api/portfolios/ethereum HTTP/1.1
+content-type: application/json
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU2MzFjOWQ1OWExMDI3YzFmYmQ2YzQiLCJpYXQiOjE2MjU3Njg3ODR9.PqBTBu1l7eYIin1wA5jd0iZBtyDvdDyDHXZNp0FH-CQ
+
+{
+    "quantity": "10"
+}
+
+###
+DELETE http://localhost:3001/api/portfolios/bitcoin

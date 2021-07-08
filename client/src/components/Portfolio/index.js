@@ -1,9 +1,10 @@
 import LoggedIn from './LoggedIn'
 import LoggedOut from "./LoggedOut";
-import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+
 const Portfolio = () => {
-  const [loggedIn, setLoggedIn] = useState(true)
-  return loggedIn ? <LoggedIn /> : <LoggedOut />;
+  const {user} = useAuth()
+  return user ? <LoggedIn user={user} /> : <LoggedOut />;
 };
 
 export default Portfolio;

@@ -63,6 +63,7 @@
   height: auto;
 }
 
+/*Portfolio Dashboard*/
 .portfolio-dashboard{
   display: flex;
   flex-direction: column;
@@ -124,19 +125,44 @@
 .portfolio-coin-data{
   flex: 1;
   background-color: #444;
+  overflow-y: auto;
 }
 
+.portfolio-coin-data::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+/*Portfolio Coin Data Section*/
+.coin-asset-row{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1em;
+}
+
+.coin-asset-row-name{
+  font-size: 1em;
+}
+
+.coin-asset-row p{
+  border: solid 1px white;
+}
+
+/*Add Coin Modal*/
 .modal{
   position: absolute;
-  top: 10vh;
-  left: 25vw;
-  width: 50vw;
+  top: 15vh;
+  left: 30vw;
   background-color: #003;
   color: white;
   padding: 2em 0.5em;
   border-radius: 12px;
   max-height: 70vh;
   overflow-y: auto;
+  min-height: 70vh;
+  min-width: 40vw;
+  box-shadow: 0.5em 0.2em #222;
 }
 .modal::-webkit-scrollbar {
   width: 0;
@@ -168,13 +194,6 @@
   margin-top: 1em;
 }
 
-.modal-coin-select{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-
 .modal-coin-list{
   padding-bottom: 1em;
   width: 80%;
@@ -190,16 +209,85 @@
   margin: 0.5em;
 }
 
+/*Modal Coin Row*/
 .coin{
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  margin: 0.5em;
+  margin: 0 0.5em;
+  padding: 1.2em 1em;
 }
 
 .coin:hover, .coin:focus{
   background-color: #000;
+}
+
+.coin h1{
+  font-size: 1.5em;
+}
+
+/*Selected Coin Modal*/
+.modal-coin-select{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 80%;
+  width: 50%;
+  margin: auto;
+}
+
+.selected-header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 80%;
+  margin: 0.5em auto 2em;
+}
+
+.selected-header img {
+  height: 10vh;
+  width: 10vh;
+  margin-right: 1em;
+}
+
+.modal-coin-select input{
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.modal-coin-select h1{
+  font-size: 1.5em;
+  margin-bottom: 2em;
+}
+
+.modal-coin-select h1 span{
+  font-size: 1.1em;
+}
+
+.modal-select-btn-container{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  bottom: 0;
+  width: 100%;
+  height: 10vh;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.modal-select-btn-container p{
+  flex: 1;
+  text-align: center;
+  height: 5vh;
+}
+
+.mkt-up {
+  color: var(--market-up-color);
+}
+
+.mkt-down {
+  color: var(--market-down-color);
 }
 
 @media screen and (max-width: 600px) {

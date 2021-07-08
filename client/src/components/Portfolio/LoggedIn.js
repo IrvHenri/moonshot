@@ -1,12 +1,14 @@
 import { useState } from "react"
 import PortfolioDashboard from "./PortfolioDashboard";
-
-const LoggedIn = () => {
-  const [userHasPortfolio, setUserHasPortfolio] = useState(false) // Gonna change this, this is just for testing
+const LoggedIn = ({user}) => {
+  const [userHasPortfolio, setUserHasPortfolio] = useState(user.portfolio.coins.length > 0) // Gonna change this, this is just for testing
   return userHasPortfolio 
   ? 
   //View My Portfolio
-  <PortfolioDashboard />
+  <PortfolioDashboard 
+  setUserHasPortfolio={setUserHasPortfolio} //tbd
+  user={user}
+  />
   :
   //Create A New Portfolio
   <div className="portfolio-jumbo">

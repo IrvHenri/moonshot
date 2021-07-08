@@ -12,6 +12,12 @@ import Row from "./Row";
 import "./index.css";
 
 const columns = [
+  {
+    id: "market_cap_rank",
+    label: "#",
+    align: "right",
+    minWidth: 100,
+  },
   { id: "name", label: "Name", minWidth: 170 },
   {
     id: "current_price",
@@ -66,11 +72,7 @@ const CurrencyTable = ({ data }) => {
     <div className="currency-table">
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
-          <Table
-            stickyHeader
-            aria-label="sticky table"
-            className={classes.table}
-          >
+          <Table aria-label="sticky table" className={classes.table}>
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
