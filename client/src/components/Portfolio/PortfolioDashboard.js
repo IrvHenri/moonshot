@@ -1,26 +1,63 @@
 import { Modal } from '@material-ui/core'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useCoinData from '../../hooks/useCoinData'
 import PortfolioModalCoin from './PortfolioModalCoin';
+import CoinAsset from './CoinAsset'
 import {AiFillCloseCircle} from 'react-icons/ai'
-const PortfolioDashboard = () => {
+
+import SelectedCoinModalPage from './SelectedCoinModalPage';
+
+const PortfolioDashboard = ({setUserHasPortfolio}) => {
+
   const [coins, loading] = useCoinData();
   const [open, setOpen] = useState(false);
-  const [selectedCoin, setSelectedCoin] = useState("")
+  const [clearPortfolioConfirm, setClearPortfolioConfirm] = useState(false);
+  const [selectedCoin, setSelectedCoin] = useState(null)
+  const [portfolioCoins, setPortfolioCoins] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
+
+  const filterCoinList = () => {
+    return coins
+      .filter(coin => searchTerm ? coin.id.toLowerCase().includes(searchTerm.toLowerCase()) || coin.symbol.toLowerCase() === searchTerm.toLocaleLowerCase() : true)
+      .map((coin, ind) => <PortfolioModalCoin key={ind} coin={coin} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin}/>)
+  }
+
+  const updateCoin = (id, quantity, purchasePrice) => {
+    setPortfolioCoins(prev => prev.length === 0 ? 
+      [{id, quantity, purchasePrice}] 
+      :
+      prev.filter(coin => coin.id === id).length > 0 ?
+      prev.map(coin => coin.id === id ? {id, quantity: parseInt(coin.quantity) + parseInt(quantity), purchasePrice} : coin) 
+      :
+      [...prev, {id, quantity, purchasePrice}]
+    )
+  }
+
+  const removeCoin = coinId => {
+    setPortfolioCoins(prev => prev.filter(coin => coin.id !== coinId))
+    if(portfolioCoins.length === 1) {
+      setUserHasPortfolio(false)
+    }
+  }
+  
+  const clearPortfolio = () => {
+    setPortfolioCoins([])
+    setClearPortfolioConfirm(false)
+    setUserHasPortfolio(false)
+  }
 
   const body = (
     <div className="modal">
+      {selectedCoin ?
+        < SelectedCoinModalPage 
+        selectedCoin={selectedCoin} 
+        setSelectedCoin={setSelectedCoin} 
+        setOpen={setOpen} 
+        updateCoin={updateCoin}
+        />
+      :
+      <>
       <h1 className="modal-title" id="simple-modal-title">Select Coin</h1>
-      {selectedCoin && 
-        <div className='modal-coin-select'>
-          <div>
-            <h5>SELECTED COIN {`${selectedCoin.id}`}</h5>
-            <input type='number' min={1} max={1000} />
-          </div>
-          <AiFillCloseCircle onClick={() => setSelectedCoin("")}/>
-        </div>
-      }
       <form className='modal-form'>
       <input 
         type='text'
@@ -28,14 +65,16 @@ const PortfolioDashboard = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <button>Search</button>
       </form>
       {loading ? null : 
-      <div className="modal-coin-list">
-        {coins.filter(coin => searchTerm ? coin.id.includes(searchTerm) : true).map(coin => <PortfolioModalCoin coin={coin} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin}/>)}
-      </div>}
+        <div className="modal-coin-list">
+          {filterCoinList()}
+        </div>}
       <AiFillCloseCircle className='modal-close' onClick={() => setOpen(false)} />
+    </>
+    }
     </div>
+      
   );
   return <div className='portfolio-dashboard'>
     <div className='portfolio-banner'>
@@ -61,15 +100,32 @@ const PortfolioDashboard = () => {
       </div>
       <div className='portfolio-coin-data'>
         <h1>Your Assets:</h1>
+        <p className='clear-portfolio-btn' onClick={() => setClearPortfolioConfirm(true)}>Clear Portfolio</p>
+
+        {portfolioCoins.map((coin, ind) => <CoinAsset key={ind} portfolioCoins={portfolioCoins} coinData={coin} updateCoin={updateCoin} removeCoin={removeCoin}/>)}
+
       </div>
     </div>
+
     <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        aria-labelledby="simple-modal-title"
-      >
-        {body}
-      </Modal>
+      open={open}
+      onClose={() => setOpen(false)}
+      aria-labelledby="simple-modal-title"
+    >
+      {body}
+    </Modal>
+
+    <Modal
+      open={clearPortfolioConfirm}
+      onClose={() => setClearPortfolioConfirm(false)}
+      aria-labelledby="simple-modal-title"
+    >
+      <div className='clear-portfolio-modal'>
+        <h1>Are you sure?</h1>
+        <button onClick={clearPortfolio}>Yes</button>
+        <button onClick={() => setClearPortfolioConfirm(false)}>No</button>
+      </div>
+    </Modal>
   </div>
 }
 

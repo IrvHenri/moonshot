@@ -14,10 +14,19 @@ router.post('/signup', function(req, res, next) {
 
   const newUser = new User({name, email, password});
 
-  //save new user to database
-  newUser.save()
-    .then(() => res.json("User Added!"))
-    .catch(error => res.status(400).json('Error: ' + error));
+  if (email) {
+    User.findOne({email})
+      .then((user) => {
+        if (user.email === email) {
+          res.json("This email has already been registered");
+        }
+      });
+  } else {
+    newUser.save()
+      .then(() => res.json("User Added!"))
+      .catch(error => res.status(400).json('Error: ' + error));
+  }
+
 });
 
 //to test login function
