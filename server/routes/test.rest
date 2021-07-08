@@ -3,7 +3,7 @@ http://localhost:3001/api/users
 ###
 http://localhost:3001/api/portfolios/ HTTP/1.1
 content-type: application/json
-auth-token: Bearer token
+auth-token: token
 //Note: Change token to the token received on login
 
 ###

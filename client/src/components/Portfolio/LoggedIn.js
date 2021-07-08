@@ -1,7 +1,6 @@
 import { useState } from "react"
 import PortfolioDashboard from "./PortfolioDashboard";
-
-const LoggedIn = () => {
+const LoggedIn = ({user}) => {
   const [userHasPortfolio, setUserHasPortfolio] = useState(false) // Gonna change this, this is just for testing
   return userHasPortfolio 
   ? 

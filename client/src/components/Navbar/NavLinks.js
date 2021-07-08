@@ -5,9 +5,12 @@ import { useAuth } from "../../context/AuthContext";
 
 const NavLinks = ({ toggle, setToggle }) => {
   const {user, setUser} = useAuth()
+
   const signOut = () => {
-    setUser("");
+    localStorage.removeItem('auth-token', user)
+    setUser(null)
   };
+  
   return (
     <CSSTransition in={toggle} timeout={100} classNames="my-node">
       <div
