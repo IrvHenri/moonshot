@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import { Modal, Avatar } from '@material-ui/core'
 import axios from 'axios'
-const CoinAsset = ({coinData, updateCoin, removeCoin, portfolioCoins}) => {
+const CoinAsset = ({coinData, updateCoin, removeCoin, portfolioCoins, setUpdatedCoinState}) => {
   const [coin, setCoin] = useState({})
   const [loading, setLoading] = useState(true)
   const [updateModalOpen, setUpdateModalOpen] = useState(false)
@@ -10,11 +10,12 @@ const CoinAsset = ({coinData, updateCoin, removeCoin, portfolioCoins}) => {
 
   useEffect(() => {
     axios.get(`http://localhost:3001/api/coins/${id}`).then((result) => {
-      const { coin } = result.data;
+      const { coin, dailyChart, weeklyChart, monthlyChart } = result.data;
       setCoin(coin);
       setLoading(false);
+      setUpdatedCoinState(prev => [...prev, {coin, dailyChart, weeklyChart, monthlyChart}])
     });
-  }, [portfolioCoins]);
+  }, [id, portfolioCoins]);
 
   const handleUpdate = () => {
     updateCoin(id, updatedCoinQuantity, coin.market_data.current_price.usd )

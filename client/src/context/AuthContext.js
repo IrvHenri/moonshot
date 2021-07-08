@@ -26,7 +26,7 @@ export const AuthProvider = props => {
         console.log(err);
       })
     }
-  })
+  },[])
   
   return <AuthContext.Provider value={{user, setUser}}>
     {props.children}
