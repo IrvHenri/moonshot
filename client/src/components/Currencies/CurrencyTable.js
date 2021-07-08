@@ -62,6 +62,7 @@ const useStyles = makeStyles({
     maxHeight: 560,
     background: "#dcf6ff",
     overflowY: "auto",
+    borderRadius: "15px",
   },
 });
 const CurrencyTable = ({ data }) => {
