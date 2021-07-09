@@ -13,6 +13,10 @@
   padding: 1.5em;
 }
 
+.coin-detail-page div button {
+  margin-bottom: 1.7em;
+}
+
 /* ------------- */
 /* Header */
 /* ------------- */
@@ -172,4 +176,36 @@
 
   padding: 0;
   margin: 0;
+}
+
+@media (max-width: 768px) {
+  .coin-detail-page {
+    border: 2px solid yellow;
+  }
+
+  .coin-detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .header-right {
+    margin-top: 1.5em;
+  }
+  .header-right * {
+    margin-right: auto;
+  }
+  .coin-detail-main {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .stats-card {
+    margin-top: 1em;
+    width: 100%;
+  }
+
+  .coin-description {
+    width: 100%;
+  }
 }
