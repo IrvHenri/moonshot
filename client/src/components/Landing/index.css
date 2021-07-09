@@ -5,7 +5,7 @@
 .hero-header-grid {
   height: 100%;
   background: no-repeat fixed;
-  background-image: url('../../images/moonshot-background.jpeg');
+  background-image: url("../../images/moonshot-background.jpeg");
   background-size: cover;
   background-color: #717e7e;
   background-blend-mode: multiply;
@@ -31,15 +31,10 @@
 
 .about {
   background-color: var(--primary-bg-color);
-  height: 40vh;
-}
-
-.about-grid-container {
-  height: 100%;
 }
 
 .about-card {
-  margin: 10% 15% 15% 15%;
+  margin: 1em 1em;
 }
 
 .about-card-icon {
@@ -60,9 +55,19 @@
 .card-content p {
   color: white;
 }
+.about-light {
+  background-color: var(--secondary-bg-color);
+}
+.about-light h2,
+.about-light p,
+.about-light .about-card-icon {
+  color: var(--secondary-font-color);
+}
 
+.card-container {
+  display: flex;
+}
 @media only screen and (max-width: 600px) {
-
   .hero-header h1 {
     font-size: 3.5em;
   }
@@ -73,7 +78,6 @@
 }
 
 @media only screen and (min-width: 600px) {
-
   .hero-header h1 {
     font-size: 4.5em;
   }
@@ -105,6 +109,6 @@
 
 @media only screen and (min-width: 1200px) {
   .hero-header h1 {
-    font-size: 7.5em
+    font-size: 7.5em;
   }
 }

@@ -21,7 +21,7 @@ export default function DetailStatCard({ coin, chartData, coins }) {
     },
   } = coin;
 
-  const tradingVolume = total_volumes[24][1];
+  const tradingVolume = total_volumes && total_volumes[15][1];
 
   return (
     <article className="stats-card">

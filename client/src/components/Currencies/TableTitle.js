@@ -2,8 +2,7 @@ import React from "react";
 import currencyFormatterHelpers from "../../helpers/currencyFormatterHelpers";
 const { formatMoneyShort } = currencyFormatterHelpers();
 export default function TableTitle(props) {
-  const { data } = props;
-
+  const { data, theme } = props;
   const totalMarketCap = data.reduce((acc, c) => acc + c.market_cap, 0);
   const totalVolumeTwentyFour = data.reduce(
     (acc, c) => acc + c.market_cap_change_24h,
@@ -15,14 +14,19 @@ export default function TableTitle(props) {
   let dominance = (topCoin.market_cap / totalMarketCap) * 100;
 
   return (
-    <div className="currencies-page-header">
+    <div
+      className={` currencies-page-header ${
+        theme === "light" ? "light-mode-table-header" : null
+      }`}
+    >
       <h1>Today's Top 100 Cryptocurrency Prices </h1>
       <div>
         <p>
           ${formatMoneyShort(totalMarketCap)} <small>market cap</small>
         </p>
         <p>
-          ${formatMoneyShort(totalVolumeTwentyFour)} <small>24h volume</small>
+          ${formatMoneyShort(totalVolumeTwentyFour)}{" "}
+          <small>MC change (24H)</small>
         </p>
         <p>
           {Math.floor(dominance)}%<small>{topCoin.symbol}</small>

@@ -10,8 +10,21 @@ router.post('/signup', function(req, res, next) {
 
   const name = req.body.name;
   const email = req.body.email;
-  const password = bcrypt.hashSync(req.body.password, saltRounds);
+  const initialPassword = req.body.password;
 
+  if (!email || !initialPassword) {
+    res.status(400).json("Please enter valid email or password");
+  }
+
+  if (!email.includes("@") || email.length <= 3) {
+    res.status(400).json("Please enter valid email");
+  }
+
+  if (initialPassword.length < 6) {
+    res.status(400).json("Passwords must be at least 6 characters in length");
+  }
+
+  const password = bcrypt.hashSync(initialPassword, saltRounds);
   const newUser = new User({name, email, password});
  
   newUser.save()

@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: space-between;
   flex: 1;
+  border: 2x solid red;
 }
 .nav-links .link {
   letter-spacing: 0.15em;
@@ -12,6 +13,11 @@
   font-weight: 800;
   align-self: center;
 }
+
+.light-mode .link {
+  color: var(--secondary-font-color);
+}
+
 .link:hover {
   color: var(--accent-btn-color);
 }
@@ -40,6 +46,10 @@
     width: 100%;
     text-align: center;
     height: 100%;
+  }
+
+  .nav-links.light-mode#visible {
+    background-color: var(--secondary-bg-color);
   }
 
   .my-node-enter {
