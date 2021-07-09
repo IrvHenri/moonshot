@@ -1,52 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Modal, Avatar } from "@material-ui/core";
-import axios from "axios";
 const CoinAsset = ({
-  coinData,
+  coin,
   updateCoin,
   removeCoin,
-  portfolioCoins,
-  setUpdatedCoinState,
   onClick,
+  userCoinData
 }) => {
-  const [coin, setCoin] = useState({});
-  const [loading, setLoading] = useState(true);
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
   const [updatedCoinQuantity, setUpdatedCoinQuantity] = useState(1);
-  const { id, quantity, purchasePrice } = coinData;
-
-  useEffect(() => {
-    axios.get(`http://localhost:3001/api/coins/${id}`).then((result) => {
-      const { coin, dailyChart, weeklyChart, monthlyChart } = result.data;
-      setCoin(coin);
-      setLoading(false);
-      setUpdatedCoinState((prev) => {
-        if (prev.length === 0) {
-          return [
-            ...prev,
-            { coin, chartData: { dailyChart, weeklyChart, monthlyChart } },
-          ];
-        }
-        if (prev.some((val) => val.coin.id === coin.id)) {
-          return [...prev];
-        }
-
-        return [
-          ...prev,
-          { coin, chartData: { dailyChart, weeklyChart, monthlyChart } },
-        ];
-      });
-    });
-  }, [id, portfolioCoins, setUpdatedCoinState]);
 
   const handleUpdate = () => {
     updateCoin(id, updatedCoinQuantity, coin.market_data.current_price.usd);
     setUpdateModalOpen(false);
   };
 
-  return loading ? (
-    <div>Loading</div>
-  ) : (
+  if(!userCoinData) return null
+  const { id, quantity, purchasePrice} = userCoinData
+  return (
     <div className="coin-asset-row">
       <div>
         <Avatar alt={`${coin.id} logo`} src={coin.image.thumb} />
