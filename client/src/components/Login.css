@@ -33,9 +33,11 @@
 .login-form div {
   margin-bottom: 0.5em;
 }
+
 .signup-link{
   text-decoration: none;
 }
+
 .signup-btn{
   width: 80%;
   margin: 1em auto;
