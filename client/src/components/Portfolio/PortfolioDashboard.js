@@ -9,13 +9,13 @@ import SelectedCoinModalPage from "./SelectedCoinModalPage";
 import axios from "axios";
 
 import { useAuth } from "../../context/AuthContext";
+import {getPortfolioBalance, deleteAll, filterCoinList} from '../../helpers/portfolioHelpers'
 
 const PortfolioDashboard = ({ theme }) => {
   const { user, setUser } = useAuth();
   const [coins, loading] = useCoinData();
-  const [updatePage, setUpdatePage] = useState(false);
   const [open, setOpen] = useState(false);
-  const [clearPortfolioConfirm, setClearPortfolioConfirm] = useState(false);
+  const [clearPortfolioModalConfirm, setClearPortfolioModalConfirm] = useState(false);
   const [selectedCoin, setSelectedCoin] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -28,10 +28,8 @@ const PortfolioDashboard = ({ theme }) => {
     updatedCoinState.length > 0 ? updatedCoinState[chartIndex].coin : null;
 
   useEffect(() => {
-    setUpdatePage(true)
     if (user.portfolio.coins.length === 0) {
       setUpdatedCoinState([])
-      setUpdatePage(false)
     }
     else {
       user.portfolio.coins.map(coin => {
@@ -55,40 +53,12 @@ const PortfolioDashboard = ({ theme }) => {
             ];
           });
         })
-        .then(() => setUpdatePage(false))
       })
     }
   },[user])
-  
-  const getPortfolioBalance = () => {
-    let total = 0;
-    for (let coin of user.portfolio.coins) {
-      total += coin.purchasePrice;
-    }
-    return total;
-  };
-
-  const filterCoinList = () => {
-    return coins
-      .filter((coin) =>
-        searchTerm
-          ? coin.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            coin.symbol.toLowerCase() === searchTerm.toLocaleLowerCase()
-          : true
-      )
-      .map((coin, ind) => (
-        <PortfolioModalCoin
-          key={ind}
-          coin={coin}
-          selectedCoin={selectedCoin}
-          setSelectedCoin={setSelectedCoin}
-        />
-      ));
-  };
 
   const updateCoin = (id, quantity, purchasePrice) => {
     //If user.portfolio doesn't have coin
-    setUpdatePage(true)
     if (user.portfolio.coins.length === 0) {
       axios
         .post(
@@ -97,7 +67,6 @@ const PortfolioDashboard = ({ theme }) => {
           { headers: { "auth-token": localStorage.getItem("auth-token") } }
         )
         .then((res) => setUser(res.data.user))
-        .then(() => setUpdatePage(false))
         .catch((err) => console.log(err));
     } else {
       // If coin already exists in user's portfolio
@@ -109,7 +78,6 @@ const PortfolioDashboard = ({ theme }) => {
             { headers: { "auth-token": localStorage.getItem("auth-token") } }
           )
           .then((res) => setUser(res.data.user))
-          .then(() => setUpdatePage(false))
           .catch((err) => console.log(err));
       } else {
         axios
@@ -119,32 +87,24 @@ const PortfolioDashboard = ({ theme }) => {
             { headers: { "auth-token": localStorage.getItem("auth-token") } }
           )
           .then((res) => setUser(res.data.user))
-          .then(() => setUpdatePage(false))
           .catch((err) => console.log(err));
       }
     }
   };
 
   const removeCoin = (coinId) => {
-    setUpdatePage(true);
     axios
       .delete(`http://localhost:3001/api/portfolios/${coinId}`, {
-        headers: { "auth-token": localStorage.getItem("auth-token") },
+        headers: { "auth-token": localStorage.getItem("auth-token")},
       })
       .then((res) => setUser(res.data.user))
-      .then(() => setUpdatePage(false))
       .catch((err) => console.log(err));
   };
 
   const clearPortfolio = () => {
-    setUpdatePage(true);
-    axios
-      .delete("http://localhost:3001/api/portfolios/", {
-        headers: { "auth-token": localStorage.getItem("auth-token") },
-      })
-      .then((res) => setUser(res.data.user))
-      .then(() => setUpdatePage(true))
-      .catch((err) => console.log(err));
+    deleteAll()
+    .then((res) => setUser(res.data.user))
+    .catch((err) => console.log(err));
   };
 
   const setChartView = (i) => {
@@ -174,7 +134,16 @@ const PortfolioDashboard = ({ theme }) => {
             />
           </form>
           {loading ? null : (
-            <div className="modal-coin-list">{filterCoinList()}</div>
+            <div className="modal-coin-list">{
+              filterCoinList(coins, searchTerm)      
+              .map((coin, ind) => (
+              <PortfolioModalCoin
+                key={ind}
+                coin={coin}
+                selectedCoin={selectedCoin}
+                setSelectedCoin={setSelectedCoin}
+              />
+            ))}</div>
           )}
           <AiFillCloseCircle
             className="modal-close"
@@ -184,8 +153,6 @@ const PortfolioDashboard = ({ theme }) => {
       )}
     </div>
   );
-
-  if (updatePage) return <h1>loading...</h1>;
 
   return (
     <div
@@ -204,7 +171,7 @@ const PortfolioDashboard = ({ theme }) => {
             <h2>{user.portfolio.name}</h2>
           </div>
           <div>
-            <h2>Balance: {getPortfolioBalance()}</h2>
+            <h2>Balance: {getPortfolioBalance(user.portfolio.coins)}</h2>
           </div>
         </div>
         <div className="portfolio-banner-right">
@@ -232,7 +199,7 @@ const PortfolioDashboard = ({ theme }) => {
           <h1>Your Assets:</h1>
           <p
             className="clear-portfolio-btn"
-            onClick={() => setClearPortfolioConfirm(true)}
+            onClick={() => setClearPortfolioModalConfirm(true)}
           >
             Clear Portfolio
           </p>
@@ -259,14 +226,14 @@ const PortfolioDashboard = ({ theme }) => {
       </Modal>
 
       <Modal
-        open={clearPortfolioConfirm}
-        onClose={() => setClearPortfolioConfirm(false)}
+        open={clearPortfolioModalConfirm}
+        onClose={() => setClearPortfolioModalConfirm(false)}
         aria-labelledby="simple-modal-title"
       >
         <div className="clear-portfolio-modal">
           <h1>Are you sure?</h1>
           <button onClick={clearPortfolio}>Yes</button>
-          <button onClick={() => setClearPortfolioConfirm(false)}>No</button>
+          <button onClick={() => setClearPortfolioModalConfirm(false)}>No</button>
         </div>
       </Modal>
     </div>
