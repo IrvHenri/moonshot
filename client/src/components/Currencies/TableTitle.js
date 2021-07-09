@@ -3,7 +3,6 @@ import currencyFormatterHelpers from "../../helpers/currencyFormatterHelpers";
 const { formatMoneyShort } = currencyFormatterHelpers();
 export default function TableTitle(props) {
   const { data, theme } = props;
-
   const totalMarketCap = data.reduce((acc, c) => acc + c.market_cap, 0);
   const totalVolumeTwentyFour = data.reduce(
     (acc, c) => acc + c.market_cap_change_24h,
@@ -26,7 +25,8 @@ export default function TableTitle(props) {
           ${formatMoneyShort(totalMarketCap)} <small>market cap</small>
         </p>
         <p>
-          ${formatMoneyShort(totalVolumeTwentyFour)} <small>24h volume</small>
+          ${formatMoneyShort(totalVolumeTwentyFour)}{" "}
+          <small>MC change (24H)</small>
         </p>
         <p>
           {Math.floor(dominance)}%<small>{topCoin.symbol}</small>

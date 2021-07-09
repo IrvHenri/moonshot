@@ -4,6 +4,8 @@ import { useState } from "react";
 import Switch from "@material-ui/core/Switch";
 import { ThemeContext } from "../../context/ThemeContext";
 import { GiHamburgerMenu } from "react-icons/gi";
+import navLogo from "../../images/nav-logo.png";
+import navLogoDark from "../../images/nav-logo-dark.png";
 import NavLinks from "./NavLinks";
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
@@ -19,6 +21,11 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${theme === "light" ? "navbar-light" : null}`}>
       <div className="nav-left">
+        {theme === "light" ? (
+          <img src={navLogo} alt="logo" className="nav-logo-image" />
+        ) : (
+          <img src={navLogoDark} alt="logo" className="nav-logo-image" />
+        )}
         <h1 className="nav-logo">Moonshot</h1>
       </div>
       <div className="nav-right">
