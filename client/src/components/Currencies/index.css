@@ -20,6 +20,8 @@
   margin: auto 0;
 }
 
+/* Table Title */
+
 .currencies-page-header {
   display: flex;
   justify-content: space-between;
@@ -27,6 +29,7 @@
   color: var(--secondary-font-color);
   background: var(--secondary-bg-color);
   padding: 1em;
+  border-radius: 10px;
 }
 .currencies-page-header h1 {
   font-size: 1.5em;
@@ -41,9 +44,11 @@
   margin-right: 0.8em;
 }
 
-.currency-table {
-  border-radius: 0 0 10px 10px;
+.light-mode-table-header {
+  background: #f9f9f9;
 }
+
+/* Table Data */
 
 .market-up {
   color: var(--market-up-color);

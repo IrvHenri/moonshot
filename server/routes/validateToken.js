@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const validateToken = (req, res, next) => {
   const authHeader = req.header('auth-token')
-  const token = authHeader && authHeader.split(" ")[1]
+  const token = authHeader
   if(!token) return res.status(401).json("No token provided")
 
   jwt.verify(token, process.env.SECRET_TOKEN, (err, decoded) => {

@@ -10,6 +10,11 @@
   padding: 0 2em;
 }
 
+.navbar-light {
+  background-color: var(--secondary-bg-color);
+  color: var(--secondary-font-color);
+}
+
 .nav-logo {
   font-weight: 900;
   font-size: 3rem;

@@ -19,7 +19,7 @@ router.delete('/', validateToken, function(req, res) {
   .then(user => {
     user.portfolio.coins = []
     user.save()
-    .then(res.json("User Portfolio Cleared"))
+    .then(res.json({user}))
     .catch(err => res.status(400).json(`Error: ${err}`))
   })
   .catch(err => {
@@ -41,7 +41,7 @@ router.post("/:coinId", validateToken, function(req, res) {
     )
 
     user.save()
-    .then(() => res.json("Coin Added to portfolio"))
+    .then(() => res.json({user}))
     .catch(err => res.status(400).json(`Error ${err}`))
   })
   .catch(err => res.status(400).json(`Error ${err}`))
@@ -54,7 +54,7 @@ router.put('/change-name', validateToken, function(req, res){
     user.portfolio.name = req.body.newName
 
     user.save()
-    .then(res.json("Portfolio name changed"))
+    .then(res.json({user}))
     .catch(err => res.status(400).json(`Error ${err}`))
   })
   .catch(err => res.status(400).json(`Error ${err}`))
@@ -62,13 +62,19 @@ router.put('/change-name', validateToken, function(req, res){
 
 /* Update a single coin in the user's portfolio */
 router.put("/:coinId", validateToken, function(req, res) {
-  const {updatedCoinData} = req.body;
+  const {quantity, purchasePrice} = req.body;
   User.findById(req.userId)
   .then(user => {
-    user.portfolio.coins = updatedCoinData //Bad practice, but using as a test for now
-
+    const updatedPortfolio = user.portfolio.coins.map(coin => {
+      if (coin.id === req.params.coinId){
+        return {id: coin.id, quantity: parseInt(quantity) + parseInt(coin.quantity), purchasePrice}
+      } else {
+        return coin
+      }
+    })
+    user.portfolio.coins = updatedPortfolio
     user.save()
-    .then(() => res.json("Coin Added to portfolio"))
+    .then(() => res.json({user}))
     .catch(err => res.status(400).json(`Error ${err}`))
   })
   .catch(err => res.status(400).json(`Error ${err}`))
@@ -81,7 +87,7 @@ router.delete("/:coinId", validateToken, function(req, res) {
     user.portfolio.coins = user.portfolio.coins.filter(coin => coin.id !== req.params.coinId)
 
     user.save()
-    .then(() => res.json("Coin removed from portfolio"))
+    .then(() => res.json({user}))
     .catch(err => res.status(400).json(`Error ${err}`))
   })
   .catch(err => res.status(400).json(`Error ${err}`))

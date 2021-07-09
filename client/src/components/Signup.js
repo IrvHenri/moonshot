@@ -3,11 +3,28 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
-const Login = () => {
+
+import axios from 'axios'
+
+const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const user = {
+      name,
+      email,
+      password
+    }
+    
+    axios.post("http://localhost:3001/api/users/signup", user)
+    .then(window.location = "/login")
+    .catch(err => console.log(err))
+  }
+
   return (
     <div className="login-section">
       <div className="login-form">
@@ -60,7 +77,7 @@ const Login = () => {
             />
           </div>
           <div>
-            <Button fullWidth color="primary" type="submit" variant="contained">
+            <Button onClick={(e) => handleSubmit(e)} fullWidth color="primary" type="submit" variant="contained">
               Sign Up
             </Button>
           </div>
@@ -78,4 +95,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
