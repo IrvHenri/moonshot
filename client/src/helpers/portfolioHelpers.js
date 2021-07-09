@@ -39,13 +39,13 @@ export const updateOneCoin = (coinId, quantity, purchasePrice) => {
 export const deleteOneCoin = (coinId) => {
   return axios
   .delete(`http://localhost:3001/api/portfolios/${coinId}`, {
-    headers: authHeader,
+    headers: authHeader
   })
 }
 
 export const deleteAllCoins = () => {
   return axios
     .delete("http://localhost:3001/api/portfolios/", {
-      headers: authHeader,
+      headers: authHeader
   })
 };

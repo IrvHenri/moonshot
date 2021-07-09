@@ -46,7 +46,6 @@ const PortfolioDashboard = ({ theme }) => {
             if (prev.some((val) => val.coin.id === coin.id)) {
               return [...prev];
             }
-    
             return [
               ...prev,
               { coin, chartData: { dailyChart, weeklyChart, monthlyChart } },
@@ -60,24 +59,25 @@ const PortfolioDashboard = ({ theme }) => {
   const updateCoin = (id, quantity, purchasePrice) => {
     if (user.portfolio.coins.length && user.portfolio.coins.filter(coin => coin.id === id).length > 0) {
       updateOneCoin(id, quantity, purchasePrice)
-        .then((res) => setUser(res.data.user))
-        .catch((err) => console.log(err));
+        .then(res => setUser(res.data.user))
+        .catch(err => console.log(err));
     } else {
       addOneCoin(id, quantity, purchasePrice)
-        .then((res) => setUser(res.data.user))
-        .catch((err) => console.log(err));
+        .then(res => setUser(res.data.user))
+        .catch(err => console.log(err));
     }
   };
 
   const removeCoin = (coinId) => {
     deleteOneCoin(coinId)
-      .then((res) => setUser(res.data.user))
-      .catch((err) => console.log(err));
+      .then(res => setUser(res.data.user))
+      .catch(err => console.log(err));
   };
 
   const clearPortfolio = () => {
     deleteAllCoins()
-    .then((res) => setUser(res.data.user))
+    .then(res => setUser(res.data.user))
+    .then(() => setClearPortfolioModalConfirm(false))
     .catch((err) => console.log(err));
   };
 
