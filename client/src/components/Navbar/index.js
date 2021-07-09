@@ -7,15 +7,20 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import navLogo from "../../images/nav-logo.png";
 import navLogoDark from "../../images/nav-logo-dark.png";
 import NavLinks from "./NavLinks";
+import { FaSun, FaRegMoon } from "react-icons/fa";
+
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const [lightSwitch, setLightSwitch] = useState({
     checkedA: true,
     checkedB: true,
   });
+
   const { theme, setTheme } = useContext(ThemeContext);
+
   const handleThemeToggle = (e) => {
     setTheme(theme === "dark" ? "light" : "dark");
+
     setLightSwitch({ ...lightSwitch, [e.target.name]: e.target.checked });
   };
   return (
@@ -30,15 +35,17 @@ const Navbar = () => {
       </div>
       <div className="nav-right">
         <NavLinks toggle={toggle} setToggle={setToggle} theme={theme} />
-        {theme[0].toUpperCase() + theme.slice(1) + " Mode"}
-        <Switch
-          checked={lightSwitch.checkedA}
-          onChange={handleThemeToggle}
-          color="secondary"
-          name="checkedA"
-          edge="start"
-          inputProps={{ "aria-label": "secondary checkbox" }}
-        />
+        <div className="theme-switch">
+          {theme === "light" ? <FaSun /> : <FaRegMoon />}
+          <Switch
+            checked={lightSwitch.checkedA}
+            onChange={handleThemeToggle}
+            color="secondary"
+            name="checkedA"
+            edge="start"
+            inputProps={{ "aria-label": "secondary checkbox" }}
+          />
+        </div>
       </div>
       <div onClick={() => setToggle((prev) => !prev)} className="burger">
         <GiHamburgerMenu />

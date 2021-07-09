@@ -7,7 +7,7 @@
   font-family: var(--primary-font-family);
   height: auto;
   z-index: 2;
-  padding: 0 2em;
+  padding: 1.3em 2em;
 }
 
 .navbar-light {
@@ -40,6 +40,14 @@
 .nav-right {
   align-items: center;
   justify-content: flex-end;
+}
+
+.theme-switch {
+  display: flex;
+  align-items: center;
+}
+.theme-switch svg {
+  margin-right: 0.5em;
 }
 
 .navbar .burger {

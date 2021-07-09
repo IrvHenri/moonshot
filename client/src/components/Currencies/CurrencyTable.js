@@ -60,7 +60,7 @@ const CurrencyTable = ({ data, theme }) => {
       background: theme === "light" ? "#f9f9f9" : "#dcf6ff",
     },
     container: {
-      maxHeight: 560,
+      maxHeight: "50vh",
       background: theme === "light" ? "#f9f9f9" : "#dcf6ff",
       overflowY: "auto",
       borderRadius: "15px",
