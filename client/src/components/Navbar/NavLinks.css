@@ -48,6 +48,10 @@
     height: 100%;
   }
 
+  .nav-links.light-mode#visible {
+    background-color: var(--secondary-bg-color);
+  }
+
   .my-node-enter {
     opacity: 0;
     transform: translateX(100vw);

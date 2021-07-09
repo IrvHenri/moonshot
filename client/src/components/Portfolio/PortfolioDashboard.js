@@ -1,5 +1,5 @@
 import { Modal } from "@material-ui/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useCoinData from "../../hooks/useCoinData";
 import PortfolioModalCoin from "./PortfolioModalCoin";
 import DetailGraph from "../Coin/DetailGraph";
@@ -27,6 +27,39 @@ const PortfolioDashboard = ({ theme }) => {
   const chartViewCoin =
     updatedCoinState.length > 0 ? updatedCoinState[chartIndex].coin : null;
 
+  useEffect(() => {
+    setUpdatePage(true)
+    if (user.portfolio.coins.length === 0) {
+      setUpdatedCoinState([])
+      setUpdatePage(false)
+    }
+    else {
+      user.portfolio.coins.map(coin => {
+        axios.get(`http://localhost:3001/api/coins/${coin.id}`)
+        .then(res => {
+          const { coin, dailyChart, weeklyChart, monthlyChart } = res.data;
+          setUpdatedCoinState((prev) => {
+            if (prev.length === 0) {
+              return [
+                ...prev,
+                { coin, chartData: { dailyChart, weeklyChart, monthlyChart } },
+              ];
+            }
+            if (prev.some((val) => val.coin.id === coin.id)) {
+              return [...prev];
+            }
+    
+            return [
+              ...prev,
+              { coin, chartData: { dailyChart, weeklyChart, monthlyChart } },
+            ];
+          });
+        })
+        .then(() => setUpdatePage(false))
+      })
+    }
+  },[user])
+  
   const getPortfolioBalance = () => {
     let total = 0;
     for (let coin of user.portfolio.coins) {
@@ -55,6 +88,7 @@ const PortfolioDashboard = ({ theme }) => {
 
   const updateCoin = (id, quantity, purchasePrice) => {
     //If user.portfolio doesn't have coin
+    setUpdatePage(true)
     if (user.portfolio.coins.length === 0) {
       axios
         .post(
@@ -63,6 +97,7 @@ const PortfolioDashboard = ({ theme }) => {
           { headers: { "auth-token": localStorage.getItem("auth-token") } }
         )
         .then((res) => setUser(res.data.user))
+        .then(() => setUpdatePage(false))
         .catch((err) => console.log(err));
     } else {
       // If coin already exists in user's portfolio
@@ -74,6 +109,7 @@ const PortfolioDashboard = ({ theme }) => {
             { headers: { "auth-token": localStorage.getItem("auth-token") } }
           )
           .then((res) => setUser(res.data.user))
+          .then(() => setUpdatePage(false))
           .catch((err) => console.log(err));
       } else {
         axios
@@ -83,6 +119,7 @@ const PortfolioDashboard = ({ theme }) => {
             { headers: { "auth-token": localStorage.getItem("auth-token") } }
           )
           .then((res) => setUser(res.data.user))
+          .then(() => setUpdatePage(false))
           .catch((err) => console.log(err));
       }
     }
@@ -100,11 +137,13 @@ const PortfolioDashboard = ({ theme }) => {
   };
 
   const clearPortfolio = () => {
+    setUpdatePage(true);
     axios
       .delete("http://localhost:3001/api/portfolios/", {
         headers: { "auth-token": localStorage.getItem("auth-token") },
       })
       .then((res) => setUser(res.data.user))
+      .then(() => setUpdatePage(true))
       .catch((err) => console.log(err));
   };
 
@@ -198,12 +237,11 @@ const PortfolioDashboard = ({ theme }) => {
             Clear Portfolio
           </p>
 
-          {user.portfolio.coins.map((coin, ind) => (
+          {updatedCoinState.map((coinData, ind) => (
             <CoinAsset
               key={ind}
-              setUpdatedCoinState={setUpdatedCoinState}
-              portfolioCoins={user.portfolio.coins}
-              coinData={coin}
+              userCoinData={user.portfolio.coins.find(coin => coin.id === coinData.coin.id)}
+              coin={coinData.coin}
               updateCoin={updateCoin}
               removeCoin={removeCoin}
               onClick={() => setChartView(ind)}
