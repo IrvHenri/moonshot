@@ -9,12 +9,12 @@ export default function DetailDescription({ coin }) {
 
   let paragraphs = description
     .split(/(?:\r\n){2,}/)
-    .map((paragraph) => (
-      <p dangerouslySetInnerHTML={createMarkup(paragraph)} />
+    .map((paragraph, i) => (
+      <p key={i} dangerouslySetInnerHTML={createMarkup(paragraph)} />
     ));
   return (
     <div className="coin-description">
-      <h1>What is {coin.name}?</h1>
+      {description && <h1>What is {coin.name}?</h1>}
       {description && paragraphs}
     </div>
   );

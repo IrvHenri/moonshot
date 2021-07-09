@@ -20,6 +20,8 @@
   margin: auto 0;
 }
 
+/* Table Title */
+
 .currencies-page-header {
   display: flex;
   justify-content: space-between;
@@ -41,6 +43,12 @@
   margin-left: 0.1em;
   margin-right: 0.8em;
 }
+
+.light-mode-table-header {
+  background: #f9f9f9;
+}
+
+/* Table Data */
 
 .market-up {
   color: var(--market-up-color);

@@ -51,29 +51,29 @@ const columns = [
   },
 ];
 
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-  },
-  cell: {
-    background: "#dcf6ff",
-  },
-  container: {
-    maxHeight: 560,
-    background: "#dcf6ff",
-    overflowY: "auto",
-    borderRadius: "15px",
-  },
-});
-const CurrencyTable = ({ data }) => {
+const CurrencyTable = ({ data, theme }) => {
+  const useStyles = makeStyles({
+    root: {
+      width: "100%",
+    },
+    cell: {
+      background: theme === "light" ? "#f9f9f9" : "#dcf6ff",
+    },
+    container: {
+      maxHeight: 560,
+      background: theme === "light" ? "#f9f9f9" : "#dcf6ff",
+      overflowY: "auto",
+      borderRadius: "15px",
+    },
+  });
   const classes = useStyles();
   const { items, requestSort, direction, active } = useSortableData(data);
 
   return (
-    <div className="currency-table">
+    <div>
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
-          <Table aria-label="sticky table" className={classes.table}>
+          <Table aria-label="sticky table">
             <TableHead>
               <TableRow>
                 {columns.map((column) => (

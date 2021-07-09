@@ -114,7 +114,6 @@
 .coin-description p {
   font-size: 0.9em;
   overflow-y: scroll;
-  border: 2px solid red;
 }
 
 /* ------------- */

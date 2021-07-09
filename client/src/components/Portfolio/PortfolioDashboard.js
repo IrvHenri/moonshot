@@ -10,7 +10,7 @@ import axios from "axios";
 
 import { useAuth } from "../../context/AuthContext";
 
-const PortfolioDashboard = () => {
+const PortfolioDashboard = ({ theme }) => {
   const { user, setUser } = useAuth();
   const [coins, loading] = useCoinData();
   const [updatePage, setUpdatePage] = useState(false);
@@ -27,9 +27,6 @@ const PortfolioDashboard = () => {
   const chartViewCoin =
     updatedCoinState.length > 0 ? updatedCoinState[chartIndex].coin : null;
 
-  console.log("Chart Index:", chartIndex);
-  console.log("Chart Data:", chartViewData);
-  console.log("Updated Coin State:", updatedCoinState);
   const getPortfolioBalance = () => {
     let total = 0;
     for (let coin of user.portfolio.coins) {
@@ -152,8 +149,16 @@ const PortfolioDashboard = () => {
   if (updatePage) return <h1>loading...</h1>;
 
   return (
-    <div className="portfolio-dashboard">
-      <div className="portfolio-banner">
+    <div
+      className={`portfolio-dashboard ${
+        theme === "light" ? "light-dashboard" : null
+      }`}
+    >
+      <div
+        className={`portfolio-banner ${
+          theme === "light" ? "light-dashboard light-box" : null
+        }`}
+      >
         <div className="portfolio-banner-left">
           <div>
             <h1>Welcome Back {user.name}</h1>
@@ -168,14 +173,23 @@ const PortfolioDashboard = () => {
         </div>
       </div>
       <div className="portfolio-info-container">
-        <div className="portfolio-graph">
+        <div
+          className={`portfolio-graph ${
+            theme === "light" ? "light-dashboard" : null
+          }`}
+        >
           <h1>Graph:</h1>
 
           {updatedCoinState.length > 0 ? (
             <DetailGraph coin={chartViewCoin} chartData={chartViewData} />
           ) : null}
         </div>
-        <div className="portfolio-coin-data">
+
+        <div
+          className={`portfolio-coin-data ${
+            theme === "light" ? "light-dashboard light-box" : null
+          }`}
+        >
           <h1>Your Assets:</h1>
           <p
             className="clear-portfolio-btn"
