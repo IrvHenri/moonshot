@@ -58,22 +58,14 @@ const PortfolioDashboard = ({ theme }) => {
   },[user])
 
   const updateCoin = (id, quantity, purchasePrice) => {
-    //If user.portfolio doesn't have coin
-    if (user.portfolio.coins.length === 0) {
-      addOneCoin(id, quantity, purchasePrice)
+    if (user.portfolio.coins.length && user.portfolio.coins.filter(coin => coin.id === id).length > 0) {
+      updateOneCoin(id, quantity, purchasePrice)
         .then((res) => setUser(res.data.user))
         .catch((err) => console.log(err));
     } else {
-      // If coin already exists in user's portfolio
-      if (user.portfolio.coins.filter((coin) => coin.id === id).length > 0) {
-        updateOneCoin(id, quantity, purchasePrice)
-          .then((res) => setUser(res.data.user))
-          .catch((err) => console.log(err));
-      } else {
-        addOneCoin(id, quantity, purchasePrice)
-          .then((res) => setUser(res.data.user))
-          .catch((err) => console.log(err));
-      }
+      addOneCoin(id, quantity, purchasePrice)
+        .then((res) => setUser(res.data.user))
+        .catch((err) => console.log(err));
     }
   };
 
