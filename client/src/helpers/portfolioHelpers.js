@@ -20,11 +20,30 @@ export const filterCoinList = (coins, searchTerm) => {
     )
 };
 
-export const deleteOne = (coinId) => {
-  
+export const addOneCoin = (coinId, quantity, purchasePrice) => {
+  return axios.post(
+    `http://localhost:3001/api/portfolios/${coinId}`,
+    { quantity, purchasePrice },
+    { headers: authHeader }
+  )
 }
 
-export const deleteAll = () => {
+export const updateOneCoin = (coinId, quantity, purchasePrice) => {
+  return axios.put(
+    `http://localhost:3001/api/portfolios/${coinId}`,
+    { quantity, purchasePrice },
+    {headers: authHeader}
+  )
+}
+
+export const deleteOneCoin = (coinId) => {
+  return axios
+  .delete(`http://localhost:3001/api/portfolios/${coinId}`, {
+    headers: authHeader,
+  })
+}
+
+export const deleteAllCoins = () => {
   return axios
     .delete("http://localhost:3001/api/portfolios/", {
       headers: authHeader,

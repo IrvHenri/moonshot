@@ -9,7 +9,7 @@ import SelectedCoinModalPage from "./SelectedCoinModalPage";
 import axios from "axios";
 
 import { useAuth } from "../../context/AuthContext";
-import {getPortfolioBalance, deleteAll, filterCoinList} from '../../helpers/portfolioHelpers'
+import {addOneCoin, updateOneCoin, deleteOneCoin, getPortfolioBalance, deleteAllCoins, filterCoinList} from '../../helpers/portfolioHelpers'
 
 const PortfolioDashboard = ({ theme }) => {
   const { user, setUser } = useAuth();
@@ -60,32 +60,17 @@ const PortfolioDashboard = ({ theme }) => {
   const updateCoin = (id, quantity, purchasePrice) => {
     //If user.portfolio doesn't have coin
     if (user.portfolio.coins.length === 0) {
-      axios
-        .post(
-          `http://localhost:3001/api/portfolios/${id}`,
-          { quantity, purchasePrice },
-          { headers: { "auth-token": localStorage.getItem("auth-token") } }
-        )
+      addOneCoin(id, quantity, purchasePrice)
         .then((res) => setUser(res.data.user))
         .catch((err) => console.log(err));
     } else {
       // If coin already exists in user's portfolio
       if (user.portfolio.coins.filter((coin) => coin.id === id).length > 0) {
-        axios
-          .put(
-            `http://localhost:3001/api/portfolios/${id}`,
-            { quantity, purchasePrice },
-            { headers: { "auth-token": localStorage.getItem("auth-token") } }
-          )
+        updateOneCoin(id, quantity, purchasePrice)
           .then((res) => setUser(res.data.user))
           .catch((err) => console.log(err));
       } else {
-        axios
-          .post(
-            `http://localhost:3001/api/portfolios/${id}`,
-            { quantity, purchasePrice },
-            { headers: { "auth-token": localStorage.getItem("auth-token") } }
-          )
+        addOneCoin(id, quantity, purchasePrice)
           .then((res) => setUser(res.data.user))
           .catch((err) => console.log(err));
       }
@@ -93,16 +78,13 @@ const PortfolioDashboard = ({ theme }) => {
   };
 
   const removeCoin = (coinId) => {
-    axios
-      .delete(`http://localhost:3001/api/portfolios/${coinId}`, {
-        headers: { "auth-token": localStorage.getItem("auth-token")},
-      })
+    deleteOneCoin(coinId)
       .then((res) => setUser(res.data.user))
       .catch((err) => console.log(err));
   };
 
   const clearPortfolio = () => {
-    deleteAll()
+    deleteAllCoins()
     .then((res) => setUser(res.data.user))
     .catch((err) => console.log(err));
   };
