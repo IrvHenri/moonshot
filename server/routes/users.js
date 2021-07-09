@@ -12,6 +12,14 @@ router.post('/signup', function(req, res, next) {
   const email = req.body.email;
   const password = bcrypt.hashSync(req.body.password, saltRounds);
 
+  if (!email) {
+    res.status(400).json("Please enter valid email");
+  }
+
+  if (!email.includes("@") || email.length <= 3) {
+    res.status(400).json("Please enter valid email");
+  }
+
   const newUser = new User({name, email, password});
  
   newUser.save()
