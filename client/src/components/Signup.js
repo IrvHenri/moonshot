@@ -11,9 +11,23 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
+    setError("");
+
+    if (!confirmPw) {
+      setError("Please confirm password")
+      return;
+    }
+
+    if (password !== confirmPw) {
+      setError("Passwords do not match")
+      return;
+    }
+
     const user = {
       name,
       email,
@@ -21,8 +35,11 @@ const Signup = () => {
     }
     
     axios.post("http://localhost:3001/api/users/signup", user)
-    .then(window.location = "/login")
-    .catch(err => console.log(err))
+    .then((res) => window.location = "/login")
+    .catch((err) => {
+      let error = err.response.data;
+      setError(error)
+    })
   }
 
   return (
@@ -89,6 +106,7 @@ const Signup = () => {
             </Button>
           </div>
         </Link>
+        <div> { error } </div>
       </div>
       <img className="login-img" src="img/stock_signup.jpg" alt="signup logo" />
     </div>

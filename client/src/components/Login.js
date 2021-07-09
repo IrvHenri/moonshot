@@ -9,9 +9,13 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
+    setError("");
+
     const user = {
       email,
       password
@@ -22,7 +26,10 @@ const Login = () => {
       localStorage.setItem("auth-token", res.data)
       window.location = '/'
     })
-    .catch(err => console.log(err))
+    .catch((err)=> {
+      let error = err.response.data;
+      setError(error)
+    })
   }
 
   return (
@@ -67,6 +74,7 @@ const Login = () => {
             </Button>
           </div>
         </Link>
+        <div> { error } </div>
       </div>
     </div>
   );
