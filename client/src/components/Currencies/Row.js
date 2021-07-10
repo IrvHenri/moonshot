@@ -28,7 +28,7 @@ const Row = (props) => {
     price_change_percentage_24h > 0 ? "market-up" : "market-down";
 
   return (
-    <TableRow hover role="checkbox" tabIndex={-1}>
+    <TableRow hover role="checkbox" tabIndex={-1} data-testid="coin-row">
       <TableCell align={"right"}>{market_cap_rank}</TableCell>
       <TableCell align={"left"}>
         <Link
