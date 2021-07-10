@@ -9,7 +9,3 @@ export default function arrowHelper(id, active, direction) {
   }
   return;
 }
-
-// check if id is equal to the active header
-//if direction = ascending render up arrow
-// else if direction = descending render down arrow

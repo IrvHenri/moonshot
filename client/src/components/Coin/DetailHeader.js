@@ -25,7 +25,7 @@ export default function DetailHeader({ coin }) {
         <Button text="back" />
       </Link>
 
-      <header className=" coin-detail-header">
+      <header className="coin-detail-header">
         <div className="header-left">
           <div>
             <Avatar alt="coin logo" src={thumb} />

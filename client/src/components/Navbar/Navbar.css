@@ -7,7 +7,7 @@
   font-family: var(--primary-font-family);
   height: auto;
   z-index: 2;
-  padding: 0 2em;
+  padding: 1.3em 2em;
 }
 
 .navbar-light {
@@ -15,11 +15,22 @@
   color: var(--secondary-font-color);
 }
 
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
 .nav-logo {
   font-weight: 900;
   font-size: 3rem;
   margin-right: 1em;
   z-index: 2;
+}
+
+.nav-logo-image {
+  width: 45px;
+  height: 45px;
+  margin-right: 0.5em;
 }
 .navbar div {
   display: flex;
@@ -29,6 +40,14 @@
 .nav-right {
   align-items: center;
   justify-content: flex-end;
+}
+
+.theme-switch {
+  display: flex;
+  align-items: center;
+}
+.theme-switch svg {
+  margin-right: 0.5em;
 }
 
 .navbar .burger {

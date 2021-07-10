@@ -23,13 +23,15 @@ export default function Cryptocurrencies() {
           <CircularProgress size={100} />
         </div>
       ) : (
-        <>
+        <div
+          className={theme === "light" ? "light-mode-currencies-table" : null}
+        >
           <div className={theme === "light" ? "light-mode-table-header" : null}>
             <TableTitle data={coins} theme={theme} />
             <SearchBar handleChange={handleChange} theme={theme} />
           </div>
           <CurrencyTable data={filteredCoins} theme={theme} />
-        </>
+        </div>
       )}
     </div>
   );
