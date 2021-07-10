@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 import "./CoinDetail.css";
@@ -9,6 +9,11 @@ export default function DetailGraph({ coin, chartData }) {
   const weeklyData = chartData ? [...chartData.weeklyChart.prices] : null;
   const monthlyData = chartData ? [...chartData.monthlyChart.prices] : null;
   const [chartMode, setChartMode] = useState(dayData);
+
+  useEffect(() => {
+    setChartMode(dayData)
+  },[chartData])
+
   const options = {
     title: {
       text: name ? `${name} Price Chart (USD)` : "Add a coin!", //needs to be dynamic if including market cap volume

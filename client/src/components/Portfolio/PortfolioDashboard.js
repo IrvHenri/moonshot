@@ -18,18 +18,19 @@ const PortfolioDashboard = ({ theme }) => {
   const [clearPortfolioModalConfirm, setClearPortfolioModalConfirm] = useState(false);
   const [selectedCoin, setSelectedCoin] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [loadingCoins, setLoadingCoins] = useState(false)
 
   //Chart View State
   const [updatedCoinState, setUpdatedCoinState] = useState([]);
   const [chartIndex, setChartIndex] = useState(0);
-  const chartViewData =
-    updatedCoinState.length > 0 ? updatedCoinState[chartIndex].chartData : null;
-  const chartViewCoin =
-    updatedCoinState.length > 0 ? updatedCoinState[chartIndex].coin : null;
+  const [chartViewData, setChartViewData] = useState(null)
 
   useEffect(() => {
+    setLoadingCoins(true)
     if (user.portfolio.coins.length === 0) {
       setUpdatedCoinState([])
+      setChartIndex(null)
+      setLoadingCoins(false)
     }
     else {
       user.portfolio.coins.map(coin => {
@@ -52,9 +53,15 @@ const PortfolioDashboard = ({ theme }) => {
             ];
           });
         })
+        .then(() => setChartIndex(0))
+        .then(() => setLoadingCoins(false))
       })
     }
   },[user])
+
+  useEffect(() => {
+    setChartViewData(updatedCoinState.length > 0 ? updatedCoinState[chartIndex] : null)
+  },[chartIndex])
 
   const updateCoin = (id, quantity, purchasePrice) => {
     if (user.portfolio.coins.length && user.portfolio.coins.filter(coin => coin.id === id).length > 0) {
@@ -71,6 +78,7 @@ const PortfolioDashboard = ({ theme }) => {
   const removeCoin = (coinId) => {
     deleteOneCoin(coinId)
       .then(res => setUser(res.data.user))
+      .then(() => setChartIndex(null))
       .catch(err => console.log(err));
   };
 
@@ -94,8 +102,8 @@ const PortfolioDashboard = ({ theme }) => {
           setOpen={setOpen}
           updateCoin={updateCoin}
         />
-      ) : (
-        <>
+      ) : ( 
+        <div>
           <h1 className="modal-title" id="simple-modal-title">
             Select Coin
           </h1>
@@ -123,7 +131,7 @@ const PortfolioDashboard = ({ theme }) => {
             className="modal-close"
             onClick={() => setOpen(false)}
           />
-        </>
+        </div>
       )}
     </div>
   );
@@ -160,8 +168,8 @@ const PortfolioDashboard = ({ theme }) => {
         >
           <h1>Graph:</h1>
 
-          {updatedCoinState.length > 0 ? (
-            <DetailGraph coin={chartViewCoin} chartData={chartViewData} />
+          {chartViewData ? (
+            <DetailGraph coin={chartViewData.coin} chartData={chartViewData.chartData} />
           ) : null}
         </div>
 
@@ -178,7 +186,7 @@ const PortfolioDashboard = ({ theme }) => {
             Clear Portfolio
           </p>
 
-          {updatedCoinState.map((coinData, ind) => (
+          {!loadingCoins && updatedCoinState.map((coinData, ind) => (
             <CoinAsset
               key={ind}
               userCoinData={user.portfolio.coins.find(coin => coin.id === coinData.coin.id)}
