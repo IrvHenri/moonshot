@@ -1,4 +1,3 @@
-import "@testing-library/cypress/add-commands";
 describe("Navigation", () => {
   beforeEach(() => {
     cy.visit("/");
@@ -11,11 +10,9 @@ describe("Navigation", () => {
     cy.visit("/currencies");
   });
 
-  it("should navigate to Bitcoin detail page", () => {
+  it("should navigate to Bitcoin's detail page", () => {
     cy.visit("/currencies");
-    cy.get(":nth-child(1) > .MuiTableCell-alignLeft > a > .first-cell")
-      .contains("[data-testid=coin-row]", "Bitcoin")
-      .click()
-      .should("have.class", "coin-detail-header");
+    cy.findByText("Bitcoin").click();
+    cy.findByText("Bitcoin Market Statistics").should("exist");
   });
 });
