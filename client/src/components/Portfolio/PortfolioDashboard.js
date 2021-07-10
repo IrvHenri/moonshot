@@ -85,7 +85,7 @@ const PortfolioDashboard = ({ theme }) => {
     .catch((err) => console.log(err));
   };
 
-  const modalContent = (
+  const searchModalContent = (
     <div className="modal">
       {selectedCoin ? (
         <SelectedCoinModalPage
@@ -150,13 +150,10 @@ const PortfolioDashboard = ({ theme }) => {
             theme === "light" ? "light-dashboard light-box" : null
           }`}
         >
+          <div className='portfolio-coin-data-header'>
           <h1>Your Assets:</h1>
-          <p
-            className="clear-portfolio-btn"
-            onClick={() => setClearPortfolioModalConfirm(true)}
-          >
-            Clear Portfolio
-          </p>
+          <p onClick={() => setClearPortfolioModalConfirm(true)}>Clear Portfolio</p>
+          </div>
 
           {!loadingCoins && updatedCoinState.map((coinData, ind) => (
             <CoinAsset
@@ -176,7 +173,7 @@ const PortfolioDashboard = ({ theme }) => {
         onClose={() => setOpen(false)}
         aria-labelledby="select-coin-modal-title"
       >
-        {modalContent}
+        {searchModalContent}
       </Modal>
 
       <Modal
@@ -185,7 +182,8 @@ const PortfolioDashboard = ({ theme }) => {
         aria-labelledby="clear-modal-title"
       >
         <div className="modal clear-portfolio-modal">
-          <h1>Are you sure?</h1>
+          <h1>Clear Your Portfolio</h1>
+          <h2>Are you sure? This cannot be undone</h2>
           <button onClick={clearPortfolio}>Yes</button>
           <button onClick={() => setClearPortfolioModalConfirm(false)}>No</button>
         </div>

@@ -21,7 +21,7 @@ const CoinAsset = ({
   if(!userCoinData) return null
   const { id, quantity, purchasePrice} = userCoinData
   return (
-    <div className="coin-asset-row">
+    <div onClick={onClick} className="coin-asset-row">
       <div>
         <Avatar alt={`${coin.id} logo`} src={coin.image.thumb} />
         <h1 className="coin-asset-row-name">{coin.symbol.toUpperCase()}</h1>
@@ -49,7 +49,6 @@ const CoinAsset = ({
         <h1>{currentPrice - purchasePrice }</h1>
       </div>
       <div className='coin-asset-btn-well'>
-        <button onClick={onClick}>View Chart</button>
         <button onClick={() => setUpdateModalOpen(true)}>Update</button>
         <button onClick={() => removeCoin(id)}>Delete</button>
       </div>
