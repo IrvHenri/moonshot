@@ -38,10 +38,7 @@ const PortfolioDashboard = ({ theme }) => {
           const { coin, dailyChart, weeklyChart, monthlyChart } = res.data;
           setUpdatedCoinState((prev) => {
             if (prev.length === 0) {
-              return [
-                ...prev,
-                { coin, chartData: { dailyChart, weeklyChart, monthlyChart } },
-              ];
+              return [{ coin, chartData: { dailyChart, weeklyChart, monthlyChart } }];
             }
             if (prev.some((val) => val.coin.id === coin.id)) {
               return [...prev];
@@ -86,10 +83,6 @@ const PortfolioDashboard = ({ theme }) => {
     .then(res => setUser(res.data.user))
     .then(() => setClearPortfolioModalConfirm(false))
     .catch((err) => console.log(err));
-  };
-
-  const setChartView = (i) => {
-    setChartIndex(i);
   };
 
   const modalContent = (
@@ -172,7 +165,7 @@ const PortfolioDashboard = ({ theme }) => {
               coin={coinData.coin}
               updateCoin={updateCoin}
               removeCoin={removeCoin}
-              onClick={() => setChartView(ind)}
+              onClick={() => setChartIndex(ind)}
             />
           ))}
         </div>
@@ -191,7 +184,7 @@ const PortfolioDashboard = ({ theme }) => {
         onClose={() => setClearPortfolioModalConfirm(false)}
         aria-labelledby="clear-modal-title"
       >
-        <div className="clear-portfolio-modal">
+        <div className="modal clear-portfolio-modal">
           <h1>Are you sure?</h1>
           <button onClick={clearPortfolio}>Yes</button>
           <button onClick={() => setClearPortfolioModalConfirm(false)}>No</button>

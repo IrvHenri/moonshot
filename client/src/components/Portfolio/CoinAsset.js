@@ -10,10 +10,13 @@ const CoinAsset = ({
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
   const [updatedCoinQuantity, setUpdatedCoinQuantity] = useState(1);
 
+  const currentPrice = coin.market_data.current_price.usd
+  
   const handleUpdate = () => {
-    updateCoin(id, updatedCoinQuantity, coin.market_data.current_price.usd);
+    updateCoin(id, updatedCoinQuantity, currentPrice);
     setUpdateModalOpen(false);
   };
+
 
   if(!userCoinData) return null
   const { id, quantity, purchasePrice} = userCoinData
@@ -25,7 +28,7 @@ const CoinAsset = ({
       </div>
       <div>
         <h1>Price:</h1>
-        <h1>{coin.market_data.current_price.usd}</h1>
+        <h1>{currentPrice}</h1>
       </div>
       <div>
         <h1>7D:</h1>
@@ -34,28 +37,29 @@ const CoinAsset = ({
       <div>
         <h1>Currently Holding:</h1>
         <h1>
-          {coin.market_data.current_price.usd * quantity} 
+          {currentPrice * quantity} 
           ({quantity}{" "}{coin.symbol})
         </h1>
       </div>
       <div>
         <h1>P/L Since Purchase:</h1>
         <h1>
-          {purchasePrice} | {coin.market_data.current_price.usd}
+          {purchasePrice} | {currentPrice}
         </h1>
-        <h1>{purchasePrice - coin.market_data.current_price.usd}</h1>
+        <h1>{currentPrice - purchasePrice }</h1>
       </div>
-      <div>
+      <div className='coin-asset-btn-well'>
         <button onClick={onClick}>View Chart</button>
         <button onClick={() => setUpdateModalOpen(true)}>Update</button>
         <button onClick={() => removeCoin(id)}>Delete</button>
       </div>
+
       <Modal
         open={updateModalOpen}
         onClose={() => setUpdateModalOpen(false)}
         aria-labelledby="update-asset-modal-title"
       >
-        <div className="update-asset-modal">
+        <div className="modal update-asset-modal">
           <input
             type="number"
             value={updatedCoinQuantity}
