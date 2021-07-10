@@ -1,8 +1,7 @@
 import "./Login.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import TextField from "@material-ui/core/TextField";
-import { Button } from "@material-ui/core";
+import { Button, TextField, Grid, Box } from "@material-ui/core";
 
 import axios from 'axios'
 
@@ -43,8 +42,8 @@ const Signup = () => {
   }
 
   return (
-    <div className="login-section">
-      <div className="login-form">
+    <Grid container className="login-section">
+      <Grid item xs={12} sm={6} className="login-form">
         <h1>Sign Up</h1>
         <form>
           <div>
@@ -93,23 +92,27 @@ const Signup = () => {
               onChange={(e) => setConfirmPw(e.target.value)}
             />
           </div>
-          <div>
+          <div className="signup-buttons">
             <Button onClick={(e) => handleSubmit(e)} fullWidth color="primary" type="submit" variant="contained">
               Sign Up
             </Button>
+            <Link className="signup-link" to={"/login"}>
+              <div className="signup-btn">
+                <Button fullWidth color="primary">
+                  Already A User? Log In!
+                </Button>
+              </div>
+            </Link>
+            <div> {error} </div>
           </div>
         </form>
-        <Link className="signup-link" to={"/login"}>
-          <div className="signup-btn">
-            <Button fullWidth color="primary">
-              Already A User? Log In!
-            </Button>
-          </div>
-        </Link>
-        <div> { error } </div>
-      </div>
-      <img className="login-img" src="img/stock_signup.jpg" alt="signup logo" />
-    </div>
+
+      </Grid>
+
+      <Grid item xs={12} sm={6}>
+        <img className="login-img" src="img/stock_signup.jpg" alt="signup logo" />
+      </Grid>
+    </Grid>
   );
 };
 

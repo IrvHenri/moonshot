@@ -1,8 +1,7 @@
 import "./Login.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import TextField from "@material-ui/core/TextField";
-import { Button } from "@material-ui/core";
+import { Button, TextField, Grid } from "@material-ui/core";
 import axios from "axios";
 
 const Login = () => {
@@ -33,9 +32,13 @@ const Login = () => {
   }
 
   return (
-    <div className="login-section">
-      <img className="login-img" src="img/stock_login.jpg" alt="login logo" />
-      <div className="login-form">
+    <Grid container className="login-section">
+
+      <Grid item xs={12} sm={6} className="login-img-grid">
+        <img className="login-img" src="img/stock_login.jpg" alt="login logo" />
+      </Grid>
+
+      <Grid item xs={12} sm={6} className="login-form">
         <h1>Log In</h1>
         <form>
           <div>
@@ -65,18 +68,20 @@ const Login = () => {
             <Button onClick={(e) => handleSubmit(e)} fullWidth color="primary" type="submit" variant="contained">
               Log in
             </Button>
+            <Link className="signup-link" to={"/signup"}>
+              <div className="signup-btn">
+                <Button fullWidth color="primary">
+                  Not A User Yet? Sign Up!
+                </Button>
+              </div>
+            </Link>
+            <div> { error } </div>
           </div>
         </form>
-        <Link className="signup-link" to={"/signup"}>
-          <div className="signup-btn">
-            <Button fullWidth color="primary">
-              Not A User Yet? Sign Up!
-            </Button>
-          </div>
-        </Link>
-        <div> { error } </div>
-      </div>
-    </div>
+        
+      </Grid>
+      
+    </Grid>
   );
 };
 
