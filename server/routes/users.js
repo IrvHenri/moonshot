@@ -6,7 +6,7 @@ const User = require('../models/userModel');
 const saltRounds = 10;
 
 //Sign Up
-router.post('/signup', function(req, res, next) {
+router.post('/signup', async function(req, res, next) {
 
   const name = req.body.name;
   const email = req.body.email;
@@ -24,13 +24,21 @@ router.post('/signup', function(req, res, next) {
     return res.status(400).json("Passwords must be at least 6 characters in length");
   }
 
+  const userExists = await User.findOne({email})
+  if (userExists) return res.status(400).json("Email is already in use!");
+
   const password = bcrypt.hashSync(initialPassword, saltRounds);
   const newUser = new User({name, email, password});
- 
-  newUser.save()
-    .then(() => res.json("User Added!"))
-    .catch(error => res.status(400).json('Error: ' + error));
-
+  
+  try {
+    await newUser.save();
+    console.log("new user", newUser);
+    res.json("New user added!");
+  }
+  catch {
+    res.status(400).json("Error creating new user")
+  };
+  
 });
 
 // to test login function
@@ -50,11 +58,11 @@ router.post('/login', function(req, res, next) {
     .then((user) => {
 
       if (user === null) {
-        return res.status(400).json("email does not exist");
+        return res.status(400).json("Email does not exist");
       }
 
       if (!bcrypt.compareSync(password, user.password)) {
-        return res.status(400).json("wrong password");
+        return res.status(400).json("Wrong password");
       }
 
       const token = jwt.sign({_id: user._id}, process.env.SECRET_TOKEN);
