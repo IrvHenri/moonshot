@@ -17,6 +17,11 @@ const Signup = () => {
 
     setError("");
 
+    if (!name) {
+      setError("Please enter name")
+      return;
+    }
+
     if (!confirmPw) {
       setError("Please confirm password");
       return;
