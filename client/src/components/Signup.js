@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, TextField, Grid, Box } from "@material-ui/core";
 
-import axios from 'axios'
+import axios from "axios";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -13,33 +13,35 @@ const Signup = () => {
   const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     setError("");
 
     if (!confirmPw) {
-      setError("Please confirm password")
+      setError("Please confirm password");
       return;
     }
 
     if (password !== confirmPw) {
-      setError("Passwords do not match")
+      setError("Passwords do not match");
       return;
     }
 
     const user = {
       name,
       email,
-      password
-    }
-    
-    axios.post("http://localhost:3001/api/users/signup", user)
-    .then((res) => window.location = "/login")
-    .catch((err) => {
-      let error = err.response.data;
-      setError(error)
-    })
-  }
+      password,
+    };
+
+    axios
+      .post("http://localhost:3001/api/users/signup", user)
+      .then((res) => (window.location = "/login"))
+      .catch((err) => {
+        let error = err.response.data;
+
+        setError(error);
+      });
+  };
 
   return (
     <Grid container className="login-section">
@@ -93,7 +95,13 @@ const Signup = () => {
             />
           </div>
           <div className="signup-buttons">
-            <Button onClick={(e) => handleSubmit(e)} fullWidth color="primary" type="submit" variant="contained">
+            <Button
+              onClick={(e) => handleSubmit(e)}
+              fullWidth
+              color="primary"
+              type="submit"
+              variant="contained"
+            >
               Sign Up
             </Button>
             <Link className="signup-link" to={"/login"}>
@@ -106,11 +114,14 @@ const Signup = () => {
             <div> {error} </div>
           </div>
         </form>
-
       </Grid>
 
       <Grid item xs={12} sm={6}>
-        <img className="login-img" src="img/stock_signup.jpg" alt="signup logo" />
+        <img
+          className="login-img"
+          src="img/stock_signup.jpg"
+          alt="signup logo"
+        />
       </Grid>
     </Grid>
   );
