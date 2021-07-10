@@ -21,7 +21,7 @@ const CoinAsset = ({
     <div className="coin-asset-row">
       <div>
         <Avatar alt={`${coin.id} logo`} src={coin.image.thumb} />
-        <h1 className="coin-asset-row-name">{coin.id}</h1>
+        <h1 className="coin-asset-row-name">{coin.symbol.toUpperCase()}</h1>
       </div>
       <div>
         <h1>Price:</h1>
@@ -34,8 +34,8 @@ const CoinAsset = ({
       <div>
         <h1>Currently Holding:</h1>
         <h1>
-          {coin.market_data.current_price.usd * quantity} ({quantity}{" "}
-          {coin.symbol})
+          {coin.market_data.current_price.usd * quantity} 
+          ({quantity}{" "}{coin.symbol})
         </h1>
       </div>
       <div>

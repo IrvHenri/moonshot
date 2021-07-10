@@ -1,39 +1,39 @@
 import { Modal } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import useCoinData from "../../hooks/useCoinData";
-import PortfolioModalCoin from "./PortfolioModalCoin";
+import SearchCoinModal from "./SearchCoinModal";
 import DetailGraph from "../Coin/DetailGraph";
 import CoinAsset from "./CoinAsset";
-import { AiFillCloseCircle } from "react-icons/ai";
 import SelectedCoinModalPage from "./SelectedCoinModalPage";
 import axios from "axios";
 
 import { useAuth } from "../../context/AuthContext";
-import {addOneCoin, updateOneCoin, deleteOneCoin, getPortfolioBalance, deleteAllCoins, filterCoinList} from '../../helpers/portfolioHelpers'
+import {addOneCoin, updateOneCoin, deleteOneCoin, getPortfolioBalance, deleteAllCoins} from '../../helpers/portfolioHelpers'
 
 const PortfolioDashboard = ({ theme }) => {
   const { user, setUser } = useAuth();
-  const [coins, loading] = useCoinData();
   const [open, setOpen] = useState(false);
   const [clearPortfolioModalConfirm, setClearPortfolioModalConfirm] = useState(false);
   const [selectedCoin, setSelectedCoin] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [loadingCoins, setLoadingCoins] = useState(false)
+  const [coins, loading] = useCoinData();
 
   //Chart View State
   const [updatedCoinState, setUpdatedCoinState] = useState([]);
   const [chartIndex, setChartIndex] = useState(0);
-  const chartViewData =
-    updatedCoinState.length > 0 ? updatedCoinState[chartIndex].chartData : null;
-  const chartViewCoin =
-    updatedCoinState.length > 0 ? updatedCoinState[chartIndex].coin : null;
+  const [chartViewData, setChartViewData] = useState(null)
 
   useEffect(() => {
+    setLoadingCoins(true)
     if (user.portfolio.coins.length === 0) {
       setUpdatedCoinState([])
+      setChartIndex(null)
+      setLoadingCoins(false)
     }
     else {
       user.portfolio.coins.map(coin => {
-        axios.get(`http://localhost:3001/api/coins/${coin.id}`)
+        return axios.get(`http://localhost:3001/api/coins/${coin.id}`)
         .then(res => {
           const { coin, dailyChart, weeklyChart, monthlyChart } = res.data;
           setUpdatedCoinState((prev) => {
@@ -52,9 +52,15 @@ const PortfolioDashboard = ({ theme }) => {
             ];
           });
         })
+        .then(() => setChartIndex(0))
+        .then(() => setLoadingCoins(false))
       })
     }
   },[user])
+
+  useEffect(() => {
+    setChartViewData(updatedCoinState.length > 0 ? updatedCoinState[chartIndex] : null)
+  },[chartIndex, updatedCoinState])
 
   const updateCoin = (id, quantity, purchasePrice) => {
     if (user.portfolio.coins.length && user.portfolio.coins.filter(coin => coin.id === id).length > 0) {
@@ -71,6 +77,7 @@ const PortfolioDashboard = ({ theme }) => {
   const removeCoin = (coinId) => {
     deleteOneCoin(coinId)
       .then(res => setUser(res.data.user))
+      .then(() => setChartIndex(null))
       .catch(err => console.log(err));
   };
 
@@ -85,7 +92,7 @@ const PortfolioDashboard = ({ theme }) => {
     setChartIndex(i);
   };
 
-  const body = (
+  const modalContent = (
     <div className="modal">
       {selectedCoin ? (
         <SelectedCoinModalPage
@@ -94,36 +101,16 @@ const PortfolioDashboard = ({ theme }) => {
           setOpen={setOpen}
           updateCoin={updateCoin}
         />
-      ) : (
-        <>
-          <h1 className="modal-title" id="simple-modal-title">
-            Select Coin
-          </h1>
-          <form className="modal-form">
-            <input
-              type="text"
-              placeholder="Find a coin"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </form>
-          {loading ? null : (
-            <div className="modal-coin-list">{
-              filterCoinList(coins, searchTerm)      
-              .map((coin, ind) => (
-              <PortfolioModalCoin
-                key={ind}
-                coin={coin}
-                selectedCoin={selectedCoin}
-                setSelectedCoin={setSelectedCoin}
-              />
-            ))}</div>
-          )}
-          <AiFillCloseCircle
-            className="modal-close"
-            onClick={() => setOpen(false)}
-          />
-        </>
+      ) : ( 
+        <SearchCoinModal 
+          selectedCoin={selectedCoin}
+          setSelectedCoin={setSelectedCoin}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          setOpen={setOpen}
+          coins={coins}
+          loading={loading}
+        />
       )}
     </div>
   );
@@ -160,8 +147,8 @@ const PortfolioDashboard = ({ theme }) => {
         >
           <h1>Graph:</h1>
 
-          {updatedCoinState.length > 0 ? (
-            <DetailGraph coin={chartViewCoin} chartData={chartViewData} />
+          {chartViewData ? (
+            <DetailGraph coin={chartViewData.coin} chartData={chartViewData.chartData} />
           ) : null}
         </div>
 
@@ -178,7 +165,7 @@ const PortfolioDashboard = ({ theme }) => {
             Clear Portfolio
           </p>
 
-          {updatedCoinState.map((coinData, ind) => (
+          {!loadingCoins && updatedCoinState.map((coinData, ind) => (
             <CoinAsset
               key={ind}
               userCoinData={user.portfolio.coins.find(coin => coin.id === coinData.coin.id)}
@@ -194,15 +181,15 @@ const PortfolioDashboard = ({ theme }) => {
       <Modal
         open={open}
         onClose={() => setOpen(false)}
-        aria-labelledby="simple-modal-title"
+        aria-labelledby="select-coin-modal-title"
       >
-        {body}
+        {modalContent}
       </Modal>
 
       <Modal
         open={clearPortfolioModalConfirm}
         onClose={() => setClearPortfolioModalConfirm(false)}
-        aria-labelledby="simple-modal-title"
+        aria-labelledby="clear-modal-title"
       >
         <div className="clear-portfolio-modal">
           <h1>Are you sure?</h1>

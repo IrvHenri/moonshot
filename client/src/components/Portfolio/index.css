@@ -131,14 +131,15 @@
   overflow-y: auto;
   padding: 1em;
   border-radius: 10px;
+  max-height: 65vh;
 }
 
 .portfolio-coin-data::-webkit-scrollbar {
   width: 0;
   background: transparent;
 }
-/* light mode dashboard - last styling wins! */
 
+/* light mode dashboard - last styling wins! */
 .light-dashboard {
   background: #f9f9f9;
 }
@@ -165,6 +166,7 @@
 
 .coin-asset-row-name {
   font-size: 1em;
+  text-align: center;
 }
 
 .coin-asset-row p {
