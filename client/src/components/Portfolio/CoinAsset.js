@@ -1,12 +1,6 @@
 import { useState } from "react";
 import { Modal, Avatar } from "@material-ui/core";
-const CoinAsset = ({
-  coin,
-  updateCoin,
-  removeCoin,
-  onClick,
-  userCoinData
-}) => {
+const CoinAsset = ({ coin, updateCoin, removeCoin, onClick, userCoinData }) => {
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
   const [updatedCoinQuantity, setUpdatedCoinQuantity] = useState(1);
 
@@ -15,8 +9,8 @@ const CoinAsset = ({
     setUpdateModalOpen(false);
   };
 
-  if(!userCoinData) return null
-  const { id, quantity, purchasePrice} = userCoinData
+  if (!userCoinData) return null;
+  const { id, quantity, purchasePrice } = userCoinData;
   return (
     <div className="coin-asset-row">
       <div>
@@ -34,8 +28,8 @@ const CoinAsset = ({
       <div>
         <h1>Currently Holding:</h1>
         <h1>
-          {coin.market_data.current_price.usd * quantity} 
-          ({quantity}{" "}{coin.symbol})
+          {coin.market_data.current_price.usd * quantity}({quantity}{" "}
+          {coin.symbol})
         </h1>
       </div>
       <div>
@@ -48,7 +42,9 @@ const CoinAsset = ({
       <div>
         <button onClick={onClick}>View Chart</button>
         <button onClick={() => setUpdateModalOpen(true)}>Update</button>
-        <button onClick={() => removeCoin(id)}>Delete</button>
+        <button data-testid={`${coin.id}`} onClick={() => removeCoin(id)}>
+          Delete
+        </button>
       </div>
       <Modal
         open={updateModalOpen}

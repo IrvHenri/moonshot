@@ -6,8 +6,7 @@ const User = require("../models/userModel");
 const saltRounds = 10;
 
 //Sign Up
-router.post('/signup', async function(req, res, next) {
-
+router.post("/signup", async function (req, res, next) {
   const name = req.body.name;
   const email = req.body.email;
   const initialPassword = req.body.password;
@@ -21,33 +20,24 @@ router.post('/signup', async function(req, res, next) {
   }
 
   if (initialPassword.length < 6) {
-    return res.status(400).json("Passwords must be at least 6 characters in length");
+    return res
+      .status(400)
+      .json("Passwords must be at least 6 characters in length");
   }
 
-  const userExists = await User.findOne({email})
+  const userExists = await User.findOne({ email });
   if (userExists) return res.status(400).json("Email is already in use!");
 
   const password = bcrypt.hashSync(initialPassword, saltRounds);
-<<<<<<< HEAD
   const newUser = new User({ name, email, password });
 
-  newUser
-    .save()
-    .then(() => res.json("User Added!"))
-    .catch((error) => res.status(400).json("Error: " + error));
-=======
-  const newUser = new User({name, email, password});
-  
   try {
     await newUser.save();
     console.log("new user", newUser);
     res.json("New user added!");
+  } catch {
+    res.status(400).json("Error creating new user");
   }
-  catch {
-    res.status(400).json("Error creating new user")
-  };
-  
->>>>>>> main
 });
 
 // to test login function
