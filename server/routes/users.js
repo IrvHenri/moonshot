@@ -50,7 +50,7 @@ router.post('/login', function(req, res, next) {
     .then((user) => {
 
       if (user === null) {
-        res.status(404).json("email does not exist");
+        res.status(400).json("email does not exist");
       }
 
       if (!bcrypt.compareSync(password, user.password)) {
