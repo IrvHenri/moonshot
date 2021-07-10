@@ -1,19 +1,22 @@
 .login-section {
   display: flex;
   background-color: rgb(182, 60, 161);
+  height: 88vh;
 }
 
 .login-img {
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height: 88vh;
   width: 100%;
-  flex: 1;
   opacity: 0.5;
 }
 
 .login-form {
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 88vh;
   flex: 1;
   background-color: rgb(255, 255, 255);
   text-align: center;
@@ -21,15 +24,15 @@
 
 .login-form h1 {
   font-size: 5em;
-  margin: 1em;
+  margin-top: 1em;
 }
 
 .login-form form {
-  width: 80%;
-  height: 100vh;
-  margin: auto;
+  width: 50%;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
+  margin-top: 5em;
 }
 
 .login-form div {

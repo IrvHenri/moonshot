@@ -11,8 +11,8 @@ export default function DetailGraph({ coin, chartData }) {
   const [chartMode, setChartMode] = useState(dayData);
 
   useEffect(() => {
-    setChartMode(dayData)
-  },[chartData])
+    setChartMode(dayData);
+  }, [chartData]);
 
   const options = {
     title: {
