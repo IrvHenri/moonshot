@@ -183,8 +183,9 @@
   text-align: center;
 }
 
-.coin-asset-row p {
-  border: solid 1px white;
+.coin-asset-row div h1{
+  display: flex;
+  justify-content: space-around;
 }
 
 .coin-asset-btn-well {
@@ -194,8 +195,29 @@
 
 .update-asset-modal {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.update-asset-modal h1 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+
+.update-asset-modal button {
+  margin: 0.5em;
+  padding: 1em 4em;
+}
+
+.update-modal-change{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.update-modal-change h1{
+  margin: 0;
+  padding: 0.1em 2em;
 }
 
 /*Add Coin Modal*/
@@ -358,7 +380,7 @@
   transition: all 0.25s ease;
 }
 
-.portfolio-coin-data-header p:hover, .portfolio-coin-data-header p:focus {
+.portfolio-coin-data-header p:hover, .portfolio-coin-data-header p:focus, .err {
   color: #FF5555;
 }
 
@@ -386,7 +408,7 @@
   margin: 0.2em auto
 }
 
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 900px) {
   .portfolio-info-container {
     flex-direction: column;
   }

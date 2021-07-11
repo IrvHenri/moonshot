@@ -3,7 +3,7 @@ import { formatMarketValColor } from '../../helpers/portfolioHelpers'
 
 const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, updateCoin, setOpen}) => {
   const [quantity, setQuantity] = useState(1)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState("")
   const {
     id, 
     name, 
@@ -33,7 +33,11 @@ const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, updateCoin, setOp
       <input 
       type='number' 
       value={quantity} 
-      onChange={(e) => setQuantity(e.target.value)} min={1} max={1000} />
+      onChange={(e) => {
+        setQuantity(e.target.value)
+        setError("")}} 
+      min={1} 
+      max={1000} />
       <p className='coin-select-quantity'>Add {quantity} {symbol} to your portfolio</p>
       <h1>
         Current {symbol.toUpperCase()} Price: <span>${current_price}</span>
