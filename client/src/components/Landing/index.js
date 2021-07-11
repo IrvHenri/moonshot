@@ -1,13 +1,9 @@
 import "./index.css";
 import React from "react";
-import { ThemeContext } from "../../context/ThemeContext";
-import { useContext } from "react";
-import { Box, Grid, Card, CardContent } from "@material-ui/core";
-import { BsFillEyeFill, BsFillCalendarFill } from "react-icons/bs";
-import { FaBrain } from "react-icons/fa";
+import { Box, Grid } from "@material-ui/core";
 
 const Landing = () => {
-  const { theme } = useContext(ThemeContext);
+  
   return (
     <React.Fragment>
       <Box className="hero-header">
@@ -25,81 +21,6 @@ const Landing = () => {
         </Grid>
       </Box>
 
-      <Box className={`about ${theme === "light" ? "about-light" : null}`}>
-        <div className="card-container">
-          <Grid item xs={12} sm={4}>
-            <Card className="about-card">
-              <CardContent
-                className={`card-content ${
-                  theme === "light" ? "about-light" : null
-                }`}
-              >
-                <div className="about-card-icon">
-                  {" "}
-                  <BsFillCalendarFill />{" "}
-                </div>
-                <h2> Stay up to date </h2>
-                <br />
-                <p>
-                  {" "}
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Nam libero justo laoreet sit amet cursus sit amet. Viverra nam
-                  libero justo laoreet sit amet cursus sit.
-                </p>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          <Grid item xs={12} sm={4}>
-            <Card className="about-card">
-              <CardContent
-                className={`card-content ${
-                  theme === "light" ? "about-light" : null
-                }`}
-              >
-                <div className="about-card-icon">
-                  {" "}
-                  <FaBrain />{" "}
-                </div>
-                <h2> Learn how to invest </h2>
-                <br />
-                <p>
-                  {" "}
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Nam libero justo laoreet sit amet cursus sit amet. Viverra nam
-                  libero justo laoreet sit amet cursus sit.
-                </p>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          <Grid item xs={12} sm={4}>
-            <Card className="about-card">
-              <CardContent
-                className={`card-content ${
-                  theme === "light" ? "about-light" : null
-                }`}
-              >
-                <div className="about-card-icon">
-                  {" "}
-                  <BsFillEyeFill />{" "}
-                </div>
-                <h2> Monitor your assets </h2>
-                <br />
-                <p>
-                  {" "}
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Nam libero justo laoreet sit amet cursus sit amet. Viverra nam
-                  libero justo laoreet sit amet cursus sit.
-                </p>
-              </CardContent>
-            </Card>
-          </Grid>
-        </div>
-      </Box>
     </React.Fragment>
   );
 };

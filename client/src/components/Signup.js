@@ -1,7 +1,7 @@
 import "./Login.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, TextField, Grid, Box } from "@material-ui/core";
+import { Button, TextField, Grid } from "@material-ui/core";
 
 import axios from "axios";
 
@@ -124,7 +124,7 @@ const Signup = () => {
       <Grid item xs={12} sm={6}>
         <img
           className="login-img"
-          src="img/stock_signup.jpg"
+          src="img/signup.jpeg"
           alt="signup logo"
         />
       </Grid>

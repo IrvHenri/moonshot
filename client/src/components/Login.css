@@ -1,6 +1,6 @@
 .login-section {
   display: flex;
-  background-color: rgb(182, 60, 161);
+  background-color: rgb(103, 128, 131);
   height: 88vh;
 }
 
@@ -18,13 +18,22 @@
   align-items: center;
   height: 88vh;
   flex: 1;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(1, 4, 12);
   text-align: center;
 }
 
-.login-form h1 {
+.login-form-light {
+  background-color: white;
+}
+
+.login-form-text {
   font-size: 5em;
   margin-top: 1em;
+  color: white;
+}
+
+.login-form-text-light {
+  color: black;
 }
 
 .login-form form {
