@@ -1,7 +1,7 @@
 import "./Login.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, TextField, Grid, Box } from "@material-ui/core";
+import { Button, TextField, Grid } from "@material-ui/core";
 
 import axios from "axios";
 
@@ -18,7 +18,7 @@ const Signup = () => {
     setError("");
 
     if (!name) {
-      setError("Please enter name")
+      setError("Please enter name");
       return;
     }
 
