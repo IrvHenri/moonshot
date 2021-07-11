@@ -89,11 +89,12 @@
 
 .portfolio-banner-left {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  flex: 1;
 }
 
 .portfolio-banner-left div {
-  margin: 1.5em;
+  margin: 1em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -102,7 +103,8 @@
 .portfolio-banner-left div h2{
   display: flex;
   justify-content: space-between;
-  font-size: 1.5em;
+  font-size: 2em;
+  font-family: var(--secondary-font-family);
 }
 
 .portfolio-banner-left div h2 span{
@@ -114,6 +116,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 2em;
   margin-right: 1em;
 }
 
@@ -425,14 +428,49 @@
 
   .portfolio-banner {
     height: fit-content;
+    display: flex;
+    flex-direction: column;
   }
 
   .portfolio-banner-left div h2 {
     font-size: 1em;
   }
 
+  .portfolio-banner-right button {
+    height: 100%;
+    width: 100%;
+    margin-bottom: 1em;
+  }
+
   .portfolio-graph {
     margin-right: 0;
     margin-bottom: 1em;
+  }
+
+  .modal {
+    top: 0;
+    left: 0;
+    width: 100vw;
+  }
+
+  .modal-coin-list {
+    width: 100%;
+  }
+
+  .modal-coin-select {
+    width: 90%;
+  }
+
+  .coin-asset-row{
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .coin-asset-row div {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin: 1em;
+    border-bottom: 0.1em solid #555;
   }
 }

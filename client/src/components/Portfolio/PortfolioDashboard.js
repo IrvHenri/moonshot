@@ -5,7 +5,6 @@ import DetailGraph from "../Coin/DetailGraph";
 import CoinAsset from "./CoinAsset";
 
 //Modals
-import ClearPortfolioModal from "./modals/ClearPortfolioModal";
 import SearchCoinModal from "./SearchCoinModal";
 import SelectedCoinModalPage from "./SelectedCoinModalPage";
 
@@ -15,12 +14,10 @@ import { useAuth } from "../../context/AuthContext";
 import {
   getOneCoin,
   addOneCoin,
-  getTotalPl, 
   updateOneCoin, 
   deleteOneCoin,
   getPortfolioBalance, 
   deleteAllCoins,
-  formatMarketValColor,
   formatPortfolioCurrency} from '../../helpers/portfolioHelpers'
 
 const PortfolioDashboard = ({ theme }) => {
@@ -31,7 +28,6 @@ const PortfolioDashboard = ({ theme }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [loadingCoins, setLoadingCoins] = useState(false)
   const [coins, loading] = useCoinData();
-
   //Chart View State
   const [updatedCoinState, setUpdatedCoinState] = useState([]);
   const [chartIndex, setChartIndex] = useState(0);
@@ -144,9 +140,6 @@ const PortfolioDashboard = ({ theme }) => {
             <h2>Current Balance: 
               <span>{formatPortfolioCurrency(getPortfolioBalance(user.portfolio.coins))}</span>
             </h2>
-            <h2>Total Profit/Loss:  
-              <span className={formatMarketValColor()}>{formatPortfolioCurrency(getTotalPl(user.portfolio.coins, updatedCoinState))}</span>
-            </h2>
           </div>
         </div>
         <div className="portfolio-banner-right">
@@ -202,9 +195,12 @@ const PortfolioDashboard = ({ theme }) => {
         onClose={() => setClearPortfolioModalConfirm(false)}
         aria-labelledby="clear-modal-title"
       >
-        <ClearPortfolioModal 
-        clearPortfolio={clearPortfolio} 
-        setClearPortfolioModalConfirm={setClearPortfolioModalConfirm}/>
+      <div className="modal clear-portfolio-modal">
+        <h1>Clear Your Portfolio</h1>
+        <h2>Are you sure? This cannot be undone</h2>
+        <button onClick={clearPortfolio}>Yes</button>
+        <button onClick={() => setClearPortfolioModalConfirm(false)}>No</button>
+      </div>
       </Modal>
     </div>
   );
