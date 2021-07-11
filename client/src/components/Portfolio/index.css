@@ -89,15 +89,25 @@
 
 .portfolio-banner-left {
   display: flex;
+  justify-content: space-between;
 }
 
 .portfolio-banner-left div {
-  margin: 1em;
+  margin: 1.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.portfolio-banner-left div p {
-  color: var(--market-up-color);
-  text-align: right;
+.portfolio-banner-left div h2{
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5em;
+}
+
+.portfolio-banner-left div h2 span{
+  margin-left: 1em;
+  font-size: 1em;
 }
 
 .portfolio-banner-right {
@@ -411,6 +421,14 @@
 @media screen and (max-width: 900px) {
   .portfolio-info-container {
     flex-direction: column;
+  }
+
+  .portfolio-banner {
+    height: fit-content;
+  }
+
+  .portfolio-banner-left div h2 {
+    font-size: 1em;
   }
 
   .portfolio-graph {

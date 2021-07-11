@@ -13,6 +13,7 @@ const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, updateCoin, setOp
     price_change_percentage_24h, 
     ath} = selectedCoin
 
+  const fixedPrice = price_change_percentage_24h.toFixed(2)
   const addCoin = (id, quantity, purchasePrice) => {
     if (quantity <= 0){
       setError("Error: Quantity must be a positive number.")
@@ -43,7 +44,7 @@ const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, updateCoin, setOp
         Current {symbol.toUpperCase()} Price: <span>${current_price}</span>
       </h1>
       <h1>
-        24h Price Change: <span className={`${formatMarketValColor(price_change_percentage_24h  )}`}>{price_change_percentage_24h}%</span>
+        24h Price Change: <span className={`${formatMarketValColor(fixedPrice)}`}>{fixedPrice}%</span>
       </h1>
       <h1>
         All Time High: <span>${ath}</span>

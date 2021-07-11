@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Modal } from "@material-ui/core";
-import { formatMarketValColor } from '../../helpers/portfolioHelpers'
-import { AiOutlineArrowRight } from 'react-icons/ai'
+import { formatMarketValColor, formatPortfolioCurrency } from '../../helpers/portfolioHelpers'
 const CoinAsset = ({
   coin,
   updateCoin,
@@ -14,7 +13,7 @@ const CoinAsset = ({
   const [error, setError] = useState("")
 
   const currentPrice = coin.market_data.current_price.usd
-  const weekPricePercent = coin.market_data.price_change_percentage_7d
+  const weekPricePercent = coin.market_data.price_change_percentage_7d.toFixed(2)
   const coinSymbol = coin.symbol.toUpperCase()
   const handleUpdate = () => {
     if (parseInt(quantity) + parseInt(updatedCoinQuantity) <= 0) {
@@ -28,6 +27,7 @@ const CoinAsset = ({
 
   if(!userCoinData) return null
   const { id, quantity, purchasePrice} = userCoinData
+  const fixedPl = (currentPrice - purchasePrice).toFixed(2)
   return (
     <div onClick={onClick} className="coin-asset-row">
       <div>
@@ -36,22 +36,22 @@ const CoinAsset = ({
       </div>
       <div>
         <h1>Price:</h1>
-        <h1>{currentPrice}</h1>
+        <h1>{formatPortfolioCurrency(currentPrice)}</h1>
       </div>
       <div>
         <h1>7D:</h1>
-        <h1 className={formatMarketValColor(weekPricePercent)}>{weekPricePercent} </h1>
+        <h1 className={formatMarketValColor(weekPricePercent)}>{weekPricePercent}%</h1>
       </div>
       <div>
         <h1>Currently Holding:</h1>
         <h1>
-          {currentPrice * quantity} 
-          <span>({quantity}{" "}{coinSymbol})</span>
+        {formatPortfolioCurrency(currentPrice * quantity)}
+          <span>{quantity} {coinSymbol}</span>
         </h1>
       </div>
       <div>
-        <h1>P/L Since Purchase:</h1>
-        <h1 className={formatMarketValColor(currentPrice - purchasePrice)}>{currentPrice - purchasePrice}</h1>
+        <h1>P/L:</h1>
+        <h1 className={formatMarketValColor(fixedPl)}>{formatPortfolioCurrency(fixedPl)}</h1>
       </div>
       <div className='coin-asset-btn-well'>
         <button onClick={() => setUpdateModalOpen(true)}>Update</button>

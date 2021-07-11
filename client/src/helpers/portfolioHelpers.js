@@ -7,12 +7,14 @@ export const formatMarketValColor = (num) => {
 }
 
 export const getPortfolioBalance = (coins) => {
-  let total = 0;
-  for (let coin of coins) {
-    total += coin.purchasePrice;
-  }
-  return total;
+  return coins.reduce((total, curr) => total + curr.purchasePrice, 0)
 };
+
+export const getTotalPl = (coins, updatedCoinData) => {
+  const updatedCoinPrice = updatedCoinData.reduce((total, curr) => total + curr.coin.market_data.current_price.usd, 0)
+  const portfolioBalance = getPortfolioBalance(coins)
+  return updatedCoinPrice - portfolioBalance
+}
 
 export const filterCoinList = (coins, searchTerm) => {
   return coins
@@ -23,6 +25,10 @@ export const filterCoinList = (coins, searchTerm) => {
         : true
     )
 };
+
+export const getOneCoin = (coinId) => {
+  return axios.get(`http://localhost:3001/api/coins/${coinId}`)
+}
 
 export const addOneCoin = (coinId, quantity, purchasePrice) => {
   return axios.post(
@@ -53,3 +59,8 @@ export const deleteAllCoins = () => {
       headers: authHeader
   })
 };
+
+export const formatPortfolioCurrency = (num) => {
+  const formattedNum = Intl.NumberFormat('en-IN',{ style: 'currency', currency: 'USD' }).format(num)
+  return formattedNum
+}

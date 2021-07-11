@@ -1,16 +1,27 @@
 import { Modal } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import useCoinData from "../../hooks/useCoinData";
-import SearchCoinModal from "./SearchCoinModal";
 import DetailGraph from "../Coin/DetailGraph";
 import CoinAsset from "./CoinAsset";
+
+//Modals
+import ClearPortfolioModal from "./modals/ClearPortfolioModal";
+import SearchCoinModal from "./SearchCoinModal";
 import SelectedCoinModalPage from "./SelectedCoinModalPage";
-import axios from "axios";
 
 import {AiFillCloseCircle} from 'react-icons/ai'
 
 import { useAuth } from "../../context/AuthContext";
-import {addOneCoin, updateOneCoin, deleteOneCoin, getPortfolioBalance, deleteAllCoins} from '../../helpers/portfolioHelpers'
+import {
+  getOneCoin,
+  addOneCoin,
+  getTotalPl, 
+  updateOneCoin, 
+  deleteOneCoin,
+  getPortfolioBalance, 
+  deleteAllCoins,
+  formatMarketValColor,
+  formatPortfolioCurrency} from '../../helpers/portfolioHelpers'
 
 const PortfolioDashboard = ({ theme }) => {
   const { user, setUser } = useAuth();
@@ -35,10 +46,10 @@ const PortfolioDashboard = ({ theme }) => {
     }
     else {
       user.portfolio.coins.map(coin => {
-        return axios.get(`http://localhost:3001/api/coins/${coin.id}`)
+        getOneCoin(coin.id)
         .then(res => {
           const { coin, dailyChart, weeklyChart, monthlyChart } = res.data;
-          setUpdatedCoinState((prev) => {
+          setUpdatedCoinState(prev => {
             if (prev.length === 0) {
               return [{ coin, chartData: { dailyChart, weeklyChart, monthlyChart } }];
             }
@@ -126,11 +137,16 @@ const PortfolioDashboard = ({ theme }) => {
       >
         <div className="portfolio-banner-left">
           <div>
-            <h1>Welcome Back {user.name}</h1>
+            <h2>Welcome Back {user.name}</h2>
             <h2>{user.portfolio.name}</h2>
           </div>
           <div>
-            <h2>Balance: {getPortfolioBalance(user.portfolio.coins)}</h2>
+            <h2>Current Balance: 
+              <span>{formatPortfolioCurrency(getPortfolioBalance(user.portfolio.coins))}</span>
+            </h2>
+            <h2>Total Profit/Loss:  
+              <span className={formatMarketValColor()}>{formatPortfolioCurrency(getTotalPl(user.portfolio.coins, updatedCoinState))}</span>
+            </h2>
           </div>
         </div>
         <div className="portfolio-banner-right">
@@ -186,12 +202,9 @@ const PortfolioDashboard = ({ theme }) => {
         onClose={() => setClearPortfolioModalConfirm(false)}
         aria-labelledby="clear-modal-title"
       >
-        <div className="modal clear-portfolio-modal">
-          <h1>Clear Your Portfolio</h1>
-          <h2>Are you sure? This cannot be undone</h2>
-          <button onClick={clearPortfolio}>Yes</button>
-          <button onClick={() => setClearPortfolioModalConfirm(false)}>No</button>
-        </div>
+        <ClearPortfolioModal 
+        clearPortfolio={clearPortfolio} 
+        setClearPortfolioModalConfirm={setClearPortfolioModalConfirm}/>
       </Modal>
     </div>
   );
