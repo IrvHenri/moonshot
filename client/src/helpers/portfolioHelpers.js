@@ -2,13 +2,21 @@ import axios from "axios";
 
 const authHeader = { "auth-token": localStorage.getItem("auth-token") }
 
+export const formatMarketValColor = (num) => {
+  let numInt = parseInt(num)
+  return numInt > 0 ? "mkt-up" : numInt < 0 ? "mkt-down" : ""
+}
+
 export const getPortfolioBalance = (coins) => {
-  let total = 0;
-  for (let coin of coins) {
-    total += coin.purchasePrice;
-  }
-  return total;
+  return coins.reduce((total, curr) => total + curr.purchasePrice, 0)
 };
+
+export const getTotalPl = (coins, updatedCoinData) => {
+  const updatedCoinPrice = updatedCoinData.reduce((total, curr) => total + curr.coin.market_data.current_price.usd, 0)
+  const portfolioBalance = getPortfolioBalance(coins)
+  const totalPl = updatedCoinPrice - portfolioBalance
+  return totalPl
+}
 
 export const filterCoinList = (coins, searchTerm) => {
   return coins
@@ -19,6 +27,10 @@ export const filterCoinList = (coins, searchTerm) => {
         : true
     )
 };
+
+export const getOneCoin = (coinId) => {
+  return axios.get(`http://localhost:3001/api/coins/${coinId}`)
+}
 
 export const addOneCoin = (coinId, quantity, purchasePrice) => {
   return axios.post(
@@ -49,3 +61,15 @@ export const deleteAllCoins = () => {
       headers: authHeader
   })
 };
+
+export const updatePortfolioName = (newName) => {
+  return axios.put("http://localhost:3001/api/portfolios/change-name",
+    { newName },
+    {headers: authHeader}
+  )
+}
+
+export const formatPortfolioCurrency = (num) => {
+  const formattedNum = Intl.NumberFormat('en-IN',{ style: 'currency', currency: 'USD' }).format(num)
+  return formattedNum
+}

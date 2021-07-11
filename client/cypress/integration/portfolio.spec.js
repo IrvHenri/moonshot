@@ -2,13 +2,13 @@ describe("Portfolio", () => {
   beforeEach(() => {
     cy.visit("/login");
   });
-  xit("should see My Portfolio in the navbar after logging in", () => {
+  it("should see My Portfolio in the navbar after logging in", () => {
     cy.get('input[name="email"]').type("henriquezirv@gmail.com");
     cy.get('input[name="password"]').type("123456");
     cy.findByText("Log in").click();
     cy.findByText("My Portfolio").should("exist");
   });
-  xit("should see Create A model Portolfio on screen if portfolio is empty  ", () => {
+  it("should see Create A model Portolfio on screen if portfolio is empty  ", () => {
     cy.get('input[name="email"]').type("henriquezirv@gmail.com");
     cy.get('input[name="password"]').type("123456");
     cy.findByText("Log in").click();
@@ -16,8 +16,8 @@ describe("Portfolio", () => {
     cy.findByText("Create A Model Portfolio!").should("exist");
   });
   it("should be able to add  a coin and see it in your coin table ", () => {
-    cy.get('input[name="email"]').type("zohebboga@hotmail.com");
-    cy.get('input[name="password"]').type("123456");
+    cy.get('input[name="email"]').type("2");
+    cy.get('input[name="password"]').type("2");
     cy.findByText("Log in").click();
     cy.findByText("My Portfolio").click();
     cy.findByText("Add Coin:").click();
@@ -28,8 +28,8 @@ describe("Portfolio", () => {
   });
   it("should be able to update a coin ", () => {
     //Issue with DB reset
-    cy.get('input[name="email"]').type("zohebboga@hotmail.com");
-    cy.get('input[name="password"]').type("123456");
+    cy.get('input[name="email"]').type("2");
+    cy.get('input[name="password"]').type("2");
     cy.findByText("Log in").click();
     cy.findByText("My Portfolio").click();
     cy.findByText("Update").click();
@@ -37,8 +37,8 @@ describe("Portfolio", () => {
     cy.get(".update-asset-modal").contains("Update").click();
   });
   it("should be able to remove a coin", () => {
-    cy.get('input[name="email"]').type("zohebboga@hotmail.com");
-    cy.get('input[name="password"]').type("123456");
+    cy.get('input[name="email"]').type("2");
+    cy.get('input[name="password"]').type("2");
     cy.findByText("Log in").click();
     cy.findByText("My Portfolio").click();
     cy.findByText("Add Coin:").click();

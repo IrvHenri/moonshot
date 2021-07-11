@@ -74,6 +74,7 @@
   color: white;
   background-color: #222;
   padding: 1em;
+  font-family: var(--primary-font-family);
 }
 
 .portfolio-banner {
@@ -88,21 +89,34 @@
 
 .portfolio-banner-left {
   display: flex;
+  justify-content: space-evenly;
+  flex: 1;
 }
 
 .portfolio-banner-left div {
   margin: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.portfolio-banner-left div p {
-  color: var(--market-up-color);
-  text-align: right;
+.portfolio-banner-left div h2{
+  display: flex;
+  justify-content: space-between;
+  font-size: 2em;
+  font-family: var(--secondary-font-family);
+}
+
+.portfolio-banner-left div h2 span{
+  margin-left: 1em;
+  font-size: 1em;
 }
 
 .portfolio-banner-right {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 2em;
   margin-right: 1em;
 }
 
@@ -162,6 +176,19 @@
   justify-content: space-around;
   align-items: center;
   margin-top: 1em;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+  padding: 0.25em;
+}
+
+.coin-asset-row:hover{
+  background-color: #AAA;
+}
+
+.coin-asset-row-img {
+  height: 2em;
+  width: 2em;
 }
 
 .coin-asset-row-name {
@@ -169,8 +196,41 @@
   text-align: center;
 }
 
-.coin-asset-row p {
-  border: solid 1px white;
+.coin-asset-row div h1{
+  display: flex;
+  justify-content: space-around;
+}
+
+.coin-asset-btn-well {
+  display: flex;
+  flex-direction: column;
+}
+
+.update-asset-modal {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.update-asset-modal h1 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+
+.update-asset-modal button {
+  margin: 0.5em;
+  padding: 1em 4em;
+}
+
+.update-modal-change{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.update-modal-change h1{
+  margin: 0;
+  padding: 0.1em 2em;
 }
 
 /*Add Coin Modal*/
@@ -184,9 +244,10 @@
   border-radius: 12px;
   max-height: 70vh;
   overflow-y: auto;
-  min-height: 70vh;
-  min-width: 40vw;
   box-shadow: 0.5em 0.2em #222;
+  min-height: 20vh;
+  min-width: 40vw;
+  font-family: var(--secondary-font-family);
 }
 .modal::-webkit-scrollbar {
   width: 0;
@@ -222,6 +283,8 @@
   padding-bottom: 1em;
   width: 80%;
   margin: auto;
+  min-height: 70vh;
+  min-width: 40vw;
 }
 
 .modal-close {
@@ -239,8 +302,9 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  margin: 0 0.5em;
-  padding: 1.2em 1em;
+  margin: 0 1.5em;
+  padding: 1.2em 4em;
+  transition: all 0.5s ease;
 }
 
 .coin:hover,
@@ -262,6 +326,11 @@
   margin: auto;
 }
 
+.coin-select-quantity{
+  padding: 0;
+  margin-bottom: 1em;
+}
+
 .selected-header {
   display: flex;
   justify-content: center;
@@ -278,33 +347,32 @@
 
 .modal-coin-select input {
   width: 100%;
-  margin-bottom: 1em;
 }
 
 .modal-coin-select h1 {
-  font-size: 1.5em;
-  margin-bottom: 2em;
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .modal-coin-select h1 span {
-  font-size: 1.1em;
+  font-size: 1em;
+  letter-spacing: 0.05em
 }
 
 .modal-select-btn-container {
-  position: absolute;
   display: flex;
   flex-direction: column;
   bottom: 0;
-  width: 100%;
-  height: 10vh;
+  width: 50%;
   justify-content: space-between;
-  margin: auto;
+  margin: 2em auto 0;
 }
 
-.modal-select-btn-container p {
-  flex: 1;
-  text-align: center;
-  height: 5vh;
+.modal-select-btn-container button {
+  margin: 0.25em;
 }
 
 .mkt-up {
@@ -315,13 +383,94 @@
   color: var(--market-down-color);
 }
 
-@media screen and (max-width: 600px) {
+.portfolio-coin-data-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.portfolio-coin-data-header p {
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.portfolio-coin-data-header p:hover, .portfolio-coin-data-header p:focus, .err {
+  color: #FF5555;
+}
+
+.clear-portfolio-modal {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 5em auto;
+  border: solid 2px black;
+}
+
+.clear-portfolio-modal h1{
+  margin-bottom: 1em;
+  font-size: 2.5em;
+}
+
+.clear-portfolio-modal h2{
+  font-size: 1.2em;
+  font-weight: 800;
+  margin-bottom: 0.2em;
+}
+
+.clear-portfolio-modal button{
+  width: 80%;
+  margin: 0.2em auto
+}
+
+@media screen and (max-width: 900px) {
   .portfolio-info-container {
     flex-direction: column;
+  }
+
+  .portfolio-banner {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .portfolio-banner-left div h2 {
+    font-size: 1em;
+  }
+
+  .portfolio-banner-right button {
+    height: 100%;
+    width: 100%;
+    margin-bottom: 1em;
   }
 
   .portfolio-graph {
     margin-right: 0;
     margin-bottom: 1em;
+  }
+
+  .modal {
+    top: 0;
+    left: 0;
+    width: 100vw;
+  }
+
+  .modal-coin-list {
+    width: 100%;
+  }
+
+  .modal-coin-select {
+    width: 90%;
+  }
+
+  .coin-asset-row{
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .coin-asset-row div {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin: 1em;
+    border-bottom: 0.1em solid #555;
   }
 }

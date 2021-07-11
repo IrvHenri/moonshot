@@ -1,8 +1,7 @@
 import {filterCoinList} from "../../helpers/portfolioHelpers"
-import {AiFillCloseCircle} from 'react-icons/ai'
 import PortfolioModalCoin from "./PortfolioModalCoin"
 
-const SearchCoinModal = ({loading, coins, searchTerm, setSearchTerm, setOpen, selectedCoin, setSelectedCoin}) => {
+const SearchCoinModal = ({loading, coins, searchTerm, setSearchTerm, selectedCoin, setSelectedCoin}) => {
   return <div>
     <h1 className="modal-title" id="simple-modal-title">
       Select Coin
@@ -27,10 +26,6 @@ const SearchCoinModal = ({loading, coins, searchTerm, setSearchTerm, setOpen, se
         />
       ))}</div>
     )}
-    <AiFillCloseCircle
-      className="modal-close"
-      onClick={() => setOpen(false)}
-    />
 </div>
 }
 

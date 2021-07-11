@@ -7,10 +7,9 @@ export default function SearchBar({ handleChange, theme }) {
       placeholder="Search"
       onChange={handleChange}
       aria-label="search"
+      className="search-input-table"
       style={{
-        width: "20%",
         display: "block",
-        marginLeft: "auto",
         padding: "0 1.7em",
         background: theme === "light" ? "#f9f9f9" : "#dcf6ff",
       }}
