@@ -2,6 +2,10 @@ import axios from "axios";
 
 const authHeader = { "auth-token": localStorage.getItem("auth-token") }
 
+export const formatMarketValColor = (num) => {
+  return num > 0 ? "mkt-up" : "mkt-down"
+}
+
 export const getPortfolioBalance = (coins) => {
   let total = 0;
   for (let coin of coins) {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal, Avatar } from "@material-ui/core";
+import { Modal } from "@material-ui/core";
 const CoinAsset = ({
   coin,
   updateCoin,
@@ -23,7 +23,7 @@ const CoinAsset = ({
   return (
     <div onClick={onClick} className="coin-asset-row">
       <div>
-        <Avatar alt={`${coin.id} logo`} src={coin.image.thumb} />
+        <img className="coin-asset-row-img" alt={`${coin.id} logo`} src={coin.image.thumb} />
         <h1 className="coin-asset-row-name">{coin.symbol.toUpperCase()}</h1>
       </div>
       <div>

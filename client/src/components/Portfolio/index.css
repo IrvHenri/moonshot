@@ -173,6 +173,11 @@
   background-color: #AAA;
 }
 
+.coin-asset-row-img {
+  height: 2em;
+  width: 2em;
+}
+
 .coin-asset-row-name {
   font-size: 1em;
   text-align: center;
@@ -262,8 +267,9 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  margin: 0 0.5em;
-  padding: 1.2em 1em;
+  margin: 0 1.5em;
+  padding: 1.2em 4em;
+  transition: all 0.5s ease;
 }
 
 .coin:hover,
@@ -285,6 +291,11 @@
   margin: auto;
 }
 
+.coin-select-quantity{
+  padding: 0;
+  margin-bottom: 1em;
+}
+
 .selected-header {
   display: flex;
   justify-content: center;
@@ -301,15 +312,19 @@
 
 .modal-coin-select input {
   width: 100%;
-  margin-bottom: 1em;
 }
 
 .modal-coin-select h1 {
-  font-size: 1.2em
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .modal-coin-select h1 span {
-  font-size: 1.1em;
+  font-size: 1em;
+  letter-spacing: 0.05em
 }
 
 .modal-select-btn-container {
@@ -352,6 +367,7 @@
   flex-direction: column;
   text-align: center;
   margin: 5em auto;
+  border: solid 2px black;
 }
 
 .clear-portfolio-modal h1{
@@ -370,7 +386,7 @@
   margin: 0.2em auto
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 860px) {
   .portfolio-info-container {
     flex-direction: column;
   }

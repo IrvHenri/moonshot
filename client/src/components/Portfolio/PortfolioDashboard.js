@@ -7,6 +7,8 @@ import CoinAsset from "./CoinAsset";
 import SelectedCoinModalPage from "./SelectedCoinModalPage";
 import axios from "axios";
 
+import {AiFillCloseCircle} from 'react-icons/ai'
+
 import { useAuth } from "../../context/AuthContext";
 import {addOneCoin, updateOneCoin, deleteOneCoin, getPortfolioBalance, deleteAllCoins} from '../../helpers/portfolioHelpers'
 
@@ -100,11 +102,14 @@ const PortfolioDashboard = ({ theme }) => {
           setSelectedCoin={setSelectedCoin}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
-          setOpen={setOpen}
           coins={coins}
           loading={loading}
         />
       )}
+      <AiFillCloseCircle
+        className="modal-close"
+        onClick={() => setOpen(false)}
+      />
     </div>
   );
 
