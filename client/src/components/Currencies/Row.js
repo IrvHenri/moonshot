@@ -28,7 +28,7 @@ const Row = (props) => {
     price_change_percentage_24h > 0 ? "market-up" : "market-down";
 
   return (
-    <TableRow hover role="checkbox" tabIndex={-1}>
+    <TableRow hover role="checkbox" tabIndex={-1} data-testid="coin-row">
       <TableCell align={"right"}>{market_cap_rank}</TableCell>
       <TableCell align={"left"}>
         <Link
@@ -52,26 +52,47 @@ const Row = (props) => {
         </Link>
       </TableCell>
       <TableCell align={"right"}>
-        <p className={`${priceStyling} second-cell `}>
-          {price_change_percentage_24h > 0 ? (
-            <TiArrowSortedUp />
-          ) : (
-            <TiArrowSortedDown />
-          )}
-          {price_change_percentage_24h.toFixed(2)}%
-        </p>
+        <Link
+          to={`/currencies/${id}`}
+          style={{ textDecoration: "none", color: "#232b2b" }}
+        >
+          <p className={`${priceStyling} second-cell `}>
+            {price_change_percentage_24h > 0 ? (
+              <TiArrowSortedUp />
+            ) : (
+              <TiArrowSortedDown />
+            )}
+            {price_change_percentage_24h.toFixed(2)}%
+          </p>
+        </Link>
       </TableCell>
       <TableCell align={"right"}>
-        <p>{currencyFormatter.format(market_cap)}</p>
+        <Link
+          to={`/currencies/${id}`}
+          style={{ textDecoration: "none", color: "#232b2b" }}
+        >
+          <p>{currencyFormatter.format(market_cap)}</p>
+        </Link>
       </TableCell>
       <TableCell align={"right"}>
-        <p>{currencyFormatter.format(market_cap_change_24h)}</p>
+        <Link
+          to={`/currencies/${id}`}
+          style={{ textDecoration: "none", color: "#232b2b" }}
+        >
+          {" "}
+          <p>{currencyFormatter.format(market_cap_change_24h)}</p>
+        </Link>
       </TableCell>
       <TableCell align={"right"}>
-        <div className="last-cell">
-          <p>{circulating_supply.toLocaleString()}</p>
-          <small>{symbol.toUpperCase()}</small>
-        </div>
+        <Link
+          to={`/currencies/${id}`}
+          style={{ textDecoration: "none", color: "#232b2b" }}
+        >
+          <div className="last-cell">
+            <p>{circulating_supply.toLocaleString()}</p>
+            <small>{symbol.toUpperCase()}</small>
+          </div>
+        </Link>
         {max_supply !== null && (
           <ProgressBar
             maxSupply={max_supply}

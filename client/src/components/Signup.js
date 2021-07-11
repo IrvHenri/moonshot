@@ -1,10 +1,9 @@
 import "./Login.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import TextField from "@material-ui/core/TextField";
-import { Button } from "@material-ui/core";
+import { Button, TextField, Grid } from "@material-ui/core";
 
-import axios from 'axios'
+import axios from "axios";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -14,37 +13,44 @@ const Signup = () => {
   const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     setError("");
 
+    if (!name) {
+      setError("Please enter name");
+      return;
+    }
+
     if (!confirmPw) {
-      setError("Please confirm password")
+      setError("Please confirm password");
       return;
     }
 
     if (password !== confirmPw) {
-      setError("Passwords do not match")
+      setError("Passwords do not match");
       return;
     }
 
     const user = {
       name,
       email,
-      password
-    }
-    
-    axios.post("http://localhost:3001/api/users/signup", user)
-    .then((res) => window.location = "/login")
-    .catch((err) => {
-      let error = err.response.data;
-      setError(error)
-    })
-  }
+      password,
+    };
+
+    axios
+      .post("http://localhost:3001/api/users/signup", user)
+      .then((res) => (window.location = "/login"))
+      .catch((err) => {
+        let error = err.response.data;
+
+        setError(error);
+      });
+  };
 
   return (
-    <div className="login-section">
-      <div className="login-form">
+    <Grid container className="login-section">
+      <Grid item xs={12} sm={6} className="login-form">
         <h1>Sign Up</h1>
         <form>
           <div>
@@ -93,23 +99,36 @@ const Signup = () => {
               onChange={(e) => setConfirmPw(e.target.value)}
             />
           </div>
-          <div>
-            <Button onClick={(e) => handleSubmit(e)} fullWidth color="primary" type="submit" variant="contained">
+          <div className="signup-buttons">
+            <Button
+              onClick={(e) => handleSubmit(e)}
+              fullWidth
+              color="primary"
+              type="submit"
+              variant="contained"
+            >
               Sign Up
             </Button>
+            <Link className="signup-link" to={"/login"}>
+              <div className="signup-btn">
+                <Button fullWidth color="primary">
+                  Already A User? Log In!
+                </Button>
+              </div>
+            </Link>
+            <div> {error} </div>
           </div>
         </form>
-        <Link className="signup-link" to={"/login"}>
-          <div className="signup-btn">
-            <Button fullWidth color="primary">
-              Already A User? Log In!
-            </Button>
-          </div>
-        </Link>
-        <div> { error } </div>
-      </div>
-      <img className="login-img" src="img/stock_signup.jpg" alt="signup logo" />
-    </div>
+      </Grid>
+
+      <Grid item xs={12} sm={6}>
+        <img
+          className="login-img"
+          src="img/stock_signup.jpg"
+          alt="signup logo"
+        />
+      </Grid>
+    </Grid>
   );
 };
 

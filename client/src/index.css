@@ -16,7 +16,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--primary-bg-color);
-
   line-height: 1.6;
 }
 

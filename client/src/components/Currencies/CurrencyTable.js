@@ -63,7 +63,8 @@ const CurrencyTable = ({ data, theme }) => {
       maxHeight: "50vh",
       background: theme === "light" ? "#f9f9f9" : "#dcf6ff",
       overflowY: "auto",
-      borderRadius: "15px",
+      borderRadius: "0 0 15px 15px",
+      padding: "20px",
     },
   });
   const classes = useStyles();

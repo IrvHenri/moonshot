@@ -55,7 +55,9 @@ const CoinAsset = ({
       </div>
       <div className='coin-asset-btn-well'>
         <button onClick={() => setUpdateModalOpen(true)}>Update</button>
-        <button onClick={() => removeCoin(id)}>Delete</button>
+        <button data-testid={`${coin.id}`} onClick={() => removeCoin(id)}>
+          Delete
+        </button>
       </div>
 
       <Modal

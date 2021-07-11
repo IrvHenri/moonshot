@@ -11,12 +11,12 @@ export default function DetailGraph({ coin, chartData }) {
   const [chartMode, setChartMode] = useState(dayData);
 
   useEffect(() => {
-    setChartMode(dayData)
-  },[chartData])
+    setChartMode(dayData);
+  }, [chartData]);
 
   const options = {
     title: {
-      text: name ? `${name} Price Chart (USD)` : "Add a coin!", //needs to be dynamic if including market cap volume
+      text: name ? `${name} Price Chart (USD)` : "Add a coin!",
     },
 
     chart: {
@@ -24,8 +24,6 @@ export default function DetailGraph({ coin, chartData }) {
       shadow: true,
     },
 
-    // issue with current x value being one day in the future (JS array index based)
-    // fix amount of x points (ticks)
     xAxis: {
       dateTimeLabelFormats: {
         day: "%d-%b",
@@ -35,7 +33,6 @@ export default function DetailGraph({ coin, chartData }) {
       endOnTick: true,
     },
 
-    // fix y-axis baseline - should start at 0 - has to do with logarithmic scale not compatible with 0
     yAxis: {
       type: "logarithmic", // sets short form currency
       labels: {
@@ -45,7 +42,7 @@ export default function DetailGraph({ coin, chartData }) {
         },
       },
     },
-    //bottom bar that's draggable. fix issue that is similar to x-axis
+
     navigator: {
       handles: {
         enabled: true,
@@ -60,7 +57,7 @@ export default function DetailGraph({ coin, chartData }) {
         data: chartMode,
       },
     ],
-    // Look into adjusting data with this. data coming from function
+
     rangeSelector: {
       allButtonsEnabled: true,
       buttons: [
@@ -98,7 +95,6 @@ export default function DetailGraph({ coin, chartData }) {
       selected: 0,
     },
 
-    //Hover on data point styling
     tooltip: {
       valuePrefix: "$",
       valueDecimals: 2,
