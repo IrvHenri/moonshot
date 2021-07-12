@@ -16,7 +16,7 @@ const CoinAsset = ({
   const weekPricePercent = coin.market_data.price_change_percentage_7d.toFixed(2)
   const coinSymbol = coin.symbol.toUpperCase()
   const handleUpdate = () => {
-    if (parseInt(quantity) + parseInt(updatedCoinQuantity) <= 0) {
+    if (parseFloat(quantity) + parseFloat(updatedCoinQuantity) <= 0) {
       setError("Error: Portfolio coin balance must be a positive number.")
     } else {
       updateCoin(id, updatedCoinQuantity, currentPrice);
@@ -80,7 +80,7 @@ const CoinAsset = ({
         {updatedCoinQuantity && 
         <div className='update-modal-change'>
           <h1>Before: {quantity} <img src={coin.image.thumb} alt={coin.name}/></h1> 
-          <h1>After: {parseInt(quantity) + parseInt(updatedCoinQuantity)} <img src={coin.image.thumb} alt={coin.name}/></h1>
+          <h1>After: {parseFloat(quantity) + parseFloat(updatedCoinQuantity)} <img src={coin.image.thumb} alt={coin.name}/></h1>
         </div>}
         </div>
       </Modal>
