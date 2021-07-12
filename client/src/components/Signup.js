@@ -30,6 +30,9 @@ const Signup = () => {
       },
       "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
         borderColor: theme === "light" ? "black" : "white"
+      },
+      '& .MuiInputBase-input': {
+        color: theme === "light" ? "black" : "white"
       }
     }
   })

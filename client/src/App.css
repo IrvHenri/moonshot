@@ -30,14 +30,6 @@
   --background-color: var(--primary-bg-color);
 }
 
-[data-theme="ls-light"] {
-  --background-color: var(--secondary-bg-color);
-}
-
-[data-theme="ls-dark"] {
-  --background-color: #040c13;
-}
-
 .App {
   color: var(--text-color);
   background-color: var(--background-color);
