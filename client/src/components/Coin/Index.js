@@ -29,7 +29,10 @@ export default function CoinDetail() {
           <DetailHeader coin={coin} />
 
           <main className="coin-detail-main">
-            <DetailGraph coin={coin} chartData={chartData} />
+            <div className="graph-div-detail">
+              <DetailGraph coin={coin} chartData={chartData} />
+            </div>
+
             <DetailStatCard coin={coin} chartData={chartData} coins={coins} />
           </main>
           <DetailDescription coin={coin} />

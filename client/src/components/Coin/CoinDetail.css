@@ -223,7 +223,11 @@
 
   .stats-card {
     margin: 1.5em 0;
-    width: 65%;
+    width: 100%;
+  }
+
+  .graph-div-detail {
+    width: 100%;
   }
 
   .coin-description {
