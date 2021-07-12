@@ -1,10 +1,9 @@
 import "./Login.css";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, TextField, Grid } from "@material-ui/core";
+import { Button, TextField, Grid, makeStyles } from "@material-ui/core";
 import axios from "axios";
 import { ThemeContext } from "../context/ThemeContext";
-
 
 
 const Login = () => {
@@ -14,6 +13,28 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const useStyles = makeStyles({
+    loginButton: {
+      color: theme === "light" ? "white" : "black",
+      background: theme === "light" ? "#132455" : "#fec87f",
+      "&:hover": {
+        background: theme === "light" ? "#132455" : "#febd66"
+      }
+    },
+
+    loginForm: {
+      "& .MuiInputLabel-outlined": {
+        color: theme === "light" ? "black" : "white",
+        fontWeight: "bold"
+      },
+      "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+        borderColor: theme === "light" ? "black" : "white"
+      }
+    }
+  })
+
+  const classes = useStyles();
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -54,6 +75,7 @@ const Login = () => {
         <form>
           <div>
             <TextField
+              className={classes.loginForm}
               fullWidth
               label="Email"
               name="email"
@@ -61,10 +83,17 @@ const Login = () => {
               variant="outlined"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              inputProps={{
+                autoComplete: 'new-password',
+                form: {
+                  autoComplete: "off"
+                }
+              }}
             />
           </div>
           <div>
             <TextField
+              className={classes.loginForm}
               fullWidth
               label="Password"
               name="password"
@@ -73,20 +102,30 @@ const Login = () => {
               variant="outlined"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              autocomplete="new-password"
             />
           </div>
           <div>
-            <Button onClick={(e) => handleSubmit(e)} fullWidth type="submit" variant="contained" >
+            <Button 
+              className={classes.loginButton}
+              onClick={(e) => handleSubmit(e)} 
+              fullWidth type="submit"
+              variant="contained"
+              color="primary"
+              >
               Log in
             </Button>
+
             <Link className="signup-link" to={"/signup"}>
               <div className="signup-btn">
-                <Button fullWidth color="primary">
+                <Button fullWidth className={classes.loginButton}>
                   Not A User Yet? Sign Up!
                 </Button>
               </div>
             </Link>
-            <div> { error } </div>
+
+            <div className={`error ${theme === "light" ? "error-light" : null}`}> <h3>{ error } </h3> </div>
+
           </div>
         </form>
         

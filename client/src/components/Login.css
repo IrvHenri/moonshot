@@ -55,3 +55,11 @@
 .signup-btn {
   margin: 1em auto;
 }
+
+.error {
+  color: white;
+}
+
+.error-light {
+  color: black
+}
