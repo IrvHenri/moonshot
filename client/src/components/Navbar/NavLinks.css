@@ -32,9 +32,9 @@
   #visible {
     position: absolute;
     width: 100vw;
-    height: 92vh;
+    height: 87vh;
     right: 0px;
-    top: 8vh;
+    top: 13vh;
     display: flex;
     flex-direction: column;
     background-color: var(--primary-bg-color);
@@ -46,10 +46,6 @@
     width: 100%;
     text-align: center;
     height: 100%;
-  }
-
-  .nav-links.light-mode#visible {
-    background-color: var(--secondary-bg-color);
   }
 
   .my-node-enter {

@@ -8,7 +8,7 @@ export const formatMarketValColor = (num) => {
 }
 
 export const getPortfolioBalance = (coins) => {
-  return coins.reduce((total, curr) => total + curr.purchasePrice, 0)
+  return coins.reduce((total, curr) => total + curr.quantity * curr.purchasePrice, 0)
 };
 
 export const getTotalPl = (coins, updatedCoinData) => {
