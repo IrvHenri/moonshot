@@ -3,12 +3,12 @@ import axios from "axios";
 const authHeader = { "auth-token": localStorage.getItem("auth-token") }
 
 export const formatMarketValColor = (num) => {
-  let numInt = parseInt(num)
-  return numInt > 0 ? "mkt-up" : numInt < 0 ? "mkt-down" : ""
+  let parsedPrice = parseFloat(num)
+  return parsedPrice > 0 ? "mkt-up" : parsedPrice < 0 ? "mkt-down" : ""
 }
 
 export const getPortfolioBalance = (coins) => {
-  return coins.reduce((total, curr) => total + curr.purchasePrice, 0)
+  return coins.reduce((total, curr) => total + curr.quantity * curr.purchasePrice, 0)
 };
 
 export const getTotalPl = (coins, updatedCoinData) => {
