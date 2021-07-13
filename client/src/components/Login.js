@@ -77,6 +77,7 @@ const Login = () => {
         
         <form>
           <div>
+            <div className={`error ${theme === "light" ? "error-light" : null}`}> <h2> { error } </h2> </div>
             <TextField
               className={classes.loginForm}
               fullWidth
@@ -126,8 +127,6 @@ const Login = () => {
                 </Button>
               </div>
             </Link>
-
-            <div className={`error ${theme === "light" ? "error-light" : null}`}> <h3>{ error } </h3> </div>
 
           </div>
         </form>

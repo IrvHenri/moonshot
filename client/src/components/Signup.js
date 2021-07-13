@@ -85,6 +85,9 @@ const Signup = () => {
 
         <form>
           <div>
+
+            <div className={`error ${theme === "light" ? "error-light" : null}`}> <h3>{ error } </h3> </div>
+            
             <TextField
               className={classes.signUpForm}
               fullWidth
@@ -165,7 +168,6 @@ const Signup = () => {
                 </Button>
               </div>
             </Link>
-            <div className={`error ${theme === "light" ? "error-light" : null}`}> <h3>{ error } </h3> </div>
           </div>
 
         </form>

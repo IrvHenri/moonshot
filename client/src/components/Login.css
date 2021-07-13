@@ -57,9 +57,11 @@
 }
 
 .error {
-  color: white;
+  color: rgb(252, 77, 77);
+  text-transform: uppercase;
 }
 
 .error-light {
-  color: black
+  color: rgb(252, 0, 0);
+  text-transform: uppercase;
 }
