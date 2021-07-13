@@ -67,11 +67,17 @@
 }
 
 @media screen and (max-width: 600px) {
+
+  .login-img {
+    flex-direction: column-reverse;
+  }
+
   .login-form-text {
     margin-top: 0.3em;
   }
 
   .login-form form {
     margin-top: 1.5em;
+    flex: 1;
   }
 }

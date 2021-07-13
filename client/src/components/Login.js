@@ -14,7 +14,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const useStyles = makeStyles({
+  const useStyles = makeStyles(themes => ({
     loginButton: {
       color: theme === "light" ? "white" : "black",
       background: theme === "light" ? "#132455" : "#fec87f",
@@ -35,9 +35,19 @@ const Login = () => {
       '& .MuiInputBase-input': {
         color: theme === "light" ? "black" : "white"
       },
-      order: 1
+      order: 2,
+      [themes.breakpoints.up('sm')]: {
+        order: 1
+      }
+    },
+
+    loginImgGrid: {
+      order: 1,
+      [themes.breakpoints.up('sm')]: {
+        order: 2
+      }
     }
-  })
+  }))
 
   const classes = useStyles();
 
@@ -65,12 +75,12 @@ const Login = () => {
   return (
     <Grid container className="login-section">
 
-      <Grid item xs={12} sm={6} className="login-img-grid">
+      <Grid item xs={12} sm={6} className={classes.loginImgGrid}>
         <img className="login-img" src="img/login.jpeg" alt="login logo" />
       </Grid>
 
       <Grid 
-        item xs={12} sm={6} 
+        item xs={12} sm={6}
         className={`login-form ${theme === "light" ? "login-form-light" : null}`}>
 
         <h1 className={`login-form-text ${theme === "light" ? "login-form-text-light" : null}`}> 
