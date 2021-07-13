@@ -9,11 +9,12 @@ const Landing = () => {
       width: "30%",
       backgroundColor: "#febd66",
       marginTop: "1%",
-      text: "blue",
+      text: "white",
       color: "black",
       "&:hover": {
-        color: "white"
-      }
+        backgroundColor: "#febd66"
+      },
+      boxShadow: "none"
     }
   })
 
@@ -31,7 +32,7 @@ const Landing = () => {
                 and stay on top of current market trends.{" "}
               </h3>
               <Link to={"/signup"} style={{ textDecoration: 'none' }}>
-                <Button className={classes.landingButton} variant="outlined" size="large" color="primary" >
+                <Button className={classes.landingButton} variant="outlined" size="large" >
                   GET STARTED NOW!
                 </Button>
               </Link>

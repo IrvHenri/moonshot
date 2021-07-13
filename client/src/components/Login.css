@@ -65,3 +65,13 @@
   color: rgb(252, 0, 0);
   text-transform: uppercase;
 }
+
+@media screen and (max-width: 600px) {
+  .login-form-text {
+    margin-top: 0.3em;
+  }
+
+  .login-form form {
+    margin-top: 1.5em;
+  }
+}

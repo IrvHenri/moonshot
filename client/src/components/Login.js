@@ -20,7 +20,8 @@ const Login = () => {
       background: theme === "light" ? "#132455" : "#fec87f",
       "&:hover": {
         background: theme === "light" ? "#132455" : "#febd66"
-      }
+      },
+      boxShadow: "none"
     },
 
     loginForm: {
@@ -33,7 +34,8 @@ const Login = () => {
       },
       '& .MuiInputBase-input': {
         color: theme === "light" ? "black" : "white"
-      }
+      },
+      order: 1
     }
   })
 
