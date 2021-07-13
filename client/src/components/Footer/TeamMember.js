@@ -1,21 +1,20 @@
 import "./TeamMember.css";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
-const TeamMember = ({ name, img, bio, linkedInUrl, gitHubUrl }) => {
+const TeamMember = ({ name, img, linkedInUrl, gitHubUrl }) => {
   return (
     <div className="member-container">
-      <img className="member-img" src={img} alt="a gentleman" />
-      <div className="member-info">
-        <h1>{name}</h1>
-        <p>{bio}</p>
+      <div>
+        <img className="member-img" src={img} alt="a gentleman" />
         <div className="member-socials">
-        <a href="http://www.github.com/">
-          <AiFillGithub size={"3.3em"} />
-        </a>
-        <a href="http://www.linkedIn.com/">
-          <AiFillLinkedin size={"3.3em"} />
-        </a>
+          <a href={gitHubUrl}>
+            <AiFillGithub size={"3.3em"} />
+          </a>
+          <a href={linkedInUrl}>
+            <AiFillLinkedin size={"3.3em"} />
+          </a>
+        </div>
       </div>
-      </div>
+        <h1>{name}</h1>
     </div>
   );
 };

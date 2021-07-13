@@ -70,7 +70,7 @@ router.put("/:coinId", validateToken, function (req, res) {
         if (coin.id === req.params.coinId) {
           return {
             id: coin.id,
-            quantity: parseInt(quantity) + parseInt(coin.quantity),
+            quantity: parseFloat(quantity) + parseFloat(coin.quantity),
             purchasePrice,
           };
         } else {

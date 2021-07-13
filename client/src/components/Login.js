@@ -52,7 +52,7 @@ const Login = () => {
     axios.post("http://localhost:3001/api/users/login", user)
     .then(res => {
       localStorage.setItem("auth-token", res.data)
-      window.location = '/'
+      window.location = '/portfolio'
     })
     .catch((err)=> {
       let error = err.response.data;

@@ -233,6 +233,9 @@
   .coin-description {
     width: 100%;
   }
+  table thead tr th:first-of-type {
+    min-width: 50px !important;
+  }
 }
 
 .coin-description-container svg {
