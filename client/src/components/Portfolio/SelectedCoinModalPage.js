@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { formatMarketValColor } from '../../helpers/portfolioHelpers'
+import { formatMarketValColor, formatPortfolioCurrency } from '../../helpers/portfolioHelpers'
 
 const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, updateCoin, setOpen}) => {
   const [quantity, setQuantity] = useState(1)
@@ -47,10 +47,10 @@ const SelectedCoinModalPage = ({selectedCoin, setSelectedCoin, updateCoin, setOp
         24h Price Change: <span className={`${formatMarketValColor(fixedPrice)}`}>{fixedPrice}%</span>
       </h1>
       <h1>
-        All Time High: <span>${ath}</span>
+        All Time High: <span>{formatPortfolioCurrency(ath)}</span>
       </h1>
       <h1>
-        Total Cost: <span>${current_price * quantity || "0.00"}</span>
+        Total Cost: <span>{formatPortfolioCurrency(current_price * quantity) || "0.00"}</span>
       </h1>
     </div>
     <div className="modal-select-btn-container">
