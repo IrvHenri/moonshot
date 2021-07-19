@@ -100,14 +100,14 @@
   justify-content: space-between;
 }
 
-.portfolio-banner-left div h2{
+.portfolio-banner-left div h2 {
   display: flex;
   justify-content: space-between;
   font-size: 2em;
   font-family: var(--secondary-font-family);
 }
 
-.portfolio-banner-left div h2 span{
+.portfolio-banner-left div h2 span {
   margin-left: 1em;
   font-size: 1em;
 }
@@ -148,6 +148,12 @@
   max-height: 65vh;
 }
 
+.circular-progress {
+  display: flex;
+  margin-top: 3rem;
+  justify-content: center;
+}
+
 .portfolio-coin-data::-webkit-scrollbar {
   width: 0;
   background: transparent;
@@ -182,8 +188,8 @@
   padding: 0.25em;
 }
 
-.coin-asset-row:hover{
-  background-color: #AAA;
+.coin-asset-row:hover {
+  background-color: #aaa;
 }
 
 .coin-asset-row-img {
@@ -196,7 +202,7 @@
   text-align: center;
 }
 
-.coin-asset-row div h1{
+.coin-asset-row div h1 {
   display: flex;
   justify-content: space-around;
 }
@@ -222,13 +228,13 @@
   padding: 1em 4em;
 }
 
-.update-modal-change{
+.update-modal-change {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.update-modal-change h1{
+.update-modal-change h1 {
   margin: 0;
   padding: 0.1em 2em;
 }
@@ -326,7 +332,7 @@
   margin: auto;
 }
 
-.coin-select-quantity{
+.coin-select-quantity {
   padding: 0;
   margin-bottom: 1em;
 }
@@ -359,7 +365,7 @@
 
 .modal-coin-select h1 span {
   font-size: 1em;
-  letter-spacing: 0.05em
+  letter-spacing: 0.05em;
 }
 
 .modal-select-btn-container {
@@ -393,8 +399,10 @@
   transition: all 0.25s ease;
 }
 
-.portfolio-coin-data-header p:hover, .portfolio-coin-data-header p:focus, .err {
-  color: #FF5555;
+.portfolio-coin-data-header p:hover,
+.portfolio-coin-data-header p:focus,
+.err {
+  color: #ff5555;
 }
 
 .clear-portfolio-modal {
@@ -405,20 +413,20 @@
   border: solid 2px black;
 }
 
-.clear-portfolio-modal h1{
+.clear-portfolio-modal h1 {
   margin-bottom: 1em;
   font-size: 2.5em;
 }
 
-.clear-portfolio-modal h2{
+.clear-portfolio-modal h2 {
   font-size: 1.2em;
   font-weight: 800;
   margin-bottom: 0.2em;
 }
 
-.clear-portfolio-modal button{
+.clear-portfolio-modal button {
   width: 80%;
-  margin: 0.2em auto
+  margin: 0.2em auto;
 }
 
 @media screen and (max-width: 900px) {
@@ -461,7 +469,7 @@
     width: 90%;
   }
 
-  .coin-asset-row{
+  .coin-asset-row {
     flex-direction: column;
     justify-content: center;
   }

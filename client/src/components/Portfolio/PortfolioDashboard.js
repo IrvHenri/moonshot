@@ -3,95 +3,107 @@ import { useEffect, useState } from "react";
 import useCoinData from "../../hooks/useCoinData";
 import DetailGraph from "../Coin/DetailGraph";
 import CoinAsset from "./CoinAsset";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 //Modals
 import SearchCoinModal from "./SearchCoinModal";
 import SelectedCoinModalPage from "./SelectedCoinModalPage";
 
-import {AiFillCloseCircle} from 'react-icons/ai'
+import { AiFillCloseCircle } from "react-icons/ai";
 
 import { useAuth } from "../../context/AuthContext";
 import {
   getOneCoin,
   addOneCoin,
-  updateOneCoin, 
+  updateOneCoin,
   deleteOneCoin,
-  getPortfolioBalance, 
+  getPortfolioBalance,
   deleteAllCoins,
-  formatPortfolioCurrency} from '../../helpers/portfolioHelpers'
+  formatPortfolioCurrency,
+} from "../../helpers/portfolioHelpers";
 
 const PortfolioDashboard = ({ theme }) => {
   const { user, setUser } = useAuth();
   const [open, setOpen] = useState(false);
-  const [clearPortfolioModalConfirm, setClearPortfolioModalConfirm] = useState(false);
+  const [clearPortfolioModalConfirm, setClearPortfolioModalConfirm] =
+    useState(false);
   const [selectedCoin, setSelectedCoin] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [loadingCoins, setLoadingCoins] = useState(false)
+  const [loadingCoins, setLoadingCoins] = useState(false);
   const [coins, loading] = useCoinData();
   //Chart View State
   const [updatedCoinState, setUpdatedCoinState] = useState([]);
   const [chartIndex, setChartIndex] = useState(0);
-  const [chartViewData, setChartViewData] = useState(null)
+  const [chartViewData, setChartViewData] = useState(null);
 
   useEffect(() => {
-    setLoadingCoins(true)
+    setLoadingCoins(true);
     if (user.portfolio.coins.length === 0) {
-      setUpdatedCoinState([])
-      setChartIndex(null)
-      setLoadingCoins(false)
-    }
-    else {
-      user.portfolio.coins.map(coin => {
+      setUpdatedCoinState([]);
+      setChartIndex(null);
+      setLoadingCoins(false);
+    } else {
+      user.portfolio.coins.map((coin) => {
         getOneCoin(coin.id)
-        .then(res => {
-          const { coin, dailyChart, weeklyChart, monthlyChart } = res.data;
-          setUpdatedCoinState(prev => {
-            if (prev.length === 0) {
-              return [{ coin, chartData: { dailyChart, weeklyChart, monthlyChart } }];
-            }
-            if (prev.some((val) => val.coin.id === coin.id)) {
-              return [...prev];
-            }
-            return [
-              ...prev,
-              { coin, chartData: { dailyChart, weeklyChart, monthlyChart } },
-            ];
-          });
-        })
-        .then(() => setChartIndex(0))
-        .then(() => setLoadingCoins(false))
-      })
+          .then((res) => {
+            const { coin, dailyChart, weeklyChart, monthlyChart } = res.data;
+            setUpdatedCoinState((prev) => {
+              if (prev.length === 0) {
+                return [
+                  {
+                    coin,
+                    chartData: { dailyChart, weeklyChart, monthlyChart },
+                  },
+                ];
+              }
+              if (prev.some((val) => val.coin.id === coin.id)) {
+                return [...prev];
+              }
+              return [
+                ...prev,
+                { coin, chartData: { dailyChart, weeklyChart, monthlyChart } },
+              ];
+            });
+          })
+          .then(() => setChartIndex(0))
+          .then(() => setLoadingCoins(false));
+      });
     }
-  },[user])
+  }, [user]);
 
   useEffect(() => {
-    setChartViewData(updatedCoinState.length > 0 ? updatedCoinState[chartIndex] : null)
-  },[chartIndex, updatedCoinState])
+    setChartViewData(
+      updatedCoinState.length > 0 ? updatedCoinState[chartIndex] : null
+    );
+  }, [chartIndex, updatedCoinState]);
 
   const updateCoin = (id, quantity, purchasePrice) => {
-    if (user.portfolio.coins.length && user.portfolio.coins.filter(coin => coin.id === id).length > 0) {
+    if (
+      user.portfolio.coins.length &&
+      user.portfolio.coins.filter((coin) => coin.id === id).length > 0
+    ) {
       updateOneCoin(id, quantity, purchasePrice)
-        .then(res => setUser(res.data.user))
-        .catch(err => console.log(err));
+        .then((res) => setUser(res.data.user))
+        .catch((err) => console.log(err));
     } else {
       addOneCoin(id, quantity, purchasePrice)
-        .then(res => setUser(res.data.user))
-        .catch(err => console.log(err));
+        .then((res) => setUser(res.data.user))
+        .catch((err) => console.log(err));
     }
   };
 
   const removeCoin = (coinId) => {
     deleteOneCoin(coinId)
-      .then(res => setUser(res.data.user))
+      .then((res) => setUser(res.data.user))
       .then(() => setChartIndex(null))
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   const clearPortfolio = () => {
     deleteAllCoins()
-    .then(res => setUser(res.data.user))
-    .then(() => setClearPortfolioModalConfirm(false))
-    .catch((err) => console.log(err));
+      .then((res) => setUser(res.data.user))
+      .then(() => setClearPortfolioModalConfirm(false))
+      .catch((err) => console.log(err));
   };
 
   const searchModalContent = (
@@ -103,8 +115,8 @@ const PortfolioDashboard = ({ theme }) => {
           setOpen={setOpen}
           updateCoin={updateCoin}
         />
-      ) : ( 
-        <SearchCoinModal 
+      ) : (
+        <SearchCoinModal
           selectedCoin={selectedCoin}
           setSelectedCoin={setSelectedCoin}
           searchTerm={searchTerm}
@@ -137,8 +149,13 @@ const PortfolioDashboard = ({ theme }) => {
             <h2>{user.portfolio.name}</h2>
           </div>
           <div>
-            <h2>Current Balance: 
-              <span>{formatPortfolioCurrency(getPortfolioBalance(user.portfolio.coins))}</span>
+            <h2>
+              Current Balance:
+              <span>
+                {formatPortfolioCurrency(
+                  getPortfolioBalance(user.portfolio.coins)
+                )}
+              </span>
             </h2>
           </div>
         </div>
@@ -155,7 +172,10 @@ const PortfolioDashboard = ({ theme }) => {
           <h1>Graph:</h1>
 
           {chartViewData ? (
-            <DetailGraph coin={chartViewData.coin} chartData={chartViewData.chartData} />
+            <DetailGraph
+              coin={chartViewData.coin}
+              chartData={chartViewData.chartData}
+            />
           ) : null}
         </div>
 
@@ -164,21 +184,31 @@ const PortfolioDashboard = ({ theme }) => {
             theme === "light" ? "light-dashboard light-box" : null
           }`}
         >
-          <div className='portfolio-coin-data-header'>
-          <h1>Your Assets:</h1>
-          <p onClick={() => setClearPortfolioModalConfirm(true)}>Clear Portfolio</p>
+          <div className="portfolio-coin-data-header">
+            <h1>Your Assets:</h1>
+            <p onClick={() => setClearPortfolioModalConfirm(true)}>
+              Clear Portfolio
+            </p>
           </div>
 
-          {!loadingCoins && updatedCoinState.map((coinData, ind) => (
-            <CoinAsset
-              key={ind}
-              userCoinData={user.portfolio.coins.find(coin => coin.id === coinData.coin.id)}
-              coin={coinData.coin}
-              updateCoin={updateCoin}
-              removeCoin={removeCoin}
-              onClick={() => setChartIndex(ind)}
-            />
-          ))}
+          {loadingCoins ? (
+            <div className="circular-progress">
+              <CircularProgress size={100} />
+            </div>
+          ) : (
+            updatedCoinState.map((coinData, ind) => (
+              <CoinAsset
+                key={ind}
+                userCoinData={user.portfolio.coins.find(
+                  (coin) => coin.id === coinData.coin.id
+                )}
+                coin={coinData.coin}
+                updateCoin={updateCoin}
+                removeCoin={removeCoin}
+                onClick={() => setChartIndex(ind)}
+              />
+            ))
+          )}
         </div>
       </div>
 
@@ -195,12 +225,14 @@ const PortfolioDashboard = ({ theme }) => {
         onClose={() => setClearPortfolioModalConfirm(false)}
         aria-labelledby="clear-modal-title"
       >
-      <div className="modal clear-portfolio-modal">
-        <h1>Clear Your Portfolio</h1>
-        <h2>Are you sure? This cannot be undone</h2>
-        <button onClick={clearPortfolio}>Yes</button>
-        <button onClick={() => setClearPortfolioModalConfirm(false)}>No</button>
-      </div>
+        <div className="modal clear-portfolio-modal">
+          <h1>Clear Your Portfolio</h1>
+          <h2>Are you sure? This cannot be undone</h2>
+          <button onClick={clearPortfolio}>Yes</button>
+          <button onClick={() => setClearPortfolioModalConfirm(false)}>
+            No
+          </button>
+        </div>
       </Modal>
     </div>
   );
