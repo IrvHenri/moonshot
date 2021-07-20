@@ -33,7 +33,7 @@ A full stack web app which allows users to create a cryptocurrency portfolio to 
 <img width="604" alt="portfolio page" src="https://user-images.githubusercontent.com/69181038/126242359-49e8a350-bbea-4f86-b002-b835dd8a8305.png">
 
 
-## Stack
+## Tech Stack
 
 
 <li>MongoDB</li>
