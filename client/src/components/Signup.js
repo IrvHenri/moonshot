@@ -12,82 +12,83 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const useStyles = makeStyles({
     signUpButton: {
       color: theme === "light" ? "white" : "black",
       background: theme === "light" ? "#132455" : "#fec87f",
       "&:hover": {
-        background: theme === "light" ? "#132455" : "#febd66"
-      }
+        background: theme === "light" ? "#132455" : "#febd66",
+      },
     },
 
     signUpForm: {
       "& .MuiInputLabel-outlined": {
         color: theme === "light" ? "black" : "white",
-        fontWeight: "bold"
+        fontWeight: "bold",
       },
       "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-        borderColor: theme === "light" ? "black" : "white"
+        borderColor: theme === "light" ? "black" : "white",
       },
-      '& .MuiInputBase-input': {
-        color: theme === "light" ? "black" : "white"
-      }
-    }
-  })
+      "& .MuiInputBase-input": {
+        color: theme === "light" ? "black" : "white",
+      },
+    },
+  });
 
   const classes = useStyles();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    setError("");
-
-    if (!name) {
-      setError("Please enter name");
-      return;
-    }
-
-    if (!confirmPw) {
-      setError("Please confirm password");
-      return;
-    }
-
-    if (password !== confirmPw) {
-      setError("Passwords do not match");
-      return;
-    }
-
     const user = {
       name,
       email,
       password,
+      confirmPw,
     };
 
     axios
       .post("http://localhost:3001/api/users/signup", user)
-      .then((res) => (window.location = "/login"))
+      .then((res) => {
+        setErrors([]);
+        return (window.location = "/login");
+      })
       .catch((err) => {
-        let error = err.response.data;
-
-        setError(error);
+        let errors = err.response.data.errors.map((err) => err.msg);
+        setErrors(errors);
       });
   };
 
   return (
     <Grid container className="login-section">
-      <Grid item xs={12} sm={6} className={`login-form ${theme === "light" ? "login-form-light" : null}`}>
-
-        <h1 className={`login-form-text ${theme === "light" ? "login-form-text-light" : null}`}> 
-          Sign up 
+      <Grid
+        item
+        xs={12}
+        sm={6}
+        className={`login-form ${
+          theme === "light" ? "login-form-light" : null
+        }`}
+      >
+        <h1
+          className={`login-form-text ${
+            theme === "light" ? "login-form-text-light" : null
+          }`}
+        >
+          Sign up
         </h1>
 
         <form>
           <div>
+            <div
+              className={`error ${theme === "light" ? "error-light" : null}`}
+            >
+              {errors.length > 0
+                ? errors.map((error, index) => <h3 key={index}>{error} </h3>)
+                : null}
+            </div>
 
-            <div className={`error ${theme === "light" ? "error-light" : null}`}> <h3>{ error } </h3> </div>
-            
             <TextField
               className={classes.signUpForm}
               fullWidth
@@ -98,10 +99,11 @@ const Signup = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               inputProps={{
-                autoComplete: 'new-password',
+                autoComplete: "new-password",
                 form: {
-                  autoComplete: "off"
-                }
+                  autoComplete: "off",
+                },
+                required: true,
               }}
             />
           </div>
@@ -116,10 +118,10 @@ const Signup = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               inputProps={{
-                autoComplete: 'new-password',
+                autoComplete: "new-password",
                 form: {
-                  autoComplete: "off"
-                }
+                  autoComplete: "off",
+                },
               }}
             />
           </div>
@@ -169,7 +171,6 @@ const Signup = () => {
               </div>
             </Link>
           </div>
-
         </form>
       </Grid>
 

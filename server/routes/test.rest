@@ -3,7 +3,7 @@ http://localhost:3001/api/users
 ###
 http://localhost:3001/api/portfolios/ HTTP/1.1
 content-type: application/json
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU3MmQ3MWM1Njg0NTBiM2M1ODM0YjgiLCJpYXQiOjE2MjU3NzQ4ODV9.A4sNaRTBxQ94fES--DeceODxarholBkoL-NAI8-eR1g
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGY1MDhkZjY5YjJlNTI1NTJlODJhNzkiLCJpYXQiOjE2MjY3NDI4NDh9.noRnC6yNhNydSke6F3QkB5bXlJOIHf-dSPSIN5Z6wE8
 
 //Note: Change token to the token received on login
 
@@ -15,14 +15,14 @@ POST http://localhost:3001/api/users/login HTTP/1.1
 content-type: application/json
 
 {
-    "email": "zohebboga@hotmail.com",
-    "password": "123456"
+    "email": "henriquezirv@gmail.com",
+    "password": "Jackie123"
 }
 
 ###
 POST http://localhost:3001/api/portfolios/ethereum HTTP/1.1
 content-type: application/json
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGU2MzFjOWQ1OWExMDI3YzFmYmQ2YzQiLCJpYXQiOjE2MjU3Njg3ODR9.PqBTBu1l7eYIin1wA5jd0iZBtyDvdDyDHXZNp0FH-CQ
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGY1MDhkZjY5YjJlNTI1NTJlODJhNzkiLCJpYXQiOjE2MjY3NDI4NDh9.noRnC6yNhNydSke6F3QkB5bXlJOIHf-dSPSIN5Z6wE8
 
 {
     "quantity": "1",

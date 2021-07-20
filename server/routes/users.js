@@ -3,41 +3,57 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
+const { body, validationResult } = require("express-validator");
 const saltRounds = 10;
 
 //Sign Up
-router.post("/signup", async function (req, res, next) {
-  const name = req.body.name;
-  const email = req.body.email;
-  const initialPassword = req.body.password;
+router.post(
+  "/signup",
+  [
+    body("name").not().isEmpty().withMessage("Please enter your name"),
+    body("email")
+      .trim()
+      .isEmail()
+      .withMessage("Email must be a valid email address")
+      .normalizeEmail()
+      .toLowerCase(),
+    body("password")
+      .trim()
+      .isLength(8)
+      .withMessage("Password must be at least 8 characters long")
+      .matches(/\d/)
+      .withMessage("Password must contain a number"),
+    body("confirmPw").custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error("Password confirmation does not match password");
+      }
+      return true;
+    }),
+  ],
+  async function (req, res, next) {
+    const name = req.body.name;
+    const email = req.body.email;
+    const initialPassword = req.body.password;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json(errors);
+    }
 
-  if (!email || !initialPassword) {
-    return res.status(400).json("Please enter valid email or password");
+    const userExists = await User.findOne({ email });
+    if (userExists)
+      return res.status(400).json({ errors: [{ msg: "Email already taken" }] });
+
+    const password = bcrypt.hashSync(initialPassword, saltRounds);
+    const newUser = new User({ name, email, password });
+
+    try {
+      await newUser.save();
+      res.json("New user added!");
+    } catch {
+      res.status(400).json("Error creating new user");
+    }
   }
-
-  if (!email.includes("@") || email.length <= 3) {
-    return res.status(400).json("Please enter valid email");
-  }
-
-  if (initialPassword.length < 6) {
-    return res
-      .status(400)
-      .json("Passwords must be at least 6 characters in length");
-  }
-
-  const userExists = await User.findOne({ email });
-  if (userExists) return res.status(400).json("Email is already in use!");
-
-  const password = bcrypt.hashSync(initialPassword, saltRounds);
-  const newUser = new User({ name, email, password });
-
-  try {
-    await newUser.save();
-    res.json("New user added!");
-  } catch {
-    res.status(400).json("Error creating new user");
-  }
-});
+);
 
 // to test login function
 router.get("/", function (req, res, next) {
