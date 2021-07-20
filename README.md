@@ -47,13 +47,7 @@ A full stack web app which allows users to create a cryptocurrency portfolio to 
 <li>"@material-ui/core"</li>
 <li>"axios"</li>
 <li>"highcharts"</li>
-<li>"moment"</li>
-<li>"react"</li>
-<li>"react-dom"</li>
 <li>"react-icons"</li>
 <li>"react-router-dom"</li>
-<li>"react-scripts"</li>
-<li>"react-transition-group"</li>
-<li>"web-vitals"</li>
 <li>"@testing-library/cypress"</li>
 <li>"cypress"</li>
