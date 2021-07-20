@@ -43,7 +43,7 @@ A full stack web app which allows users to create a cryptocurrency portfolio to 
 
 <br>
 
-## Dependencies
+## Client Dependencies
 <li>"@material-ui/core"</li>
 <li>"axios"</li>
 <li>"highcharts"</li>
@@ -51,3 +51,18 @@ A full stack web app which allows users to create a cryptocurrency portfolio to 
 <li>"react-router-dom"</li>
 <li>"@testing-library/cypress"</li>
 <li>"cypress"</li>
+
+
+
+## Server Dependencies
+ <li>"axios": "^0.21.1"</li>
+  <li>"bcrypt": "^5.0.1"</li>
+    <li>"cookie-parser": "~1.4.4"</li>
+    <li>"cors": "^2.8.5"</li>
+    <li>"debug": "~2.6.9"</li>
+   <li> "express": "~4.16.1"</li>
+    <li>"express-validator": "^6.12.0"</li>
+    <li>"jsonwebtoken": "^8.5.1"</li>
+    <li>"mongodb": "^3.6.9"</li>
+    <li>"mongoose": "^5.13.2"</li>
+    <li>"morgan": "~1.9.1"</li>
