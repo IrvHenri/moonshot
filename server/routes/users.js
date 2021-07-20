@@ -33,7 +33,6 @@ router.post("/signup", async function (req, res, next) {
 
   try {
     await newUser.save();
-    console.log("new user", newUser);
     res.json("New user added!");
   } catch {
     res.status(400).json("Error creating new user");

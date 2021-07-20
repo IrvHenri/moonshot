@@ -9,12 +9,9 @@ button {
   border: none;
   outline: none;
   cursor: pointer;
-  box-shadow: 0.1em 0.1em #6767c9;
   transition: all 0.2s ease;
 }
 
 button:hover {
-  transform: translateX(0.5rem);
-  transform: translateY(0.1rem);
   box-shadow: none;
 }
