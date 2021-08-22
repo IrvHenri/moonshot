@@ -20,11 +20,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI= react-scripts build",
     "test": "cypress open",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:3001",
+  "proxy": "https://moonshot-mongodb.herokuapp.com",
   "eslintConfig": {
     "extends": [
       "react-app",

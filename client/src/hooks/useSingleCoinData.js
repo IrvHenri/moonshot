@@ -10,7 +10,7 @@ function useSingleCoinData(id) {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/coins/${id}`)
+      .get(`/api/coins/${id}`)
       .then((result) => {
         const { coin, dailyChart, weeklyChart, monthlyChart } = result.data;
         setCoin((prev) => ({ ...prev, ...coin }));

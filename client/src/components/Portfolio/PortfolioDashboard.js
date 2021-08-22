@@ -43,7 +43,7 @@ const PortfolioDashboard = ({ theme }) => {
       setChartIndex(null);
       setLoadingCoins(false);
     } else {
-      user.portfolio.coins.map((coin) => {
+      user.portfolio.coins.forEach((coin) => {
         getOneCoin(coin.id)
           .then((res) => {
             const { coin, dailyChart, weeklyChart, monthlyChart } = res.data;

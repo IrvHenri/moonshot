@@ -61,7 +61,7 @@ const Login = () => {
       password
     }
     
-    axios.post("http://localhost:3001/api/users/login", user)
+    axios.post("/api/users/login", user)
     .then(res => {
       localStorage.setItem("auth-token", res.data)
       window.location = '/portfolio'

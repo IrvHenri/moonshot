@@ -50,7 +50,7 @@ const Signup = () => {
     };
 
     axios
-      .post("http://localhost:3001/api/users/signup", user)
+      .post("/api/users/signup", user)
       .then((res) => {
         setErrors([]);
         return (window.location = "/login");
