@@ -13,15 +13,11 @@ export default function Cryptocurrencies() {
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
-  // const filteredCoins =
-  //   coins.length > 1 &&
-  //   coins.filter((coin) =>
-  //     coin.name.toLowerCase().includes(search.toLowerCase())
-  //   );
-
-  const filteredCoins = coins.filter((coin) =>
-    search ? coin.name.toLowerCase().includes(search.toLowerCase()) : true
-  );
+  const filteredCoins =
+    coins.length > 1 &&
+    coins.filter((coin) =>
+      coin.name.toLowerCase().includes(search.toLowerCase())
+    );
 
   return (
     <div className="currencies-page">
